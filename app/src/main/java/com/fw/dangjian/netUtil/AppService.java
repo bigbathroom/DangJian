@@ -18,6 +18,7 @@ import com.fw.dangjian.bean.RegistBean;
 import com.fw.dangjian.bean.StudyBean;
 import com.fw.dangjian.bean.StudyPageBean;
 import com.fw.dangjian.bean.SubmitBean;
+import com.fw.dangjian.bean.VideoBean;
 
 import java.util.Map;
 
@@ -188,6 +189,11 @@ public interface AppService {
     //档案信息
     @GET(Constants.FILE + "{managerid}/")
     Observable<FileBean> getFile(@Path("managerid") int managerid);
+
+    //提交视频评论
+    @GET(Constants.VIDEO+ "{id}/")
+    Observable<VideoBean> getVideo(@Path("id") int id);
+
 
 }
 

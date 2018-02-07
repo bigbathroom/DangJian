@@ -5,6 +5,7 @@ import android.util.Log;
 import com.fw.dangjian.base.BasePresenter;
 import com.fw.dangjian.bean.CommentBean;
 import com.fw.dangjian.bean.KongBean;
+import com.fw.dangjian.bean.VideoBean;
 import com.fw.dangjian.mvpView.VideoMvpView;
 
 import rx.Subscriber;
@@ -16,6 +17,29 @@ public class VideoInfoPresenter extends BasePresenter {
     public VideoInfoPresenter(VideoMvpView mvpView) {
         this.mvpView = mvpView;
     }
+
+    public void getVideo(int id) {
+        retrofitHelper.toSubscribe(req.getVideo(id), new Subscriber<VideoBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000","loginonCompleted");
+                mvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "loginononError");
+                mvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(VideoBean user) {
+                Log.d("000000", "loginononNext");
+                mvpView.onGetDataNext(user);
+            }
+        });
+    }
+
 
     public void commitComment(int comment_postid,String comment_author,String comment_content) {
         retrofitHelper.toSubscribe(req.submitComment1(comment_postid,comment_author,comment_content), new Subscriber<KongBean>() {

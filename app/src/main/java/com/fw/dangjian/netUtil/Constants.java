@@ -65,4 +65,6 @@ public class Constants {
 
     //档案信息
     public static final String FILE = "square/record/";
+    //视频地址
+    public static final String VIDEO = "learn/";
 }

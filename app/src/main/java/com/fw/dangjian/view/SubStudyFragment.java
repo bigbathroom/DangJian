@@ -107,9 +107,13 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
         handler = new HandlerUtil(nrecycler);
 
         mAdapter.setonItemClickLitener(new StudyAdapter.onItemClickLitener() {
+
+
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(),VideoActivity.class);
+
+               intent.putExtra("studyId", lists.get(position - 1).id);
                 startActivity(intent);
             }
         });

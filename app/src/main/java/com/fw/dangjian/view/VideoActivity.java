@@ -1,5 +1,6 @@
 package com.fw.dangjian.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.fw.dangjian.R;
 import com.fw.dangjian.adapter.PingLunAdapter;
 import com.fw.dangjian.bean.CommentBean;
 import com.fw.dangjian.bean.KongBean;
+import com.fw.dangjian.bean.VideoBean;
 import com.fw.dangjian.dialog.CommentDialog;
 import com.fw.dangjian.mvpView.VideoMvpView;
 import com.fw.dangjian.presenter.VideoInfoPresenter;
@@ -63,6 +65,8 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView{
     private VideoInfoPresenter videoInfoPresenter;
     private CommentDialog commentDialog;
     private int postId;
+    private Intent intent;
+    private int studyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,16 +76,17 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView{
         MyApplication.getInstance().addActivity(this);
 
         videoInfoPresenter = new VideoInfoPresenter(this);
+
+        intent = getIntent();
+
+        if(intent != null){
+            studyId = intent.getIntExtra("studyId", -1);
+        }
+
+        videoInfoPresenter.getVideo(studyId);
+
         initUi();
 
-        String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
-        mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK); // or NiceVideoPlayer.TYPE_NATIVE
-        mNiceVideoPlayer.setUp(mVideoUrl, null);
-
-        TxVideoPlayerController controller = new TxVideoPlayerController(this);
-//        controller.setTitle(mTitle);
-//        controller.setImage(mImageUrl);
-        mNiceVideoPlayer.setController(controller);
     }
 
     private void initUi() {
@@ -179,11 +184,33 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView{
     }
 
     @Override
-    public void onGetDataNext(KongBean kongBean) {
+    public void onGetDataNext(VideoBean kongBean) {
+
+        if(kongBean.result_code != null && kongBean.result_code.equals("200")){
+            if(kongBean.result != null){
+
+//                String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
+                mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK); // or NiceVideoPlayer.TYPE_NATIVE
+                mNiceVideoPlayer.setUp(kongBean.result.post_content, null);
+//                mNiceVideoPlayer.setUp(mVideoUrl, null);
+                TxVideoPlayerController controller = new TxVideoPlayerController(this);
+//        controller.setTitle(mTitle);
+//        controller.setImage(mImageUrl);
+                mNiceVideoPlayer.setController(controller);
+
+                tv_introduce_content1.setText(kongBean.result.post_excerpt);
+                tv_introduce_content2.setText(kongBean.result.post_excerpt);
+            }
+
+        }else{
+           ToastUtils.show(this,kongBean.reason,Toast.LENGTH_SHORT);
+        }
+
+
 
     }
 
-    @Override
+@Override
     public void onCommentNext(KongBean kongBean) {
 
         if(kongBean.result_code!=null && kongBean.result_code.equals("200")){
