@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_goods"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#eeeeee"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#eeeeee"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/iv_goods"
+            android:layout_width="140dp"
+            android:layout_height="90dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:scaleType="fitXY"
+            android:background="@mipmap/banner_img02"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_goods"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="中共中央总书记、国家主席、中央军委主席习近平向全军发布训令"
+                android:textColor="@color/gray6"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新华社记者李刚摄"
+                android:textColor="@color/gray9"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_marginTop="100dp"
+        android:layout_width="60dp"
+        android:layout_height="100dp" />
+    <TextView
+        android:id="@+id/tv_kong"
+        android:text="当前内容为空"
+        android:textColor="@color/gray9"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"/>
+
+
+
+</LinearLayout>

@@ -1,0 +1,57 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!-- ActionSheet进出动画 -->
+    <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
+    </style>
+
+    <style name="inputDialog" parent="@android:style/Theme.Holo.Light.Dialog">
+
+        <item name="android:windowBackground">@color/graye</item>
+        <!--背景-->
+        <item name="android:windowFrame">@null</item>
+        <!--设置无边框-->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+        <item name="android:windowSoftInputMode">stateAlwaysVisible</item>
+        <!--显示软件盘-->
+
+    </style>
+
+    <style name="TextAppearanceBig" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="dialogSlideAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_slide_out</item>
+    </style>
+
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- 对话框样式 -->
+    <style name="MyDarkDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
+</resources>

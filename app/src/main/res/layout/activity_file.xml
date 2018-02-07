@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/graye"
+    tools:context="com.fw.dangjian.view.FileActivity">
+    <include
+        layout="@layout/head_title"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="#7ecdf4">
+
+                <ImageView
+                    android:id="@+id/tv_head"
+                    android:layout_width="70dp"
+                    android:layout_height="95dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:background="@mipmap/head_portrait1"/>
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="习近平"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/tv_head"
+                    android:layout_marginTop="10dp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="电话："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="组织："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_organzition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="入党支部："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_zhibu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="流程支部："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_liucheng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="从事行业："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_hangye"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="认证情况："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_renzheng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一级组织："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_yiji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="支部信息："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="签到："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_qiandao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="学习课程："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_kecheng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="活动帮扶："
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_active"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1232484354549"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="140dp"/>
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"></View>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

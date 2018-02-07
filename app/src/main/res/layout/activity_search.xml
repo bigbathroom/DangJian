@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.fw.dangjian.view.SearchActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/toolbar">
+
+        <ImageView
+            android:id="@+id/left"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/iv_return"
+          />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_search"
+            android:layout_width="220dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_search">
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/glass"
+                android:layout_marginLeft="5dp"/>
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_search"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:ellipsize="end"
+                android:hint=""
+                android:singleLine="true"
+                android:textColor="@color/gray6"
+                android:textColorHint="#A2ABBF"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    <include  layout="@layout/layout_no_content"
+        android:id="@+id/no_content"
+        android:visibility="gone"/>
+
+    <include  layout="@layout/layout_no_net"
+        android:id="@+id/no_net"
+        android:visibility="gone"/>
+
+</LinearLayout>

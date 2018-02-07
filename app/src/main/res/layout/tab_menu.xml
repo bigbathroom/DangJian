@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="2dp"
+    android:paddingTop="5dp" >
+
+    <RadioButton
+        android:id="@+id/rd_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:checked="true"
+        android:gravity="center"
+        android:text="@string/tab_home"
+        android:textSize="13sp"
+        android:textColor="@color/select_menu_txt"
+        android:drawableTop="@drawable/selector_home_menu"
+        />
+
+    <RadioButton
+        android:id="@+id/rd_action"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:gravity="center"
+        android:text="@string/tab_action"
+        android:textColor="@color/select_menu_txt"
+        android:drawableTop="@drawable/selector_action_menu"
+        android:textSize="13sp" />
+
+    <RadioButton
+        android:id="@+id/rd_study"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:gravity="center"
+        android:text="@string/tab_study"
+        android:textColor="@color/select_menu_txt"
+        android:drawableTop="@drawable/selector_study_menu"
+        android:textSize="13sp" />
+    <RadioButton
+        android:id="@+id/rd_manage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:gravity="center"
+        android:text="@string/tab_manage"
+        android:textColor="@color/select_menu_txt"
+        android:drawableTop="@drawable/selector_manage_menu"
+        android:textSize="13sp" />
+
+
+
+    <RadioButton
+        android:id="@+id/rd_mine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:gravity="center"
+        android:text="@string/tab_mine"
+        android:textColor="@color/select_menu_txt"
+        android:drawableTop="@drawable/selector_mine_menu"
+        android:textSize="13sp" />
+
+</RadioGroup>

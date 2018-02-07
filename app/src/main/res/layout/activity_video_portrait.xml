@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.fw.dangjian.view.VideoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+        <com.xiao.nicevideoplayer.NiceVideoPlayer
+            android:id="@+id/video_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/iv_return"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray9"
+            android:textSize="18sp"
+            android:text="简介>"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"/>
+        <TextView
+            android:id="@+id/tv_introduce_content1"
+            android:layout_below="@+id/tv_introduce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="普京：俄准备继续归还乌克兰留..."
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/gray6"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:id="@+id/tv_introduce_content2"
+            android:layout_below="@+id/tv_introduce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/gray6"
+            android:layout_marginTop="3dp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:layout_marginTop="5dp">
+        <ImageView
+            android:id="@+id/iv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/comment"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/iv_collect"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/praise"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray9"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv_comment_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部评论"
+            android:textSize="20sp"
+            android:textColor="@color/gray6"
+            />
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部评论 >"
+            android:textSize="16sp"
+            android:textColor="@color/gray9"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graye"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="45dp"/>
+        <RelativeLayout
+            android:id="@+id/rl_comment"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:background="@color/white"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:hint="写评论..."
+                android:gravity="center_vertical"
+                 android:paddingLeft="20dp"
+                android:textColorHint="@color/gray9"
+                android:background="@mipmap/comment_bg"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

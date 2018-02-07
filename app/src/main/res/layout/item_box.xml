@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_goods"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="#ffffff"
+    android:paddingTop="15dp">
+
+    <ImageView
+        android:id="@+id/iv_goods"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
+        android:background="@mipmap/banner_img02"
+         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/iv_goods"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="习近平会见法国总统马克龙，新时代新气象新作为"
+            android:textColor="@color/gray6"
+            android:textSize="13sp" />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/time"/>
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018-01-04 00:00"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/gray9"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/look"
+                android:layout_toRightOf="@+id/tv_time"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_lookcount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12"
+                android:textColor="@color/gray9"
+                android:textSize="12sp"
+                android:layout_toRightOf="@+id/tv_time"
+                android:layout_marginLeft="30dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/like"
+                android:layout_toRightOf="@+id/tv_lookcount"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_likecount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12"
+                android:textColor="@color/gray9"
+                android:textSize="12sp"
+                android:layout_toRightOf="@+id/tv_lookcount"
+                android:layout_marginLeft="25dp"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#f0f0f0"></View>
+</RelativeLayout>

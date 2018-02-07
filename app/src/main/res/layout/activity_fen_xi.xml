@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.fw.dangjian.view.FenXIActivity">
+    <include
+        layout="@layout/head_title"></include>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingRight="40dp"
+        android:paddingLeft="40dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:background="@mipmap/iv1"/>
+
+            <TextView
+                android:id="@+id/tv_count1"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginTop="3dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="党员人数"
+                android:gravity="center_horizontal"
+                android:textColor="@color/gray3"
+                android:textSize="15sp"
+                android:layout_marginTop="3dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:background="@mipmap/iv2"/>
+
+            <TextView
+                android:id="@+id/tv_count2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginTop="3dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="党委/党总支数"
+                android:gravity="center_horizontal"
+                android:textColor="@color/gray3"
+                android:textSize="15sp"
+                android:layout_marginTop="3dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:background="@mipmap/iv3"/>
+
+            <TextView
+                android:id="@+id/tv_count3"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginTop="3dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="党支部"
+                android:gravity="center_horizontal"
+                android:textColor="@color/gray3"
+                android:textSize="15sp"
+                android:layout_marginTop="3dp"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray3"
+        android:textSize="16sp"
+        android:text="党委——党总支信息数"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@mipmap/dbbg"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/tv_count4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="@color/menu_select"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日工作信息数"
+                android:gravity="center_horizontal"
+                android:textColor="@color/gray3"
+                android:textSize="15sp"
+                android:layout_marginTop="3dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/tv_count5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="#3EADE2"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全部工作信息数"
+                android:gravity="center_horizontal"
+                android:textColor="@color/gray3"
+                android:textSize="15sp"
+                android:layout_marginTop="3dp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray3"
+        android:textSize="16sp"
+        android:text="党支部信息数"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"/>
+
+
+    <lecho.lib.hellocharts.view.LineChartView
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/graye"
+        android:layout_marginLeft="10dp"/>
+
+
+</LinearLayout>

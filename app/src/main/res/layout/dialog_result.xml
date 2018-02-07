@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/shape_error_bg">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:letterSpacing="0.06"
+        android:text="测试结果"
+        android:textColor="@color/gray3"
+        android:textSize="18sp"
+        android:layout_marginTop="13dp"
+        />
+
+
+
+    <RelativeLayout
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.06"
+            android:lineSpacingExtra="10sp"
+            android:text="正确"
+            android:textColor="@color/gray6"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_right_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.06"
+            android:lineSpacingExtra="10sp"
+            android:text="10"
+            android:textColor="#82D842"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_wrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.06"
+            android:lineSpacingExtra="10sp"
+            android:text="错误"
+            android:textColor="@color/gray6"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_wrong_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.06"
+            android:lineSpacingExtra="10sp"
+            android:text="10"
+            android:textColor="@color/toolbar"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+
+
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#A2BEC9"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:id="@+id/sure"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:text="确定"
+            android:gravity="center"
+            android:textColor="@drawable/linelayout"
+           />
+
+</LinearLayout>

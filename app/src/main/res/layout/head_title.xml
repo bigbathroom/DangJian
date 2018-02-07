@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/toolbar">
+
+    <ImageView
+        android:id="@+id/left"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/iv_return"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/search"
+        android:src="@mipmap/iv_search"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="党建云"
+        android:textSize="@dimen/title_size"
+        />
+
+    <ImageView
+        android:id="@+id/iv_add"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/add"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/iv_msg"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/message"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

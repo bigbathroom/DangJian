@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="menu_normal">#a9a9a9</color>
+    <color name="menu_select">#d34544</color>
+    <color name="toolbar">#D00808</color>
+    <color name="gray9">#999999</color>
+    <color name="gray6">#666666</color>
+    <color name="gray3">#333333</color>
+    <color name="graye">#eeeeee</color>
+    <color name="black">#000000</color>
+
+    <color name="gray">#AFAFAF</color>
+    <color name="yellow">#F99503</color>
+    <color name="gray_color">#ffe8ecef</color>
+    <color name="bg_sort_color">#EDEDED</color>
+
+    <color name="blue">#EDEDED</color>
+    <color name="greyblue">#81a8c7</color>
+</resources>

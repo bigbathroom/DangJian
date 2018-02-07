@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_goods"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="关乎民族命运的考试！习近平这样叮嘱“考生"
+        android:textColor="@color/gray3"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="新闻频道 来源：央视网"
+        android:textColor="@color/gray9"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/iv_goods"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/banner_img02"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/tv_title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="央视网消息："
+        android:textColor="@color/gray3"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="如果伟大复兴是一场考试，那定是一场关乎中国民族前途命运的巨大考验。"
+        android:textColor="@color/gray9"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018-01-04 18:00"
+            android:textColor="@color/gray9"
+            android:textSize="12sp" />
+
+
+
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/comment"
+                />
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_comment"
+                android:layout_marginLeft="5dp"
+                android:text="0"
+                android:textColor="@color/gray9"
+                android:textSize="12sp" />
+
+
+            <ImageView
+                android:id="@+id/iv_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/collect"
+                android:layout_toRightOf="@+id/tv_comment"
+                android:layout_marginLeft="15dp"
+                />
+            <TextView
+                android:id="@+id/tv_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_collect"
+                android:layout_marginLeft="5dp"
+                android:text="0"
+                android:textColor="@color/gray9"
+                android:textSize="12sp" />
+
+
+            <ImageView
+                android:id="@+id/iv_praise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/praise"
+                android:layout_toRightOf="@+id/tv_collect"
+                android:layout_marginLeft="15dp"
+                />
+            <TextView
+                android:id="@+id/tv_praise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_praise"
+                android:layout_marginLeft="5dp"
+                android:text="0"
+                android:textColor="@color/gray9"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@mipmap/line1"></View>
+</LinearLayout>

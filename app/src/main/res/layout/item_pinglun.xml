@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_goods"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:paddingTop="10dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/rv_touxiang"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/head_portrait"
+        app:riv_border_color="@color/white"
+        app:riv_border_width="0dip"
+        app:riv_oval="true" />
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="乌克兰"
+        android:textColor="@color/gray6"
+        android:textSize="16sp"
+        android:layout_toRightOf="@+id/rv_touxiang"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"/>
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发表于1小时前"
+        android:textColor="@color/gray9"
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/rv_touxiang"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_huifu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回复"
+        android:textColor="@color/gray9"
+        android:textSize="15sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="中共中央总书记、国家主席、中央军委主席习近平向全军发布训令"
+        android:textColor="@color/gray6"
+        android:textSize="13sp"
+        android:layout_below="@+id/rv_touxiang"
+        android:layout_toRightOf="@+id/rv_touxiang"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#f0f0f0"
+        android:layout_below="@+id/tv_content"
+        android:layout_marginTop="5dp"></View>
+</RelativeLayout>
