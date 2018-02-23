@@ -18,26 +18,25 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-    <!--用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-    <!--用于获取运营商信息，用于支持提供运营商信息相关的接口-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
-    <!--用于读取手机当前的状态-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
-    <!--用于写入缓存数据到扩展存储卡-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
-    <!--用于申请获取蓝牙信息进行室内定位-->
-    <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
-
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -46,17 +45,17 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MainActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
+
         <activity android:name=".view.DJEActivity" />
-        <activity android:name=".view.QuizActivity" >
-       </activity>
-
+        <activity android:name=".view.QuizActivity" />
         <activity
             android:name=".view.WorkInfoActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -66,7 +65,6 @@
         <activity
             android:name=".view.MapActivity"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".view.MoneyActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -84,25 +82,26 @@
 
         <activity
             android:name=".view.LoginActivity"
-            android:windowSoftInputMode="adjustPan" >
-    </activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".view.ForgetPwdActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.RegistProActivity" />
-
-
         <activity android:name=".view.ChangeNameActivity" />
         <activity android:name=".view.ResetPswActivity" />
         <activity android:name=".view.Main2Activity" />
         <activity android:name=".view.ChannelActivity" />
         <activity android:name=".view.SearchActivity" />
-        <activity android:name=".view.SplashActivity">
+        <activity android:name=".view.SplashActivity" />
+        <activity android:name=".view.GuideActivity" />
+        <!-- 定位 -->
+        <service android:name="com.amap.api.location.APSService" />
 
+        <activity android:name=".view.DataBookActivity" />
+        <activity android:name=".view.BranchPhotoActivity">
         </activity>
-        <activity android:name=".view.GuideActivity"></activity>
-<!--定位-->
-        <service android:name="com.amap.api.location.APSService"></service>
+        <activity android:name=".view.WaterFallActivity" />
+        <activity android:name=".view.ManagerActivity"></activity>
     </application>
 
 </manifest>

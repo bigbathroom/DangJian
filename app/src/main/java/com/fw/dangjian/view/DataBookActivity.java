@@ -9,13 +9,15 @@ import android.widget.TextView;
 
 import com.fw.dangjian.R;
 import com.fw.dangjian.adapter.DataBookAdapter;
-import com.fw.dangjian.base.BaseFragment;
+import com.fw.dangjian.base.BaseActivity;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
-public class ManageFragment extends BaseFragment {
+public class DataBookActivity extends BaseActivity {
+
     @BindView(R.id.left)
     ImageView left;
     @BindView(R.id.tv_title)
@@ -24,36 +26,41 @@ public class ManageFragment extends BaseFragment {
     RecyclerView nrecycler;
     private DataBookAdapter mAdapter;
     private ArrayList<String> lists;
-
     @Override
-    protected View fillView() {
-        return layoutinflater.inflate(R.layout.activity_data_book, null);
+    protected int fillView() {
+        return R.layout.activity_data_book;
     }
 
     @Override
     protected void initUi() {
+        left.setVisibility(View.VISIBLE);
         tv_title.setText("大事记");
         lists = new ArrayList<>();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         nrecycler.setLayoutManager(layoutManager);
     }
 
     @Override
     protected void initData() {
-        mAdapter = new DataBookAdapter(lists, getActivity());
+        mAdapter = new DataBookAdapter(lists, this);
         nrecycler.setAdapter(mAdapter);
 
         mAdapter.setonItemClickLitener(new DataBookAdapter.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), WorkInfoActivity.class);
+                Intent intent = new Intent(DataBookActivity.this, WorkInfoActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-
-
-
+    @OnClick({R.id.left})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.left:
+                finish();
+                break;
+        }
+    }
 }
