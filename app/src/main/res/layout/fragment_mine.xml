@@ -42,7 +42,7 @@
             android:layout_below="@+id/rv_touxiang"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="习近平"
+            android:text="大美女"
             android:textColor="@color/gray3"
             android:textSize="16sp" />
 
@@ -79,7 +79,7 @@
                     android:layout_toRightOf="@+id/iv_ku"
                     android:text="我的档案信息"
                     android:textColor="@color/gray3"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@color/white"
-                android:layout_marginTop="6dp">
+                android:layout_marginTop="8dp">
 
                 <ImageView
                     android:id="@+id/iv_photo"
@@ -113,7 +113,7 @@
                     android:layout_toRightOf="@+id/iv_photo"
                     android:text="支部照片"
                     android:textColor="@color/gray3"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@color/white"
-                android:layout_marginTop="6dp">
+                android:layout_marginTop="8dp">
 
                 <ImageView
                     android:id="@+id/iv_manager"
@@ -147,7 +147,7 @@
                     android:layout_toRightOf="@+id/iv_manager"
                     android:text="功能管理"
                     android:textColor="@color/gray3"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@color/white"
-                android:layout_marginTop="6dp">
+                android:layout_marginTop="8dp">
 
                 <ImageView
                     android:id="@+id/iv_user"
@@ -181,7 +181,7 @@
                     android:layout_toRightOf="@+id/iv_user"
                     android:text="修改用户名"
                     android:textColor="@color/gray3"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@color/white"
-                android:layout_marginTop="6dp">
+                android:layout_marginTop="8dp">
 
                 <ImageView
                     android:id="@+id/iv_psw"
@@ -215,7 +215,7 @@
                     android:layout_toRightOf="@+id/iv_psw"
                     android:text="修改密码"
                     android:textColor="@color/gray3"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -229,7 +229,7 @@
                 android:id="@+id/rl_spec"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/white">
 
                 <ImageView
@@ -248,7 +248,7 @@
                     android:layout_toRightOf="@+id/iv_spec"
                     android:text="退出登录"
                     android:textColor="@color/gray3"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"

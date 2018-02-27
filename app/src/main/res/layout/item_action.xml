@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/graye">
+    android:background="@color/grayf6">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/graye"></View>
+        android:background="@color/grayf6"></View>
 
 
     <LinearLayout
@@ -17,6 +17,7 @@
         android:layout_height="80dp"
         android:orientation="vertical"
         android:padding="10dp"
+
         android:background="@color/white">
 
         <TextView
@@ -32,7 +33,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="15dp">
             <TextView
                 android:id="@+id/tv_organization"
                 android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.fw.dangjian.view;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -28,6 +29,7 @@ public class WaterFallActivity extends BaseActivity {
 
     WaterFallAdapter  adapter;
     private String title;
+    private ArrayList<Integer> pictures;
 
     @Override
     protected int fillView() {
@@ -43,7 +45,7 @@ public class WaterFallActivity extends BaseActivity {
         title = getIntent().getStringExtra("title");
         tv_title1.setText(title);
 
-        ArrayList<Integer> pictures = new ArrayList<>();
+        pictures = new ArrayList<>();
         pictures.add(R.mipmap.er);
         pictures.add(R.mipmap.wu);
         pictures.add(R.mipmap.si);
@@ -58,6 +60,15 @@ public class WaterFallActivity extends BaseActivity {
 
         nrecycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         nrecycler.setAdapter(adapter);
+        adapter.setonItemClickLitener(new WaterFallAdapter.onItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(WaterFallActivity.this, BigPhotoActivity.class);
+
+                intent.putExtra("image", pictures.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

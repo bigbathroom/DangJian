@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/graye"
+    android:background="@color/grayf6"
     tools:context="com.fw.dangjian.view.FileActivity">
     <include
         layout="@layout/head_title"></include>
@@ -42,16 +42,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/white"
-                android:layout_marginTop="30dp">
+                android:layout_height="40dp"
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="电话："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -60,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -69,16 +68,16 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="组织："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -87,7 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -96,16 +95,16 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="入党支部："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -114,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -123,43 +122,43 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="流程支部："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"/>
+                    android:layout_marginLeft="25dp"
+                    android:text="流程支部："
+                    android:textColor="@color/gray9"
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/tv_liucheng"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1232484354549"
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="140dp"/>
+                    android:layout_marginLeft="140dp"
+                    android:text="1232484354549"
+                    android:textColor="@color/gray6"
+                    android:textSize="13sp" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="从事行业："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -168,7 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -177,16 +176,16 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="认证情况："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -195,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -203,16 +202,16 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="一级组织："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -221,7 +220,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -229,16 +228,16 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="支部信息："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -247,7 +246,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -255,16 +254,16 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="签到："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -273,7 +272,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -281,16 +280,16 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="学习课程："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -299,7 +298,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -307,16 +306,16 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="活动帮扶："
-                    android:textSize="16sp"
-                    android:textColor="@color/gray6"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray9"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"/>
 
@@ -325,7 +324,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1232484354549"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textColor="@color/gray6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
@@ -333,7 +332,7 @@
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="40dp"></View>
+                android:layout_height="30dp"></View>
         </LinearLayout>
 
 

@@ -17,7 +17,7 @@
         android:checked="true"
         android:gravity="center"
         android:text="@string/tab_home"
-        android:textSize="13sp"
+        android:textSize="12sp"
         android:textColor="@color/select_menu_txt"
         android:drawableTop="@drawable/selector_home_menu"
         />
@@ -32,7 +32,7 @@
         android:text="@string/tab_action"
         android:textColor="@color/select_menu_txt"
         android:drawableTop="@drawable/selector_action_menu"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
 
     <RadioButton
         android:id="@+id/rd_study"
@@ -44,7 +44,7 @@
         android:text="@string/tab_study"
         android:textColor="@color/select_menu_txt"
         android:drawableTop="@drawable/selector_study_menu"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
     <RadioButton
         android:id="@+id/rd_manage"
         android:layout_width="0dp"
@@ -55,7 +55,7 @@
         android:text="@string/tab_manage"
         android:textColor="@color/select_menu_txt"
         android:drawableTop="@drawable/selector_manage_menu"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
 
 
 
@@ -69,6 +69,6 @@
         android:text="@string/tab_mine"
         android:textColor="@color/select_menu_txt"
         android:drawableTop="@drawable/selector_mine_menu"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
 
 </RadioGroup>

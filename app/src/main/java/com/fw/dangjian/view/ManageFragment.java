@@ -1,8 +1,9 @@
 package com.fw.dangjian.view;
 
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ public class ManageFragment extends BaseFragment {
     RecyclerView nrecycler;
     private DataBookAdapter mAdapter;
     private ArrayList<String> lists;
-
+    ImageView iv;
     @Override
     protected View fillView() {
         return layoutinflater.inflate(R.layout.activity_data_book, null);
@@ -34,15 +35,18 @@ public class ManageFragment extends BaseFragment {
     protected void initUi() {
         tv_title.setText("大事记");
         lists = new ArrayList<>();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        nrecycler.setLayoutManager(layoutManager);
+
+        nrecycler.setLayoutManager(new GridLayoutManager(getActivity(),1));
+
+        mAdapter = new DataBookAdapter(lists, getActivity());
+        nrecycler.setAdapter(mAdapter);
+        mAdapter.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.book_head,null));
+
     }
 
     @Override
     protected void initData() {
-        mAdapter = new DataBookAdapter(lists, getActivity());
-        nrecycler.setAdapter(mAdapter);
+
 
         mAdapter.setonItemClickLitener(new DataBookAdapter.onItemClickLitener() {
             @Override

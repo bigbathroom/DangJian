@@ -5,23 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.fw.dangjian.view.DataBookActivity">
+    >
 
     <include layout="@layout/head_title"></include>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:background="@mipmap/booktitle" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:paddingBottom="40dp">
-
+        android:paddingBottom="10dp">
         <ImageView
             android:layout_width="7dp"
             android:layout_height="match_parent"
@@ -32,7 +23,6 @@
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
             />
     </RelativeLayout>
 </LinearLayout>
