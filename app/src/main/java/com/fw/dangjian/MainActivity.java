@@ -21,6 +21,7 @@ import com.fw.dangjian.view.ManageFragment;
 import com.fw.dangjian.view.MineFragment;
 import com.fw.dangjian.view.StudyFragment;
 import com.jaeger.library.StatusBarUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         SPUtils.put(this, ConstanceValue.IS_FIRST_START,"true");
-
     }
     private void initlistener() {
         menu_group.check(R.id.rd_home);
@@ -227,7 +227,14 @@ public class MainActivity extends AppCompatActivity {
         ft.add(R.id.frame, fragment, FRAGMENT_TAG[i]);
     }
 
-
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
 
 }

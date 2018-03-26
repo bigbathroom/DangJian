@@ -1,5 +1,6 @@
 package com.fw.dangjian.view;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -49,6 +50,9 @@ public class BranchPhotoActivity extends BaseActivity {
         mAdapter.setonItemClickLitener(new BranchAdapter.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
+                Intent intent = new Intent(BranchPhotoActivity.this, WaterFallActivity.class);
+                intent.putExtra("title", "互动课题活动");
+                startActivity(intent);
             }
         });
 

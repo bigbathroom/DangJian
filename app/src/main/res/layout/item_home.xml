@@ -32,9 +32,11 @@
             android:id="@+id/tv_goods_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="中共中央总书记、国家主席、中央军委主席习近平向全军发布训令"
+            android:text="中共中央总书记、国家主席、中央军委主席习近平向全军发布训令中共中央总书记、国家主席、中央军委主席习近平向全军发布训令"
+            android:maxLines="3"
+            android:ellipsize="end"
             android:textColor="@color/gray6"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"

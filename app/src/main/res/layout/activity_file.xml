@@ -13,10 +13,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
@@ -28,19 +30,19 @@
                     android:layout_height="95dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="25dp"
-                    android:background="@mipmap/head_portrait1"/>
+                    android:background="@mipmap/head_portrait1" />
 
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="习近平"
-                    android:layout_centerHorizontal="true"
                     android:layout_below="@+id/tv_head"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="习近平" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@color/white">
@@ -329,7 +331,370 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="140dp"/>
 
-            </RelativeLayout>
+            </RelativeLayout>-->
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grayf6">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="电话"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="1232484354549"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="组织"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_organzition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="入党支部"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_zhibu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="流程支部"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_liucheng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="从事行业"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_hangye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="认证情况"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_renzheng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="一级组织"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_yiji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="支部信息"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="签到"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_qiandao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="学习课程"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_kecheng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_margin="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="活动帮扶"
+                        android:textColor="@color/gray9"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grayf6"/>
+                    <TextView
+                        android:id="@+id/tv_active"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="相关组织名称"
+                        android:textColor="@color/gray6"
+                        android:textSize="13sp" />
+                </TableRow>
+            </TableLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="30dp"></View>

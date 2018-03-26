@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment implements OnChannelListener,HomeMvpV
 
 
     private void initUi() {
-        tv_title.setText("党建云");
+        tv_title.setText("党建");
         search.setVisibility(View.VISIBLE);
 //        iv_add.setVisibility(View.VISIBLE);
         homePresenter = new HomePresenter();

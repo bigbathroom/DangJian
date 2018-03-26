@@ -13,6 +13,7 @@ import com.fw.dangjian.dialog.ErrorDialog;
 import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
 import com.jaeger.library.StatusBarUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 
@@ -83,7 +84,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMvpV
 
     @Override
     public void onGetDataError(Throwable e) {
-        showErrorDialog();
+//        showErrorDialog();
     }
+
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
 
 }

@@ -72,7 +72,7 @@ public class ResetPswActivity extends BaseActivity implements PutPasswordMvpView
                     Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
                     return ;
                 }else  if(!StringUtils.isPassword(newPwd1)) {
-                    Toast.makeText(this, "密码格式不正确", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请输入6~12位字母或数字", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -88,7 +88,7 @@ public class ResetPswActivity extends BaseActivity implements PutPasswordMvpView
     @Override
     public void onPutPasswordNext(KongBean kongBean) {
         if ( kongBean.result_code!= null&& kongBean.result_code.equals("200")){
-
+            ToastUtils.show(this,"修改成功",Toast.LENGTH_SHORT);
             finish(); //调用返回键
         }else{
             ToastUtils.show(this,"修改失败",Toast.LENGTH_SHORT);

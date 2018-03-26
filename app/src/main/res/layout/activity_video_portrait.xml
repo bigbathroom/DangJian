@@ -83,12 +83,21 @@
             android:visibility="invisible"/>
 
         <ImageView
-            android:id="@+id/iv_collect"
+            android:id="@+id/iv_praise"
             android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_height="25dp"
             android:background="@mipmap/praise"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="65dp"/>
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/share"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp" />
 
     </RelativeLayout>
 

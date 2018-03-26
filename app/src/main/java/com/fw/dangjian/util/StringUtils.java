@@ -40,7 +40,7 @@ public class StringUtils {
      */
     //以前的  ^[A-Za-z0-9]+$
     public static boolean isPassword(String psw) {
-        Pattern p = Pattern.compile("^[A-Za-z0-9]{6,18}$");
+        Pattern p = Pattern.compile("^[A-Za-z0-9]{6,12}$");
         Matcher m = p.matcher(psw);
         return m.matches();
     }

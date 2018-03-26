@@ -162,7 +162,7 @@ public class DataBookAdapter extends RecyclerView.Adapter<DataBookAdapter.ViewHo
 
     public void addHeaderView(View headerView) {
         if (haveHeaderView()) {
-            throw new IllegalStateException("hearview has already exists!");
+//            throw new IllegalStateException("hearview has already exists!");
         } else {
             //避免出现宽度自适应
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -217,6 +217,9 @@ public class DataBookAdapter extends RecyclerView.Adapter<DataBookAdapter.ViewHo
     private boolean isFooterView(int position) {
         return haveFooterView() && position == getItemCount() - 1;
     }
+
+
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 

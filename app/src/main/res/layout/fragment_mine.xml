@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/graye"
+    android:background="@color/grayf6"
     android:id="@+id/root"
     tools:context="com.fw.dangjian.view.MineFragment">
 
@@ -15,7 +15,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:background="@mipmap/banner_img">
+        android:background="@mipmap/head_portrait">
 
         <View
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:layout_below="@+id/rv_touxiang"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="大美女"
+            android:text="支部"
             android:textColor="@color/gray3"
             android:textSize="16sp" />
 

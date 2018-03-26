@@ -20,7 +20,7 @@
                 android:id="@+id/iv_banner"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:background="@mipmap/banner_img03"
+                android:background="@mipmap/banner_manager"
                 android:scaleType="center"/>
 
             <TextView
@@ -66,7 +66,7 @@
                             android:text="党建e连心"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/gray6"
-                            android:textSize="15sp"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -88,7 +88,7 @@
                             android:text="党员档案"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/gray6"
-                            android:textSize="15sp"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -110,7 +110,7 @@
                             android:text="党组织管理"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/gray6"
-                            android:textSize="15sp"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -138,7 +138,7 @@
                             android:text="党费管理"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/gray6"
-                            android:textSize="15sp"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -160,7 +160,7 @@
                             android:text="党建看板"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/gray6"
-                            android:textSize="15sp"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
 
@@ -183,7 +183,7 @@
                             android:text="党建百宝箱"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/gray6"
-                            android:textSize="15sp"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
                 </RelativeLayout>
 

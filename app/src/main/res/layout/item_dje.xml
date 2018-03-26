@@ -50,9 +50,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="如果伟大复兴是一场考试，那定是一场关乎中国民族前途命运的巨大考验。"
+        android:text="如果伟大复兴是一场考试，那定是一场关乎中国民族前途命运的巨大考验如果伟大复兴是一场考试，那定是一场关乎中国民族前途命运的巨大考验如果伟大复兴是一场考试，那定是一场关乎中国民族前途命运的巨大考验。"
         android:textColor="@color/gray9"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:maxLines="3"
+        android:ellipsize="end"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -137,7 +139,5 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:background="@mipmap/line1"></View>
 </LinearLayout>

@@ -10,7 +10,9 @@ import android.widget.LinearLayout;
 
 import com.fw.dangjian.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,10 +26,17 @@ public class WaterFallAdapter extends RecyclerView.Adapter<WaterFallAdapter.View
     private List<Integer> lists;
     private Context context;
     private onItemClickLitener monItemClickLitener;
+    private List<Integer> heightList;//装产出的随机数
 
     public WaterFallAdapter(List<Integer> lists, Context context) {
         this.lists = lists;
         this.context = context;
+
+        heightList = new ArrayList<>();
+        for (int i = 0; i < lists.size(); i++) {
+            int height = new Random().nextInt(200) + 330;//[100,300)的随机数
+            heightList.add(height);
+        }
     }
 
     @Override
@@ -48,11 +57,16 @@ public class WaterFallAdapter extends RecyclerView.Adapter<WaterFallAdapter.View
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.imageView.setImageResource(lists.get(position));
-        if (position % 2 == 0) {
-            holder.imageView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150));
+        //由于需要实现瀑布流的效果,所以就需要动态的改变控件的高度了
+        ViewGroup.LayoutParams params = holder.imageView.getLayoutParams();
+        params.height=heightList.get(position);
+        holder.imageView.setLayoutParams(params);
+
+      /*  if (position % 2 == 0) {
+            holder.imageView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 250));
         } else {
-            holder.imageView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
-        }
+            holder.imageView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 350));
+        }*/
 
         if (monItemClickLitener != null) {
 
@@ -67,8 +81,9 @@ public class WaterFallAdapter extends RecyclerView.Adapter<WaterFallAdapter.View
 
     @Override
     public int getItemCount() {
-        return 10;
+        return lists.size();
     }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.rl_goods)

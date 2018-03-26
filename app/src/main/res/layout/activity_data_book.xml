@@ -9,20 +9,41 @@
 
     <include layout="@layout/head_title"></include>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
-        <ImageView
-            android:layout_width="7dp"
-            android:layout_height="match_parent"
-            android:background="@mipmap/redline"
-            android:layout_centerHorizontal="true"
-            />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
-    </RelativeLayout>
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:id="@+id/iv_book"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_centerHorizontal="true"
+                android:background="@mipmap/booktitle" />
+
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@mipmap/redline"
+                android:layout_below="@+id/iv_book"
+                android:visibility="gone"
+               />
+
+            <com.fw.dangjian.MyListView
+                android:id="@+id/recyclerview"
+                android:paddingTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/iv_book"
+                android:divider="@color/white"
+                android:background="@mipmap/book_bg"/>
+        </RelativeLayout>
+
+    </ScrollView>
 </LinearLayout>

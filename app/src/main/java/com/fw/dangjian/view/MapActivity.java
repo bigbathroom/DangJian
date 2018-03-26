@@ -29,6 +29,7 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.fw.dangjian.MyApplication;
 import com.fw.dangjian.R;
 import com.jaeger.library.StatusBarUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class MapActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
         //在activity执行onResume时执行mMapView.onResume ()，重新绘制加载地图
         mMapView.onResume();
         if (Build.VERSION.SDK_INT >= 23 && getApplicationInfo().targetSdkVersion >= 23) {
@@ -80,7 +82,6 @@ public class MapActivity extends AppCompatActivity {
             }
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -294,6 +295,7 @@ public class MapActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        MobclickAgent.onPause(this);
         //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
         mMapView.onPause();
     }

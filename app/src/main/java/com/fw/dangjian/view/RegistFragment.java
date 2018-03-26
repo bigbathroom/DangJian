@@ -102,7 +102,7 @@ public class RegistFragment extends BaseFragment implements RegistMvpView{
                     ToastUtils.showShort(act,"密码不能为空");
                     return ;
                 }else if(!StringUtils.isPassword(pwd)){
-                    ToastUtils.showShort(act,"密码格式不正确");
+                    ToastUtils.showShort(act,"请输入6~12位字母或数字");
                     return ;
                 }
                 if (!cb_agree.isChecked()) {

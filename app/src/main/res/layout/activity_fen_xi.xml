@@ -47,7 +47,7 @@
                 android:text="党员人数"
                 android:gravity="center_horizontal"
                 android:textColor="@color/gray3"
-                android:textSize="15sp"
+                android:textSize="10sp"
                 android:layout_marginTop="3dp"
                 />
         </LinearLayout>
@@ -81,7 +81,7 @@
                 android:text="党委/党总支数"
                 android:gravity="center_horizontal"
                 android:textColor="@color/gray3"
-                android:textSize="15sp"
+                android:textSize="10sp"
                 android:layout_marginTop="3dp"
                 />
 
@@ -116,7 +116,7 @@
                 android:text="党支部"
                 android:gravity="center_horizontal"
                 android:textColor="@color/gray3"
-                android:textSize="15sp"
+                android:textSize="10sp"
                 android:layout_marginTop="3dp"
                 />
         </LinearLayout>
@@ -162,7 +162,7 @@
                 android:text="今日工作信息数"
                 android:gravity="center_horizontal"
                 android:textColor="@color/gray3"
-                android:textSize="15sp"
+                android:textSize="10sp"
                 android:layout_marginTop="3dp"
                 />
         </LinearLayout>
@@ -187,7 +187,7 @@
                 android:text="全部工作信息数"
                 android:gravity="center_horizontal"
                 android:textColor="@color/gray3"
-                android:textSize="15sp"
+                android:textSize="10sp"
                 android:layout_marginTop="3dp"
                 />
         </LinearLayout>

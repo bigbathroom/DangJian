@@ -17,23 +17,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
-        <ImageView
-            android:id="@+id/iv_goods"
+
+        <RelativeLayout
+            android:id="@+id/rl_good"
             android:layout_width="140dp"
             android:layout_height="90dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:scaleType="fitXY"
-            android:background="@mipmap/banner_img02"
-            />
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/iv_goods"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:background="@mipmap/banner_img02"
+                />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@mipmap/play"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/iv_goods"
+            android:layout_toRightOf="@id/rl_good"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:layout_marginRight="10dp"

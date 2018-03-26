@@ -30,7 +30,6 @@ public class WaterFallActivity extends BaseActivity {
     WaterFallAdapter  adapter;
     private String title;
     private ArrayList<Integer> pictures;
-
     @Override
     protected int fillView() {
         return R.layout.activity_water_fall;
@@ -42,30 +41,41 @@ public class WaterFallActivity extends BaseActivity {
         left.setVisibility(View.VISIBLE);
         tv_title.setText("照片详情");
 
+
+
+
         title = getIntent().getStringExtra("title");
         tv_title1.setText(title);
-
         pictures = new ArrayList<>();
-        pictures.add(R.mipmap.er);
-        pictures.add(R.mipmap.wu);
-        pictures.add(R.mipmap.si);
-        pictures.add(R.mipmap.ba);
-        pictures.add(R.mipmap.liu);
-        pictures.add(R.mipmap.si);
-        pictures.add(R.mipmap.qi);
-        pictures.add(R.mipmap.liu);
-        pictures.add(R.mipmap.si);
-        pictures.add(R.mipmap.qi);
+        pictures.add(R.mipmap.one);
+        pictures.add(R.mipmap.two);
+        pictures.add(R.mipmap.three);
+        pictures.add(R.mipmap.four);
+        pictures.add(R.mipmap.five);
+        pictures.add(R.mipmap.six);
+        pictures.add(R.mipmap.seven);
+        pictures.add(R.mipmap.eight);
+        pictures.add(R.mipmap.nine);
+        pictures.add(R.mipmap.one);
+        pictures.add(R.mipmap.two);
+        pictures.add(R.mipmap.three);
+        pictures.add(R.mipmap.four);
+        pictures.add(R.mipmap.five);
+        pictures.add(R.mipmap.six);
+        pictures.add(R.mipmap.seven);
+        pictures.add(R.mipmap.eight);
+        pictures.add(R.mipmap.nine);
         adapter = new WaterFallAdapter(pictures,this);
 
         nrecycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+        nrecycler.setHasFixedSize(true);
         nrecycler.setAdapter(adapter);
         adapter.setonItemClickLitener(new WaterFallAdapter.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(WaterFallActivity.this, BigPhotoActivity.class);
-
-                intent.putExtra("image", pictures.get(position));
+                intent.putExtra("index", position);
+                intent.putExtra("image", pictures);
                 startActivity(intent);
             }
         });

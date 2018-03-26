@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -65,13 +66,20 @@ public class BranchAdapter extends RecyclerView.Adapter<BranchAdapter.ViewHolder
         GridePhotoAdapter pictureAdapter = new GridePhotoAdapter(pictures, context);
 
         holder.gv.setAdapter(pictureAdapter);
-
+        holder.gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(context, WaterFallActivity.class);
+                intent.putExtra("title", "互动课题活动");
+                context.startActivity(intent);
+            }
+        });
 
         holder.tv_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, WaterFallActivity.class);
-                intent.putExtra("title", "12324324");
+                intent.putExtra("title", "互动课题活动");
                 context.startActivity(intent);
             }
         });

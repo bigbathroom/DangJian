@@ -153,7 +153,14 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:src="@mipmap/praise"
-                android:layout_toRightOf="@+id/iv_collect"
+                android:layout_marginLeft="15dp"/>
+            <ImageView
+                android:id="@+id/iv_share"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/share"
+                android:layout_toRightOf="@+id/iv_praise"
                 android:layout_marginLeft="15dp"/>
         </RelativeLayout>
 

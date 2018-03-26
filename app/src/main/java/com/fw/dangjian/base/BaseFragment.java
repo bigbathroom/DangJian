@@ -133,6 +133,6 @@ public abstract class BaseFragment extends Fragment implements BaseMvpView{
 
     @Override
     public void onGetDataError(Throwable e) {
-        showErrorDialog();
+//        showErrorDialog();
     }
 }

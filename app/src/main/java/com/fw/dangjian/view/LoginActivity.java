@@ -1,5 +1,6 @@
 package com.fw.dangjian.view;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.fw.dangjian.R;
 import com.fw.dangjian.base.BaseActivity;
+import com.umeng.socialize.UMShareAPI;
 
 import java.lang.reflect.Field;
 
@@ -151,6 +153,11 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
 
 
     @OnClick({R.id.left})
@@ -161,4 +168,6 @@ public class LoginActivity extends BaseActivity {
                 break;
         }
     }
+
+
 }
