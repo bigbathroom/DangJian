@@ -2,7 +2,7 @@ package com.fw.dangjian.view;
 
 import android.graphics.Color;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
@@ -26,7 +26,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 public class FenXIActivity extends BaseActivity {
 
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.tv_count1)

@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +24,7 @@ import butterknife.OnClick;
 
 public class BoxActivity extends BaseActivity implements BoxMvpView{
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.tablayout2)
@@ -74,7 +74,7 @@ public class BoxActivity extends BaseActivity implements BoxMvpView{
             results = boxBean.result;
 
             for (int i = 0;i<results.size();i++){
-                BoxFragment boxFragment = BoxFragment.newInstance(String.valueOf(results.get(i).id));
+                BoxFragment boxFragment = BoxFragment.newInstance(String.valueOf(results.get(i).id),results.get(i).name);
                 mFragments.add(boxFragment);
                 mTabTitles.add(results.get(i).name);
             }

@@ -39,7 +39,7 @@ import static com.fw.dangjian.netUtil.Constants.BASE_URL;
 public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
 
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.tv_total_title)
@@ -69,7 +69,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     private CommentDialog commentDialog;
     private int managerId;
     private String url;
-    private String url1;
+    private String title;
 
     @Override
     protected int fillView() {
@@ -79,7 +79,6 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     @Override
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
-        tv_title.setText("工作信息");
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
         workInfoPresenter = new WorkInfoPresenter(this);
 
@@ -98,16 +97,17 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
         if (intent != null) {
 
             id = intent.getIntExtra("news_id", -1);
-            url1 = intent.getStringExtra("url");
-
+            title = intent.getStringExtra("title");
         }
 
         url = BASE_URL+"note/" + id + "?managerid=" + managerId;
 
         if (id == -1) {
-            wv.loadUrl(url1);
+            wv.loadUrl("");
+            tv_title.setText("");
         } else {
             wv.loadUrl(url);
+            tv_title.setText(title);
         }
 
     }

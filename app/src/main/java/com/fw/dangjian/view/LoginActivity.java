@@ -8,8 +8,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
@@ -25,7 +25,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
 
     @BindView(R.id.tablayout3)
     TabLayout tablayout;

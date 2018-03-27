@@ -3,7 +3,7 @@ package com.fw.dangjian.view;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +23,7 @@ import butterknife.OnClick;
 public class ResetPswActivity extends BaseActivity implements PutPasswordMvpView{
 
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.et_old_psw)

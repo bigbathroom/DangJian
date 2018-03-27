@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
@@ -21,7 +22,7 @@ import butterknife.OnClick;
 public class BigPhotoActivity extends BaseActivity {
 
     @BindView(R.id.left)
-    ImageView iv_back;
+    RelativeLayout iv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.view_page)

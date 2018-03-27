@@ -80,10 +80,9 @@ public class HomeFragment extends Fragment implements OnChannelListener,HomeMvpV
 
 //        getTitleData();
 
-
         mFragments = new ArrayList<>();
         for (int i = 0; i < mSelectedDatas.size(); i++) {
-            NewsPageFragment newsFragment = NewsPageFragment.newInstance(mSelectedDatas.get(i).TitleCode);
+            NewsPageFragment newsFragment = NewsPageFragment.newInstance(mSelectedDatas.get(i).TitleCode,mSelectedDatas.get(i).Title);
             mFragments.add(newsFragment);
         }
 
@@ -193,7 +192,7 @@ public class HomeFragment extends Fragment implements OnChannelListener,HomeMvpV
 //移动到我的频道
         Channel channel = mUnSelectedDatas.remove(starPos);
         mSelectedDatas.add(endPos, channel);
-        mFragments.add(NewsPageFragment.newInstance(channel.TitleCode));
+        mFragments.add(NewsPageFragment.newInstance(channel.TitleCode,channel.Title));
         mTitlePagerAdapter.notifyDataSetChanged();
     }
 

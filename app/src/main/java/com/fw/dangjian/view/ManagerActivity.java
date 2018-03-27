@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
@@ -14,7 +15,7 @@ import butterknife.OnClick;
 
 public class ManagerActivity extends BaseActivity {
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.search)
     ImageView search;
     @BindView(R.id.tv_title)

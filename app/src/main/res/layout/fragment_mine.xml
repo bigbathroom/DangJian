@@ -15,7 +15,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:background="@mipmap/head_portrait">
+        android:background="@mipmap/head_bg">
 
         <View
             android:layout_width="match_parent"
@@ -44,7 +44,8 @@
             android:layout_marginTop="10dp"
             android:text="支部"
             android:textColor="@color/gray3"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
@@ -163,7 +164,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@color/white"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/iv_user"
@@ -180,6 +182,40 @@
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/iv_user"
                     android:text="修改用户名"
+                    android:textColor="@color/gray3"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="22dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_course"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/iv_course"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@mipmap/course" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@+id/iv_course"
+                    android:text="学习课程"
                     android:textColor="@color/gray3"
                     android:textSize="13sp" />
 

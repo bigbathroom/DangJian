@@ -4,28 +4,27 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
-import com.fw.dangjian.adapter.ActionAdapter;
-import com.fw.dangjian.base.BaseFragment;
-import com.fw.dangjian.bean.ActionBean;
-import com.fw.dangjian.mvpView.ActionMvpView;
-import com.fw.dangjian.presenter.ActionPresenter;
-import com.fw.dangjian.util.ToastUtils;
+import com.fw.dangjian.adapter.CourseAdapter;
+import com.fw.dangjian.base.BaseActivity;
+import com.fw.dangjian.bean.CourseBean;
+import com.fw.dangjian.mvpView.CourseMvpView;
+import com.fw.dangjian.presenter.CoursePresenter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
-public class ActionFragment extends BaseFragment implements ActionMvpView{
-
+public class CourseActivity extends BaseActivity implements CourseMvpView{
+    @BindView(R.id.left)
+    RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.recyclerview)
@@ -37,42 +36,37 @@ public class ActionFragment extends BaseFragment implements ActionMvpView{
     @BindView(R.id.no_net)
     LinearLayout linearLayout_no_net;
 
-    private ImageView iv;
-    private ActionAdapter mAdapter;
-    private ArrayList<ActionBean.ResultBean.ListBean> lists;
-    private ActionPresenter actionPresenter;
-
+    CoursePresenter coursePresenter;
     int page = 1;
-    private MyHandler handler;
-    private int refreshTime = 0;
 
+    private CourseAdapter mAdapter;
+    private ArrayList<String> lists;
+    private int refreshTime = 0;
+    private MyHandler handler;
     @Override
-    protected View fillView() {
-        return layoutinflater.inflate(R.layout.fragment_action, null);
+    protected int fillView() {
+        return R.layout.activity_course;
     }
 
     @Override
     protected void initUi() {
-        tv_title.setText("互动广场");
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        left.setVisibility(View.VISIBLE);
+        tv_title.setText("学习课程");
+        coursePresenter = new CoursePresenter();
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         nrecycler.setLayoutManager(layoutManager);
 
-        View headView = LayoutInflater.from(getActivity()).inflate(R.layout.action_headview, (ViewGroup)getActivity().findViewById(android.R.id.content),false);
-        iv = (ImageView) headView.findViewById(R.id.view_pager);
-        nrecycler.addHeaderView(headView);
-
         handler = new MyHandler();
-        actionPresenter = new ActionPresenter();
+
     }
 
     @Override
     protected void initData() {
-
         lists = new ArrayList<>();
-
         requestServer(page);
-
         nrecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -98,19 +92,20 @@ public class ActionFragment extends BaseFragment implements ActionMvpView{
             }
         });
 
-        mAdapter = new ActionAdapter(lists, getActivity());
+        mAdapter = new CourseAdapter(lists, this);
         nrecycler.setAdapter(mAdapter);
         initAdapterClike();
     }
 
+
     private void initAdapterClike() {
-        mAdapter.setonItemClickLitener(new ActionAdapter.onItemClickLitener() {
+        mAdapter.setonItemClickLitener(new CourseAdapter.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
 
-                Intent intent = new Intent(getActivity(), QuizActivity.class);
-                intent.putExtra("squareId",lists.get(position-2).id);
-
+                Intent intent = new Intent(CourseActivity.this, VideoActivity.class);
+//                intent.putExtra("studyId", lists.get(position - 1).id);
+                intent.putExtra("studyId", 1);
                 startActivity(intent);
             }
         });
@@ -118,12 +113,14 @@ public class ActionFragment extends BaseFragment implements ActionMvpView{
     }
 
     private void requestServer(int page) {
-        actionPresenter.getActionPage(page,this);
+        coursePresenter.getCoursePage(page,this);
     }
 
+
     @Override
-    public void onGetDataNext(ActionBean actionBean) {
-        if (actionBean.result_code != null && actionBean.result_code.equals("200")){
+    public void onGetDataNext(CourseBean courseBean) {
+
+        /*if (actionBean.result_code != null && actionBean.result_code.equals("200")){
             if(actionBean.result.list.size()>0){
                 switch (page) {
                     case 1:
@@ -150,6 +147,17 @@ public class ActionFragment extends BaseFragment implements ActionMvpView{
             }
         }else{
             handler.sendEmptyMessageDelayed(3, 500);
+        }*/
+
+
+    }
+
+    @OnClick({R.id.left})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.left:
+                finish();
+                break;
         }
     }
 

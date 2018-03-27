@@ -1,7 +1,7 @@
 package com.fw.dangjian.view;
 
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +19,7 @@ import butterknife.OnClick;
 
 public class FileActivity extends BaseActivity implements FileMvpView{
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
 
@@ -39,10 +39,6 @@ public class FileActivity extends BaseActivity implements FileMvpView{
     TextView tv_yiji;
     @BindView(R.id.tv_info)
     TextView tv_info;
-    @BindView(R.id.tv_qiandao)
-    TextView tv_qiandao;
-    @BindView(R.id.tv_kecheng)
-    TextView tv_kecheng;
     @BindView(R.id.tv_active)
     TextView tv_active;
 

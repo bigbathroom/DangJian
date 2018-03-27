@@ -2,7 +2,7 @@ package com.fw.dangjian.view;
 
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
@@ -13,7 +13,7 @@ import butterknife.OnClick;
 
 public class RegistProActivity extends BaseActivity{
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.wv)

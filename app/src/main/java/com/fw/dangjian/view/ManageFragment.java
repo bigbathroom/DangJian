@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 public class ManageFragment extends BaseFragment implements AdapterView.OnItemClickListener{
-    @BindView(R.id.left)
-    ImageView left;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.recyclerview)

@@ -16,7 +16,6 @@ import com.fw.dangjian.bean.StudyPageBean;
 import com.fw.dangjian.mvpView.StudyMvpView;
 import com.fw.dangjian.presenter.StudyPresenter;
 import com.fw.dangjian.util.ConstanceValue;
-import com.fw.dangjian.util.HandlerUtil;
 import com.fw.dangjian.util.ToastUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -41,7 +40,6 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
     private StudyPresenter  studyPresenter;
 
     int page = 1;
-    private HandlerUtil handler;
     private int refreshTime = 0;
     private int columnid;
     private List<StudyPageBean.ResultBean.PageInfoBean.ListBean> lists;
@@ -104,7 +102,6 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
 
         mAdapter = new StudyAdapter(lists, getActivity());
         nrecycler.setAdapter(mAdapter);
-        handler = new HandlerUtil(nrecycler);
 
         mAdapter.setonItemClickLitener(new StudyAdapter.onItemClickLitener() {
 
@@ -113,7 +110,7 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(),VideoActivity.class);
 
-               intent.putExtra("studyId", lists.get(position - 1).id);
+                 intent.putExtra("studyId", lists.get(position - 1).id);
                 startActivity(intent);
             }
         });
@@ -144,11 +141,12 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
                         break;
                 }
 
+
                 linearLayout_no_content.setVisibility(View.GONE);
                 linearLayout_no_net.setVisibility(View.GONE);
                 nrecycler.setVisibility(View.VISIBLE);
-                handler.sendEmptyMessageDelayed(2, 200);
-
+                nrecycler.loadMoreComplete();
+                nrecycler.refreshComplete();
                 mAdapter.notifyDataSetChanged();
 
             } else {
@@ -159,13 +157,14 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
                         nrecycler.setVisibility(View.GONE);
                         break;
                     default:
-                        ToastUtils.showShort(act, "没有数据");
+                        ToastUtils.showShort(act, "没有更多数据");
                         page--;
                         linearLayout_no_content.setVisibility(View.GONE);
                         linearLayout_no_net.setVisibility(View.GONE);
                         nrecycler.setVisibility(View.VISIBLE);
                         mAdapter.notifyDataSetChanged();
-                        handler.sendEmptyMessageDelayed(1, 1000);
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
                         break;
                 }
             }
@@ -175,14 +174,17 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
                     linearLayout_no_content.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.VISIBLE);
                     nrecycler.setVisibility(View.GONE);
-
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
                     break;
                 default:
+                    ToastUtils.showShort(act, "网络错误");
                     page--;
                     linearLayout_no_content.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.GONE);
                     nrecycler.setVisibility(View.VISIBLE);
-                    handler.sendEmptyMessageDelayed(3, 1000);
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
                     break;
             }
         }

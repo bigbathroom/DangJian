@@ -5,6 +5,7 @@ import com.fw.dangjian.bean.BoxBean;
 import com.fw.dangjian.bean.BoxPageBean;
 import com.fw.dangjian.bean.ColumnBean;
 import com.fw.dangjian.bean.CommentBean;
+import com.fw.dangjian.bean.CourseBean;
 import com.fw.dangjian.bean.DjeBean;
 import com.fw.dangjian.bean.FileBean;
 import com.fw.dangjian.bean.HomeBean;
@@ -194,6 +195,9 @@ public interface AppService {
     @GET(Constants.VIDEO+ "{id}/")
     Observable<VideoBean> getVideo(@Path("id") int id);
 
+    //学习课程
+    @GET(Constants.COURSE)
+    Observable<CourseBean> getCourse(@Query("pageNum") int pageNum);
 
 }
 

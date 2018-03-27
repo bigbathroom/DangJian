@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
@@ -14,7 +14,6 @@ import com.fw.dangjian.base.BaseActivity;
 import com.fw.dangjian.bean.DjeBean;
 import com.fw.dangjian.mvpView.DJEMvpView;
 import com.fw.dangjian.presenter.DJEPresenter;
-import com.fw.dangjian.util.HandlerUtil;
 import com.fw.dangjian.util.ToastUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -26,7 +25,7 @@ import butterknife.OnClick;
 public class DJEActivity extends BaseActivity implements DJEMvpView{
 
     @BindView(R.id.left)
-    ImageView  left;
+    RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.recyclerview)
@@ -42,7 +41,6 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
     private ArrayList<DjeBean.ResultBean.PageInfoBean.ListBean> lists;
     private DJEPresenter djePresenter;
     int page = 1;
-    private HandlerUtil handler;
     private int refreshTime = 0;
 
 
@@ -94,8 +92,6 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
             }
         });
 
-        handler = new HandlerUtil(nrecycler);
-
         mAdapter = new DjeAdapter(lists,this);
         nrecycler.setAdapter(mAdapter);
 
@@ -115,6 +111,7 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
 
                 Intent intent = new Intent(DJEActivity.this,WorkInfoActivity.class);
                 intent.putExtra("news_id",lists.get(position-1).id);
+                intent.putExtra("title","党建e连心");
                 startActivity(intent);
             }
         });
@@ -149,8 +146,8 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
                 linearLayout_no_content.setVisibility(View.GONE);
                 linearLayout_no_net.setVisibility(View.GONE);
                 nrecycler.setVisibility(View.VISIBLE);
-                handler.sendEmptyMessageDelayed(2, 200);
-
+                nrecycler.loadMoreComplete();
+                nrecycler.refreshComplete();
                 mAdapter.notifyDataSetChanged();
 
             } else {
@@ -159,15 +156,18 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
                         linearLayout_no_content.setVisibility(View.VISIBLE);
                         linearLayout_no_net.setVisibility(View.GONE);
                         nrecycler.setVisibility(View.GONE);
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
                         break;
                     default:
-                        ToastUtils.showShort(act, "没有数据");
+                        ToastUtils.showShort(act, "没有更多数据");
                         page--;
                         linearLayout_no_content.setVisibility(View.GONE);
                         linearLayout_no_net.setVisibility(View.GONE);
                         nrecycler.setVisibility(View.VISIBLE);
                         mAdapter.notifyDataSetChanged();
-                        handler.sendEmptyMessageDelayed(1, 1000);
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
                         break;
                 }
             }
@@ -177,14 +177,17 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
                     linearLayout_no_content.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.VISIBLE);
                     nrecycler.setVisibility(View.GONE);
-
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
                     break;
                 default:
+                    ToastUtils.showShort(act, "网络错误");
                     page--;
                     linearLayout_no_content.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.GONE);
                     nrecycler.setVisibility(View.VISIBLE);
-                    handler.sendEmptyMessageDelayed(3, 1000);
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
                     break;
             }
         }

@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.amap.api.maps.AMap;
@@ -41,7 +40,7 @@ import butterknife.OnClick;
 
 public class MapActivity extends AppCompatActivity {
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.rl_search)
     RelativeLayout rl_search;
     @BindView(R.id.et_search)

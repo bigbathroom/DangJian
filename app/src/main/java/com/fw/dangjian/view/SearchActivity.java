@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,7 +18,6 @@ import com.fw.dangjian.bean.ColumnBean;
 import com.fw.dangjian.bean.HomeBean;
 import com.fw.dangjian.mvpView.HomeMvpView;
 import com.fw.dangjian.presenter.HomePresenter;
-import com.fw.dangjian.util.HandlerUtil;
 import com.fw.dangjian.util.ToastUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -31,7 +29,7 @@ import butterknife.OnClick;
 public class SearchActivity extends BaseActivity implements HomeMvpView {
 
     @BindView(R.id.left)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.rl_search)
     RelativeLayout rl_search;
     @BindView(R.id.et_search)
@@ -51,7 +49,6 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
 
     private int refreshTime = 0;
     int page = 1;
-    private HandlerUtil handler;
     private String search_content;
 
     @Override
@@ -102,8 +99,6 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
         homePresenter.getHomePage1(page, name, this);
         mAdapter = new NewSearchAdapter(lists, this);
         nrecycler.setAdapter(mAdapter);
-        handler = new HandlerUtil(nrecycler);
-
         initAdapterClike();
     }
 
@@ -159,7 +154,8 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
                 linearLayout_no_content.setVisibility(View.GONE);
                 linearLayout_no_net.setVisibility(View.GONE);
                 nrecycler.setVisibility(View.VISIBLE);
-                handler.sendEmptyMessageDelayed(2, 200);
+                nrecycler.loadMoreComplete();
+                nrecycler.refreshComplete();
 
                 mAdapter.notifyDataSetChanged();
 
@@ -169,15 +165,18 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
                         linearLayout_no_content.setVisibility(View.VISIBLE);
                         linearLayout_no_net.setVisibility(View.GONE);
                         nrecycler.setVisibility(View.GONE);
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
                         break;
                     default:
-                        ToastUtils.showShort(act, "没有数据");
+                        ToastUtils.showShort(act, "没有更多数据");
                         page--;
                         linearLayout_no_content.setVisibility(View.GONE);
                         linearLayout_no_net.setVisibility(View.GONE);
                         nrecycler.setVisibility(View.VISIBLE);
                         mAdapter.notifyDataSetChanged();
-                        handler.sendEmptyMessageDelayed(1, 1000);
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
                         break;
                 }
             }
@@ -187,14 +186,17 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
                     linearLayout_no_content.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.VISIBLE);
                     nrecycler.setVisibility(View.GONE);
-
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
                     break;
                 default:
+                    ToastUtils.showShort(act, "网络错误");
                     page--;
                     linearLayout_no_content.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.GONE);
                     nrecycler.setVisibility(View.VISIBLE);
-                    handler.sendEmptyMessageDelayed(3, 1000);
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
                     break;
             }
         }

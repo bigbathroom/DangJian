@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fw.dangjian">
 
+    <uses-sdk android:minSdkVersion="8" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -37,7 +39,7 @@
     <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <!--umeng-->
+    <!-- umeng -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -47,7 +49,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-sdk android:minSdkVersion="8"></uses-sdk>
 
     <application
         android:name=".MyApplication"
@@ -63,7 +64,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".view.DJEActivity" />
         <activity android:name=".view.QuizActivity" />
         <activity
@@ -89,11 +89,10 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="123a29385091ef021e8e169bfdbac94b" />
-        <!--umeng-->
+        <!-- umeng -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5ab1c2638f4a9d6bda0000b2"></meta-data>
-
+            android:value="5ab1c2638f4a9d6bda0000b2" />
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
@@ -109,16 +108,17 @@
         <activity android:name=".view.ResetPswActivity" />
         <activity android:name=".view.Main2Activity" />
         <activity android:name=".view.ChannelActivity" />
-        <activity android:name=".view.SearchActivity" />
+        <activity android:name=".view.SearchActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".view.SplashActivity" />
         <activity android:name=".view.GuideActivity" />
         <!-- 定位 -->
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name=".view.BranchPhotoActivity"></activity>
+        <activity android:name=".view.BranchPhotoActivity" />
         <activity android:name=".view.WaterFallActivity" />
         <activity android:name=".view.ManagerActivity" />
-        <activity android:name=".view.BigPhotoActivity"></activity>
+        <activity android:name=".view.BigPhotoActivity" />
         <!-- 新浪 -->
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
@@ -142,20 +142,20 @@
             </intent-filter>
         </activity>
 
-
-        <!--weixin-->
-      <!--  <activity
+        <!-- weixin -->
+        <!--
+            <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-        <!--qq-->
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        -->
+        <!-- qq -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -164,16 +164,13 @@
 
                 <data android:scheme="tencent101468642" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-
+        <activity android:name=".view.CourseActivity"></activity>
     </application>
 
 </manifest>

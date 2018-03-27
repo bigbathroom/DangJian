@@ -4,14 +4,24 @@
                 android:layout_height="45dp"
                 android:background="@color/toolbar">
 
-    <ImageView
+
+    <RelativeLayout
         android:id="@+id/left"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/iv_return"
-        android:visibility="gone" />
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/iv_return"
+            />
+    </RelativeLayout>
+
 
     <ImageView
         android:id="@+id/search"
@@ -29,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="党建云"
+        android:text="党建"
         android:textSize="@dimen/title_size"
         />
 

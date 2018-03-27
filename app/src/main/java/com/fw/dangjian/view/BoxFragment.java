@@ -16,7 +16,6 @@ import com.fw.dangjian.bean.BoxPageBean;
 import com.fw.dangjian.mvpView.BoxMvpView;
 import com.fw.dangjian.presenter.BoxPresenter;
 import com.fw.dangjian.util.ConstanceValue;
-import com.fw.dangjian.util.HandlerUtil;
 import com.fw.dangjian.util.ToastUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -39,9 +38,9 @@ public class BoxFragment extends  BaseFragment implements BoxMvpView{
     private ArrayList<BoxPageBean.ResultBean.PageInfoBean.ListBean> lists;
 
     int page = 1;
-    private HandlerUtil handler;
     private int refreshTime = 0;
     private String mTitleCode = "";
+    private String title = "";
    int columnid;
     private BoxPresenter boxPresenter;
 
@@ -56,16 +55,19 @@ public class BoxFragment extends  BaseFragment implements BoxMvpView{
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         nrecycler.setLayoutManager(layoutManager);
         mTitleCode = getArguments().getString(ConstanceValue.DATA);
+        title = getArguments().getString("title");
+
         columnid = Integer.valueOf(mTitleCode).intValue();
 
         boxPresenter = new BoxPresenter();
 
     }
 
-    public static BoxFragment newInstance(String code) {
+    public static BoxFragment newInstance(String code,String title) {
         BoxFragment fragment = new BoxFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstanceValue.DATA, code);
+        bundle.putString("title", title);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -104,13 +106,13 @@ public class BoxFragment extends  BaseFragment implements BoxMvpView{
 
         mAdapter = new BoxAdapter(lists, getActivity());
         nrecycler.setAdapter(mAdapter);
-        handler = new HandlerUtil(nrecycler);
         mAdapter.setonItemClickLitener(new BoxAdapter.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
 
                 Intent intent = new Intent(getActivity(), WorkInfoActivity.class);
                 intent.putExtra("news_id",lists.get(position-1).id);
+                intent.putExtra("title",title);
                 startActivity(intent);
             }
         });
@@ -139,8 +141,8 @@ public class BoxFragment extends  BaseFragment implements BoxMvpView{
                 linearLayout_no_content.setVisibility(View.GONE);
                 linearLayout_no_net.setVisibility(View.GONE);
                 nrecycler.setVisibility(View.VISIBLE);
-                handler.sendEmptyMessageDelayed(2, 200);
-
+                nrecycler.loadMoreComplete();
+                nrecycler.refreshComplete();
                 mAdapter.notifyDataSetChanged();
 
             } else {
@@ -149,15 +151,18 @@ public class BoxFragment extends  BaseFragment implements BoxMvpView{
                         linearLayout_no_content.setVisibility(View.VISIBLE);
                         linearLayout_no_net.setVisibility(View.GONE);
                         nrecycler.setVisibility(View.GONE);
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
                         break;
                     default:
-                        ToastUtils.showShort(act, "没有数据");
+                        ToastUtils.showShort(act, "没有更多数据");
                         page--;
                         linearLayout_no_content.setVisibility(View.GONE);
                         linearLayout_no_net.setVisibility(View.GONE);
                         nrecycler.setVisibility(View.VISIBLE);
                         mAdapter.notifyDataSetChanged();
-                        handler.sendEmptyMessageDelayed(1, 1000);
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
                         break;
                 }
             }
@@ -167,14 +172,17 @@ public class BoxFragment extends  BaseFragment implements BoxMvpView{
                     linearLayout_no_content.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.VISIBLE);
                     nrecycler.setVisibility(View.GONE);
-
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
                     break;
                 default:
+                    ToastUtils.showShort(act, "网络错误");
                     page--;
                     linearLayout_no_content.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.GONE);
                     nrecycler.setVisibility(View.VISIBLE);
-                    handler.sendEmptyMessageDelayed(3, 1000);
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
                     break;
             }
         }

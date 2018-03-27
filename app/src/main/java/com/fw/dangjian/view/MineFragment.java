@@ -61,6 +61,8 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView{
     RelativeLayout rl_manager;
     @BindView(R.id.rl_user)
     RelativeLayout rl_user;
+    @BindView(R.id.rl_course)
+    RelativeLayout rl_course;
     @BindView(R.id.rl_psw)
     RelativeLayout rl_psw;
     @BindView(R.id.rl_spec)
@@ -95,7 +97,7 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView{
 
     }
 
-    @OnClick({R.id.iv_msg, R.id.rv_touxiang, R.id.rl_ku,R.id.rl_photo,R.id.rl_manager, R.id.rl_spec, R.id.rl_user, R.id.rl_psw})
+    @OnClick({R.id.iv_msg, R.id.rv_touxiang, R.id.rl_ku,R.id.rl_photo,R.id.rl_manager, R.id.rl_spec, R.id.rl_user, R.id.rl_course,R.id.rl_psw})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_msg:
@@ -152,6 +154,17 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView{
                 }else{
                     Intent intent2 = new Intent(getActivity(), ChangeNameActivity.class);
                     startActivityForResult(intent2,400);
+
+                }
+
+                break;
+            case R.id.rl_course:
+                if(managerId == -1){
+                    Intent intent4 = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent4);
+                }else{
+                    Intent intent5 = new Intent(getActivity(), CourseActivity.class);
+                    startActivity(intent5);
 
                 }
 

@@ -52,6 +52,7 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
     private ArrayList<HomeBean.ResultBean.PageInfoBean.ListBean> lists;
 
     private String mTitleCode = "";
+    private String title = "";
     private HomePresenter homePresenter;
 
     int page = 1;
@@ -72,10 +73,11 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
         return view;
     }
 
-    public static NewsPageFragment newInstance(String code) {
+    public static NewsPageFragment newInstance(String code,String title) {
         NewsPageFragment fragment = new NewsPageFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstanceValue.DATA, code);
+        bundle.putString("title", title);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -93,10 +95,12 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
 
 
         mTitleCode = getArguments().getString(ConstanceValue.DATA);
+        title = getArguments().getString("title");
+
+
         columnid = Integer.valueOf(mTitleCode).intValue();
 
         homePresenter = new HomePresenter();
-
 
     }
 
@@ -150,15 +154,17 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
 
                 Intent intent = new Intent(getActivity(),WorkInfoActivity.class);
                 intent.putExtra("news_id",lists.get(position-2).id);
+                intent.putExtra("title",title);
                 startActivity(intent);
             }
         });
     }
 
     private void setBanner(final List<HomeBean.ResultBean.LinksEntityBean> linksEntity) {
+        images.clear();
+        titles.clear();
 
         for (int i = 0;i<linksEntity.size();i++){
-
             images.add(linksEntity.get(i).link_image);
             titles.add(linksEntity.get(i).link_description);
         }
@@ -214,7 +220,9 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
     public void onGetDataNext(HomeBean homeBean) {
         if (homeBean.result_code != null && homeBean.result_code.equals("200")){
             linksEntity = homeBean.result.linksEntity;
+
             setBanner(linksEntity);
+
             if(homeBean.result.pageInfo.list.size()>0){
                 switch (page) {
                     case 1:
@@ -225,23 +233,24 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
                         lists.addAll(homeBean.result.pageInfo.list);
                         break;
                 }
-                handler.sendEmptyMessageDelayed(2, 200);
+                handler.sendEmptyMessageDelayed(1, 500);
             }else{
                 switch (page) {
                     case 1:
-
                         lists.clear();
-                        handler.sendEmptyMessageDelayed(4, 1000);
+                        handler.sendEmptyMessageDelayed(2, 500);
                         break;
                     default:
                         ToastUtils.showShort(getActivity(), "没有更多数据", false);
-                        handler.sendEmptyMessageDelayed(1, 1000);
-
+                        page--;
+                        handler.sendEmptyMessageDelayed(1, 500);
                         break;
                 }
             }
         }else{
-            handler.sendEmptyMessageDelayed(3, 1000);
+
+
+            handler.sendEmptyMessageDelayed(3, 500);
         }
     }
 
@@ -254,43 +263,28 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
                 case 1:
                     nrecycler.setVisibility(View.VISIBLE);
                     linearLayout_no_net.setVisibility(View.GONE);
-
+                    linearLayout_no_content.setVisibility(View.GONE);
                     mAdapter.notifyDataSetChanged();
                     nrecycler.loadMoreComplete();
                     nrecycler.refreshComplete();
                     break;
                 case 2:
-                    nrecycler.setVisibility(View.VISIBLE);
+                    nrecycler.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.GONE);
-
+                    linearLayout_no_content.setVisibility(View.VISIBLE);
                     mAdapter.notifyDataSetChanged();
                     nrecycler.loadMoreComplete();
                     nrecycler.refreshComplete();
                     break;
                 case 3:
                     nrecycler.setVisibility(View.GONE);
+                    linearLayout_no_content.setVisibility(View.GONE);
                     linearLayout_no_net.setVisibility(View.VISIBLE);
-                  /*  bt_back.setText("重新加载");
-                    bt_back.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                           *//* MainActivity mainActivity = (MainActivity) act;
-                            MarketFragment fragmet = new MarketFragment();
-                            mainActivity.changeRadioButton(R.id.rd_home, fragmet,0);*//*
-                            page = 0;
-                            requestServer();
-                        }
-                    });*/
-                    break;
-                case 4:
-                    nrecycler.setVisibility(View.VISIBLE);
-                    linearLayout_no_net.setVisibility(View.GONE);
+                    mAdapter.notifyDataSetChanged();
                     nrecycler.loadMoreComplete();
                     nrecycler.refreshComplete();
-                    mAdapter.notifyDataSetChanged();
                     break;
             }
-            mAdapter.notifyDataSetChanged();
         }
     }
 

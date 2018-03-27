@@ -67,4 +67,7 @@ public class Constants {
     public static final String FILE = "square/record/";
     //视频地址
     public static final String VIDEO = "learn/";
+
+    //获取学习课程
+    public static final String COURSE = "article/list/";
 }
