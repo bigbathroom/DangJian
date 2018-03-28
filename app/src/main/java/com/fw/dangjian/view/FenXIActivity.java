@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import com.fw.dangjian.R;
 import com.fw.dangjian.base.BaseActivity;
+import com.fw.dangjian.bean.BoardBean;
+import com.fw.dangjian.mvpView.BoardMvpView;
+import com.fw.dangjian.presenter.BoardPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,7 @@ import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class FenXIActivity extends BaseActivity {
+public class FenXIActivity extends BaseActivity implements BoardMvpView{
 
     @BindView(R.id.left)
     RelativeLayout left;
@@ -47,6 +50,7 @@ public class FenXIActivity extends BaseActivity {
 
     private List<PointValue> mPointValues = new ArrayList<PointValue>();
     private List<AxisValue> mAxisValues = new ArrayList<AxisValue>();
+    private BoardPresenter boardPresenter;
 
     @Override
     protected int fillView() {
@@ -57,6 +61,11 @@ public class FenXIActivity extends BaseActivity {
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
         tv_title.setText("统计分析");
+
+        int managerId =1;
+
+        boardPresenter = new BoardPresenter();
+        boardPresenter.getBoard(managerId,this);
 
         getAxisLables();//获取x轴的标注
         getAxisPoints();//获取坐标点
@@ -139,6 +148,19 @@ public class FenXIActivity extends BaseActivity {
             case R.id.left:
                 finish();
                 break;
+        }
+    }
+
+    @Override
+    public void onGetDataNext(BoardBean boardBean) {
+        if(boardBean.result_code != null&&boardBean.result_code.equals("200")){
+            tv_count1.setText(boardBean.result.memberCount);
+            tv_count2.setText(boardBean.result.committeeCount);
+            tv_count3.setText(boardBean.result.branchCount);
+            tv_count4.setText(boardBean.result.todayInfoCount);
+            tv_count4.setText(boardBean.result.totleInfoCount);
+        }else{
+
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.fw.dangjian.netUtil;
 
 import com.fw.dangjian.bean.ActionBean;
+import com.fw.dangjian.bean.BoardBean;
+import com.fw.dangjian.bean.BookBean;
 import com.fw.dangjian.bean.BoxBean;
 import com.fw.dangjian.bean.BoxPageBean;
 import com.fw.dangjian.bean.ColumnBean;
@@ -20,6 +22,7 @@ import com.fw.dangjian.bean.StudyBean;
 import com.fw.dangjian.bean.StudyPageBean;
 import com.fw.dangjian.bean.SubmitBean;
 import com.fw.dangjian.bean.VideoBean;
+import com.fw.dangjian.bean.WaterBean;
 
 import java.util.Map;
 
@@ -198,7 +201,15 @@ public interface AppService {
     //学习课程
     @GET(Constants.COURSE)
     Observable<CourseBean> getCourse(@Query("pageNum") int pageNum);
-
+    //大事记
+    @GET(Constants.BOOK)
+    Observable<BookBean> getBook(@Query("pageNum") int pageNum);
+    //照片墙
+    @GET(Constants.PHOTOWALL)
+    Observable<WaterBean> getWater(@Query("pageNum") int pageNum,@Query("managerid") int managerid);
+    //党建看板
+    @GET(Constants.BOARD)
+    Observable<BoardBean> getBoard(@Query("managerid") int managerid);
 }
 
 

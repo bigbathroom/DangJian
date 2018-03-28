@@ -47,7 +47,7 @@ import static android.R.attr.id;
 
 public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     @BindView(R.id.iv_back)
-    ImageView left;
+    RelativeLayout left;
     @BindView(R.id.video_view)
     NiceVideoPlayer mNiceVideoPlayer;
     @BindView(R.id.tv_introduce_content1)
@@ -127,7 +127,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
         });
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_introduce, R.id.iv_comment, R.id.iv_praise,R.id.iv_share, R.id.tv_comment, R.id.rl_comment})
+    @OnClick({R.id.iv_back, R.id.tv_introduce, R.id.iv_comment, R.id.iv_praise, R.id.iv_share, R.id.tv_comment, R.id.rl_comment})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -157,7 +157,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 web.setThumb(new UMImage(this, R.mipmap.thumb));  //缩略图
                 web.setDescription("实时发布党新闻和活动");//描述
                 new ShareAction(this).withMedia(web)
-                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN_CIRCLE)
+                        .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN_CIRCLE)
                         .setCallback(shareListener).open();
                 break;
             case R.id.tv_comment:
@@ -224,7 +224,6 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     };
 
 
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -257,14 +256,26 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
             if (kongBean.result != null) {
 
-//                String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
 //                mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK); // or NiceVideoPlayer.TYPE_NATIVE
-                mNiceVideoPlayer.setUp(kongBean.result.post_content, null);
-//                mNiceVideoPlayer.setUp(mVideoUrl, null);
+                String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
+                if (kongBean.result.post_content == null || kongBean.result.post_content.equals("")) {
+//                    ToastUtils.showShort(this,"个"+kongBean.result.post_content);
+
+                    mNiceVideoPlayer.setUp(mVideoUrl, null);
+                } else {
+//                    ToastUtils.showShort(this,"个恶热"+kongBean.result.post_content);
+//                    mNiceVideoPlayer.setUp(Constants.BASE_URL+"images/"+kongBean.result.post_content, null);
+                    mNiceVideoPlayer.setUp(mVideoUrl, null);
+
+                }
+
                 TxVideoPlayerController controller = new TxVideoPlayerController(this);
 //        controller.setTitle(mTitle);
 //        controller.setImage(mImageUrl);
                 mNiceVideoPlayer.setController(controller);
+
+
+
 
                 tv_introduce_content1.setText(kongBean.result.post_excerpt);
                 tv_introduce_content2.setText(kongBean.result.post_excerpt);
@@ -282,7 +293,6 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
             commentDialog.dismiss();
-
 
             ToastUtils.show(this, "提交成功", Toast.LENGTH_SHORT);
         } else {
@@ -334,6 +344,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
         super.onResume();
         MobclickAgent.onResume(this);
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);

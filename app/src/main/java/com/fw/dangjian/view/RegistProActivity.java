@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.fw.dangjian.R;
 import com.fw.dangjian.base.BaseActivity;
+import com.fw.dangjian.netUtil.Constants;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,7 +33,7 @@ public class RegistProActivity extends BaseActivity{
 
     @Override
     protected void initData() {
-        String url ="";
+        String url = Constants.BASE_URL+"userDeal";
         wv.loadUrl(url);
     }
     @OnClick({R.id.left})

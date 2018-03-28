@@ -77,7 +77,7 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
                         requestServer(page);
                     }
 
-                }, 1000);            //refresh data here
+                }, 200);            //refresh data here
             }
 
             @Override
@@ -87,7 +87,7 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
                         page++;
                         requestServer(page);
                     }
-                }, 1000);
+                }, 200);
 
             }
         });
@@ -191,5 +191,12 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
                     break;
             }
         }
+    }
+
+    @Override
+    public void onGetDataError(Throwable e) {
+        super.onGetDataError(e);
+        nrecycler.loadMoreComplete();
+        nrecycler.refreshComplete();
     }
 }

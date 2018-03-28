@@ -88,7 +88,7 @@ public class BoxFragment extends  BaseFragment implements BoxMvpView{
                         requestServer(page);
                     }
 
-                }, 1000);            //refresh data here
+                }, 200);            //refresh data here
             }
 
             @Override
@@ -98,7 +98,7 @@ public class BoxFragment extends  BaseFragment implements BoxMvpView{
                         page++;
                         requestServer(page);
                     }
-                }, 1000);
+                }, 200);
 
             }
         });
@@ -189,6 +189,12 @@ public class BoxFragment extends  BaseFragment implements BoxMvpView{
 
     }
 
+    @Override
+    public void onGetDataError(Throwable e) {
+        super.onGetDataError(e);
+        nrecycler.loadMoreComplete();
+        nrecycler.refreshComplete();
+    }
     @Override
     public void onGetColunmDataNext(BoxBean boxBean) {
     }

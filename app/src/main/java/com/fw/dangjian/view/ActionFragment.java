@@ -83,7 +83,7 @@ public class ActionFragment extends BaseFragment implements ActionMvpView{
                         requestServer(page);
                     }
 
-                }, 1000);            //refresh data here
+                }, 200);            //refresh data here
             }
 
             @Override
@@ -93,7 +93,7 @@ public class ActionFragment extends BaseFragment implements ActionMvpView{
                         page++;
                         requestServer(page);
                     }
-                }, 1000);
+                }, 200);
 
             }
         });
@@ -134,23 +134,30 @@ public class ActionFragment extends BaseFragment implements ActionMvpView{
                         lists.addAll(actionBean.result.list);
                         break;
                 }
-                handler.sendEmptyMessageDelayed(1, 500);
+                handler.sendEmptyMessageDelayed(1, 200);
             }else{
                 switch (page) {
                     case 1:
                         lists.clear();
-                        handler.sendEmptyMessageDelayed(2, 500);
+                        handler.sendEmptyMessageDelayed(2, 200);
                         break;
                     default:
                         ToastUtils.showShort(getActivity(), "没有更多数据", false);
                         page--;
-                        handler.sendEmptyMessageDelayed(1, 500);
+                        handler.sendEmptyMessageDelayed(1, 200);
                         break;
                 }
             }
         }else{
-            handler.sendEmptyMessageDelayed(3, 500);
+            handler.sendEmptyMessageDelayed(3, 200);
         }
+    }
+
+    @Override
+    public void onGetDataError(Throwable e) {
+        super.onGetDataError(e);
+        nrecycler.loadMoreComplete();
+        nrecycler.refreshComplete();
     }
 
     class MyHandler extends Handler {

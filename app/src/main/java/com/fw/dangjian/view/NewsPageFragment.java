@@ -121,7 +121,7 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
                         requestServer(page);
                     }
 
-                }, 1000);            //refresh data here
+                }, 200);            //refresh data here
             }
 
             @Override
@@ -131,7 +131,7 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
                         page++;
                         requestServer(page);
                     }
-                }, 1000);
+                }, 200);
 
             }
         });
@@ -208,7 +208,8 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
 
     @Override
     public void onGetDataError(Throwable e) {
-
+        nrecycler.loadMoreComplete();
+        nrecycler.refreshComplete();
     }
 
     @Override
@@ -233,24 +234,22 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
                         lists.addAll(homeBean.result.pageInfo.list);
                         break;
                 }
-                handler.sendEmptyMessageDelayed(1, 500);
+                handler.sendEmptyMessageDelayed(1, 200);
             }else{
                 switch (page) {
                     case 1:
                         lists.clear();
-                        handler.sendEmptyMessageDelayed(2, 500);
+                        handler.sendEmptyMessageDelayed(2, 200);
                         break;
                     default:
                         ToastUtils.showShort(getActivity(), "没有更多数据", false);
                         page--;
-                        handler.sendEmptyMessageDelayed(1, 500);
+                        handler.sendEmptyMessageDelayed(1, 200);
                         break;
                 }
             }
         }else{
-
-
-            handler.sendEmptyMessageDelayed(3, 500);
+            handler.sendEmptyMessageDelayed(3, 10);
         }
     }
 

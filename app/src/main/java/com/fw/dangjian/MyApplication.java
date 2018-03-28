@@ -46,7 +46,7 @@ public class MyApplication extends Application {
     }
 
     {
-        PlatformConfig.setWeixin("wxf6c3e58b34863382", "78767ac6eb8459d162dcf7687427ac65");
+        PlatformConfig.setWeixin("wx5072af51333fd679", "7376b62fa5110bac656da21bd23a66c2");
         PlatformConfig.setQQZone("101468642", "bff4eb8d46f414fae74b7dd673c9d2ef");
 //        PlatformConfig.setSinaWeibo("1972583338", "4b500e1eca29b11110204d0f3d34b50c", "http://www.zyt1880.cn");
     }

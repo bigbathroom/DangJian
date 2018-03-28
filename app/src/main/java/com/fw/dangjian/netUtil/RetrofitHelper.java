@@ -36,8 +36,8 @@ public class RetrofitHelper {
     private void initRetrofit() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(15, TimeUnit.SECONDS);//超时时间15S
-        builder.readTimeout(20, TimeUnit.SECONDS);
-        builder.writeTimeout(20, TimeUnit.SECONDS);
+        builder.readTimeout(15, TimeUnit.SECONDS);
+        builder.writeTimeout(15, TimeUnit.SECONDS);
         builder.retryOnConnectionFailure(false);//设置失败重练
         //应用程序拦截器
        /* builder.addInterceptor(new ApplicationCacheIntercept());

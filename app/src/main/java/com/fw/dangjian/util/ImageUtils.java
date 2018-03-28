@@ -26,25 +26,16 @@ import java.util.Locale;
 
 public class ImageUtils {
 
+
     public static String capturePath;
-    public static File file_photo = null;
-    public static File feedPic1 = null;
-    public static File feedPic2 = null;
+    public static File file_photo;
+
     /*
-   *创建一个.jpg文件
-    */
+     *创建一个.jpg文件
+  */
     public static void createNewFile() {
-
-        String out_file_path = Environment.getExternalStorageDirectory().getPath() + "/jiongBook";
-        File dir = new File(out_file_path);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-
-        capturePath = out_file_path + "/" + DateFormat.format("yyyyMMddhhmmss", Calendar.getInstance(Locale.CHINA)) + ".jpg";
-
+        capturePath = Environment.getExternalStorageDirectory()+ "/" + DateFormat.format("yyyyMMddhhmmss", Calendar.getInstance(Locale.CHINA)) + ".jpg";
         file_photo = new File(capturePath);
-
         try {
             if(file_photo.exists()) {
                 file_photo.delete();
@@ -53,31 +44,14 @@ public class ImageUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        feedPic1 = new File(capturePath);
-        try {
-            if(feedPic1.exists()) {
-                feedPic1.delete();
-            }
-            feedPic1.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        feedPic2 = new File(capturePath);
-        try {
-            if(feedPic2.exists()) {
-                feedPic2.delete();
-            }
-            feedPic2.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 // 裁剪图片
-    public static Intent cropImageUri(Uri uri, int outputX, int outputY, boolean flag, Uri crop_Uri)
-    {
+    public static Intent cropImageUri(Uri uri, int outputX, int outputY) {
+
+        createNewFile();
+        Uri crop_Uri = Uri.fromFile(file_photo);
+
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
         intent.putExtra("crop", "true");
@@ -88,11 +62,7 @@ public class ImageUtils {
         intent.putExtra("outputX", outputX);
         intent.putExtra("outputY", outputY);
         intent.putExtra("scale", true);
-        intent.putExtra("scaleUpIfNeeded", true);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, crop_Uri);
-        intent.putExtra("return-data", flag);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        intent.putExtra("noFaceDetection", true);
         return  intent;
     }
 

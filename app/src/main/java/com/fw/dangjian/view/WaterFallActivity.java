@@ -10,13 +10,15 @@ import android.widget.TextView;
 import com.fw.dangjian.R;
 import com.fw.dangjian.adapter.WaterFallAdapter;
 import com.fw.dangjian.base.BaseActivity;
+import com.fw.dangjian.bean.WaterBean;
+import com.fw.dangjian.mvpView.WaterMvpView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class WaterFallActivity extends BaseActivity {
+public class WaterFallActivity extends BaseActivity implements WaterMvpView{
     @BindView(R.id.left)
     RelativeLayout left;
     @BindView(R.id.tv_title)
@@ -40,9 +42,6 @@ public class WaterFallActivity extends BaseActivity {
 
         left.setVisibility(View.VISIBLE);
         tv_title.setText("照片详情");
-
-
-
 
         title = getIntent().getStringExtra("title");
         tv_title1.setText(title);
@@ -70,6 +69,7 @@ public class WaterFallActivity extends BaseActivity {
         nrecycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         nrecycler.setHasFixedSize(true);
         nrecycler.setAdapter(adapter);
+
         adapter.setonItemClickLitener(new WaterFallAdapter.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -94,5 +94,11 @@ public class WaterFallActivity extends BaseActivity {
                 finish();
                 break;
         }
+    }
+
+
+    @Override
+    public void onGetDataNext(WaterBean waterBean) {
+
     }
 }

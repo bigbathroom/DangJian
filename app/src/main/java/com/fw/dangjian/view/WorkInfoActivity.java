@@ -152,7 +152,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 break;
             case R.id.iv_share:
 
-                String url = "https://www.baidu.com";
+//                String url = "https://www.baidu.com";
                 UMWeb web = new UMWeb(url);
                 web.setTitle("党建");//标题
                 web.setThumb(new UMImage(this, R.mipmap.thumb));  //缩略图

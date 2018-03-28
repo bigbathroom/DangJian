@@ -84,7 +84,7 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
                         requestServer(page);
                     }
 
-                }, 1000);            //refresh data here
+                }, 200);            //refresh data here
             }
 
             @Override
@@ -94,7 +94,7 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
                         page++;
                         requestServer(page);
                     }
-                }, 1000);
+                }, 200);
 
             }
         });
@@ -155,6 +155,9 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
                         linearLayout_no_content.setVisibility(View.VISIBLE);
                         linearLayout_no_net.setVisibility(View.GONE);
                         nrecycler.setVisibility(View.GONE);
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
+                        mAdapter.notifyDataSetChanged();
                         break;
                     default:
                         ToastUtils.showShort(act, "没有更多数据");
@@ -189,5 +192,11 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
             }
         }
 
+    }
+    @Override
+    public void onGetDataError(Throwable e) {
+        super.onGetDataError(e);
+        nrecycler.loadMoreComplete();
+        nrecycler.refreshComplete();
     }
 }
