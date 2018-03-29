@@ -19,6 +19,7 @@ public class RegistProActivity extends BaseActivity{
     TextView tv_title;
     @BindView(R.id.wv)
     WebView wv;
+    private int type;
 
     @Override
     protected int fillView() {
@@ -28,13 +29,22 @@ public class RegistProActivity extends BaseActivity{
     @Override
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
-        tv_title.setText("注册协议");
+
+        type = getIntent().getIntExtra("type", -1);
+        if (type == 1) {
+            tv_title.setText("注册协议");
+            String url = Constants.BASE_URL+"userDeal";
+            wv.loadUrl(url);
+        }else if (type == 2){
+            String url = Constants.BASE_URL+"userDeal";
+            wv.loadUrl(url);
+            tv_title.setText("党费收缴说明");
+        }
+
     }
 
     @Override
     protected void initData() {
-        String url = Constants.BASE_URL+"userDeal";
-        wv.loadUrl(url);
     }
     @OnClick({R.id.left})
     public void onViewClicked(View view) {

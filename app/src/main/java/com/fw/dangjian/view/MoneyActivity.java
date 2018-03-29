@@ -1,5 +1,6 @@
 package com.fw.dangjian.view;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -49,6 +50,9 @@ public class MoneyActivity extends BaseActivity implements MoneyMvpView{
     EditText tv_tax_money;
     @BindView(R.id.tv_calculate)
     TextView tv_calculate;
+    @BindView(R.id.rl_explain)
+    RelativeLayout rl_explain;
+
 
     private PopupWindow popWindow;
     private PopupWindow popWindow1;
@@ -122,7 +126,7 @@ public class MoneyActivity extends BaseActivity implements MoneyMvpView{
 
     }
 
-    @OnClick({R.id.left,R.id.rl_party,R.id.rl_money,R.id.tv_calculate})
+    @OnClick({R.id.left,R.id.rl_party,R.id.rl_money,R.id.tv_calculate,R.id.rl_explain})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.left:
@@ -176,6 +180,12 @@ public class MoneyActivity extends BaseActivity implements MoneyMvpView{
                 money = Double.valueOf(s);
 
                 moneyPresenter.getMoney(money.doubleValue(),this);
+                break;
+            case R.id.rl_explain:
+
+                Intent intent = new Intent(this, RegistProActivity.class);
+                intent.putExtra("type", 2);
+                startActivity(intent);
                 break;
         }
     }

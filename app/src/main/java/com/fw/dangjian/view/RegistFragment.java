@@ -1,6 +1,7 @@
 package com.fw.dangjian.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
@@ -27,7 +28,7 @@ import com.fw.dangjian.util.ToastUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class RegistFragment extends BaseFragment implements RegistMvpView{
+public class RegistFragment extends BaseFragment implements RegistMvpView {
     @BindView(R.id.main_ll)
     KeyboardLayout main_ll;
     @BindView(R.id.et_name)
@@ -49,6 +50,7 @@ public class RegistFragment extends BaseFragment implements RegistMvpView{
     private String pwd;
     private RegistPresenter registPresenter;
 
+
     @Override
     protected View fillView() {
         return layoutinflater.inflate(R.layout.fragment_regist, null);
@@ -65,60 +67,64 @@ public class RegistFragment extends BaseFragment implements RegistMvpView{
 
     }
 
-    @OnClick({R.id.btn_getcode,R.id.tv_login,R.id.main_ll,R.id.xieyi,R.id.cb_agree})
+    @OnClick({R.id.btn_getcode, R.id.tv_login, R.id.main_ll, R.id.xieyi, R.id.cb_agree})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_getcode:
                 phone = et_phone.getText().toString();
-                if (TextUtils.isEmpty(phone)){
-                    ToastUtils.showShort(act,"手机号不能为空");
-                    return ;
-                }else if(!StringUtils.isMobileNo(phone)){
-                    ToastUtils.showShort(act,"手机号格式不正确");
-                    return ;
+                if (TextUtils.isEmpty(phone)) {
+                    ToastUtils.showShort(act, "手机号不能为空");
+                    return;
+                } else if (!StringUtils.isMobileNo(phone)) {
+                    ToastUtils.showShort(act, "手机号格式不正确");
+                    return;
                 }
 
-                registPresenter.getIdentifyMessge(phone,1);
+                registPresenter.getIdentifyMessge(phone, 1);
                 break;
             case R.id.tv_login:
                 phone = et_phone.getText().toString();
                 zym = et_yzm.getText().toString();
                 pwd = et_pwd.getText().toString();
 
-                if (TextUtils.isEmpty(phone)){
-                    ToastUtils.showShort(act,"手机号不能为空");
-                    return ;
-                }else if(!StringUtils.isMobileNo(phone)){
-                    ToastUtils.showShort(act,"手机号格式不正确");
-                    return ;
+                if (TextUtils.isEmpty(phone)) {
+                    ToastUtils.showShort(act, "手机号不能为空");
+                    return;
+                } else if (!StringUtils.isMobileNo(phone)) {
+                    ToastUtils.showShort(act, "手机号格式不正确");
+                    return;
                 }
 
-                if (TextUtils.isEmpty(zym)){
-                    ToastUtils.showShort(act,"验证码不能为空");
-                    return ;
+                if (TextUtils.isEmpty(zym)) {
+                    ToastUtils.showShort(act, "验证码不能为空");
+                    return;
                 }
 
-                if (TextUtils.isEmpty(pwd)){
-                    ToastUtils.showShort(act,"密码不能为空");
-                    return ;
-                }else if(!StringUtils.isPassword(pwd)){
-                    ToastUtils.showShort(act,"请输入6~12位字母或数字");
-                    return ;
+                if (TextUtils.isEmpty(pwd)) {
+                    ToastUtils.showShort(act, "密码不能为空");
+                    return;
+                } else if (!StringUtils.isPassword(pwd)) {
+                    ToastUtils.showShort(act, "请输入6~12位字母或数字");
+                    return;
                 }
                 if (!cb_agree.isChecked()) {
-                    ToastUtils.showShort(act,"请阅读并同意用户协议");
-                    return ;
+                    ToastUtils.showShort(act, "请阅读并同意用户协议");
+                    return;
                 }
 
                 //    TODO 注册
-                registPresenter.regist(phone, pwd,zym);
+                registPresenter.regist(phone, pwd, zym);
                 break;
             case R.id.xieyi:
-                jumpToActivity(RegistProActivity.class);
+
+                Intent intent = new Intent(getActivity(), RegistProActivity.class);
+                intent.putExtra("type", 1);
+                startActivity(intent);
+
                 break;
             case R.id.main_ll:
-                if(main_ll.isKeyboardActive()){
-                    InputMethodManager imm1 = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (main_ll.isKeyboardActive()) {
+                    InputMethodManager imm1 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm1.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                 }
 
@@ -135,20 +141,20 @@ public class RegistFragment extends BaseFragment implements RegistMvpView{
             jumpToActivity(MainActivity.class);
             getActivity().finish();
 
-        }else {
+        } else {
             btn_login.setEnabled(true);
-            ToastUtils.show(getActivity(),kongBean.result_msg, Toast.LENGTH_SHORT);
+            ToastUtils.show(getActivity(), kongBean.result_msg, Toast.LENGTH_SHORT);
         }
 
     }
 
     @Override
     public void onGetIdentifyCodeNext(IdentifyCode identifyCode) {
-        if (identifyCode.result_code != null&&identifyCode.result_code.equals("200")) {
+        if (identifyCode.result_code != null && identifyCode.result_code.equals("200")) {
             btn_getcode.setEnabled(false);
-            TimeCount mTimeCount = new TimeCount(60000,1000);
+            TimeCount mTimeCount = new TimeCount(60000, 1000);
             mTimeCount.start();
-        }else {
+        } else {
 
         }
     }
