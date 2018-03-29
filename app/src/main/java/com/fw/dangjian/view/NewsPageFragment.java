@@ -193,6 +193,8 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
             public void OnBannerClick(int position) {
                 Intent intent = new Intent(getActivity(),WorkInfoActivity.class);
                 intent.putExtra("url",linksEntity.get(position).link_url);
+                intent.putExtra("title",title);
+
                 startActivity(intent);
             }
         });

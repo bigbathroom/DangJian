@@ -145,6 +145,18 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 
                 break;
             case R.id.iv_comment:
+                commentDialog = new CommentDialog(this);
+                commentDialog.show();
+                commentDialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
+                    @Override
+                    public void onCommit(EditText et, View v) {
+                        String s = et.getText().toString();
+                        if (TextUtils.isEmpty(s)) {
+                            ToastUtils.show(VideoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
+                        }
+                        videoInfoPresenter.commitComment(id, "游客", s);
+                    }
+                });
 
                 break;
             case R.id.iv_praise:

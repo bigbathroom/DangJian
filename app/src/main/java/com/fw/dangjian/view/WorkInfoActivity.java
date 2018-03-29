@@ -70,6 +70,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     private int managerId;
     private String url;
     private String title;
+    private String banner_url;
 
     @Override
     protected int fillView() {
@@ -98,16 +99,22 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
 
             id = intent.getIntExtra("news_id", -1);
             title = intent.getStringExtra("title");
+            banner_url = intent.getStringExtra("url");
         }
 
         url = BASE_URL+"note/" + id + "?managerid=" + managerId;
 
         if (id == -1) {
-            wv.loadUrl("");
-            tv_title.setText("");
+            wv.loadUrl(banner_url);
+            if (title != null){
+                tv_title.setText(title);
+            }
+
         } else {
             wv.loadUrl(url);
-            tv_title.setText(title);
+            if (title != null){
+                tv_title.setText(title);
+            }
         }
 
     }

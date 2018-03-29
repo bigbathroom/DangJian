@@ -11,11 +11,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp">
+
         <com.xiao.nicevideoplayer.NiceVideoPlayer
             android:id="@+id/video_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
 
 
         <RelativeLayout
@@ -23,16 +23,14 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="7dp"
-            android:layout_marginTop="10dp"
-            >
+            android:layout_marginTop="10dp">
+
             <ImageView
-                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/iv_return"
-                />
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/iv_return" />
         </RelativeLayout>
-
 
 
     </RelativeLayout>
@@ -45,78 +43,80 @@
             android:id="@+id/tv_introduce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray9"
-            android:textSize="18sp"
-            android:text="简介>"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"/>
+            android:text="简介>"
+            android:textColor="@color/gray9"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/tv_introduce_content1"
-            android:layout_below="@+id/tv_introduce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="普京：俄准备继续归还乌克兰留俄准备继续归还乌克兰留"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textSize="16sp"
+            android:layout_below="@+id/tv_introduce"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="普京：俄准备继续归还乌克兰留俄准备继续归还乌克兰留"
             android:textColor="@color/gray6"
-            android:layout_marginTop="3dp"/>
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_introduce_content2"
-            android:layout_below="@+id/tv_introduce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留"
-            android:textSize="16sp"
+            android:layout_below="@+id/tv_introduce"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/gray6"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="3dp"
-            android:visibility="gone"/>
+            android:text="普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留"
+            android:textColor="@color/gray6"
+            android:textSize="16sp"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:padding="5dp"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:padding="5dp">
+
         <ImageView
             android:id="@+id/iv_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/comment"
             android:layout_marginLeft="10dp"
-            android:visibility="invisible"/>
+            android:layout_marginTop="8dp"
+            android:background="@mipmap/comment" />
 
         <ImageView
             android:id="@+id/iv_praise"
             android:layout_width="20dp"
             android:layout_height="25dp"
-            android:background="@mipmap/praise"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="65dp"/>
+            android:layout_marginRight="65dp"
+            android:src="@mipmap/praise" />
 
         <ImageView
             android:id="@+id/iv_share"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/share"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/share" />
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/gray9"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginRight="15dp"
+        android:background="@color/gray9" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -128,51 +128,82 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="全部评论"
-            android:textSize="20sp"
             android:textColor="@color/gray6"
-            />
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/tv_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="全部评论 >"
-            android:textSize="16sp"
-            android:textColor="@color/gray9"
             android:layout_alignParentRight="true"
             android:layout_marginTop="5dp"
-            android:visibility="gone"
-            />
+            android:text="全部评论 >"
+            android:textColor="@color/gray9"
+            android:textSize="16sp"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/graye"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="45dp"/>
-        <RelativeLayout
+            android:layout_marginBottom="45dp"
+            android:background="@color/graye" />
+
+
+    <!--    <RelativeLayout
             android:id="@+id/rl_comment"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:gravity="center"
+            android:layout_alignParentBottom="true"
             android:background="@color/white"
-            android:layout_alignParentBottom="true">
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:hint="写评论..."
+                android:background="@mipmap/comment_bg"
                 android:gravity="center_vertical"
-                 android:paddingLeft="20dp"
-                android:textColorHint="@color/gray9"
-                android:background="@mipmap/comment_bg"/>
+                android:hint="写评论..."
+                android:paddingLeft="20dp"
+                android:textColorHint="@color/gray9" />
+        </RelativeLayout>
+-->
+        <RelativeLayout
+            android:id="@+id/rl_comment"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:layout_marginLeft="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/compile"
+                />
+
+            <TextView
+                android:id="@+id/tv_comment1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="写评论..."
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/gray9"
+                android:layout_marginLeft="50dp"
+                android:textSize="13sp"
+                android:layout_marginBottom="10dp"
+                />
+
         </RelativeLayout>
 
     </RelativeLayout>

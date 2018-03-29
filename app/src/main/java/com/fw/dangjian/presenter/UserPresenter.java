@@ -75,7 +75,8 @@ public class UserPresenter extends BasePresenter {
                 .addParameter("file", imgFile)
                 .bulider();
 
-        retrofitHelper.toSubscribe(req.uploadUserImg(managerId, params), new Subscriber<KongBean>() {
+
+        retrofitHelper.toSubscribe(req.uploadUserImg(managerId,params), new Subscriber<KongBean>() {
             @Override
             public void onCompleted() {
                 Log.d("dddd", "success");
@@ -117,6 +118,4 @@ public class UserPresenter extends BasePresenter {
             }
         });
     }
-
-
 }

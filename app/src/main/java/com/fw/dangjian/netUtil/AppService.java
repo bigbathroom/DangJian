@@ -33,6 +33,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -161,7 +162,8 @@ public interface AppService {
     //上传头像
     @Multipart
     @POST(Constants.UPLOADIMG)
-    Observable<KongBean> uploadUserImg(@Header("managerid") int id, @PartMap Map<String, RequestBody> params);
+    Observable<KongBean> uploadUserImg(@Part("managerid") int managerid, @PartMap Map<String, RequestBody> params);
+
 
     // 获取用户个人信息
     @GET(Constants.PROFILE+ "{managerid}/")
