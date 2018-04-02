@@ -3,6 +3,7 @@ package com.fw.dangjian.presenter;
 import android.util.Log;
 
 import com.fw.dangjian.base.BasePresenter;
+import com.fw.dangjian.bean.CommentBean;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.mvpView.WorkInfoMvpView;
 
@@ -82,4 +83,31 @@ public class WorkInfoPresenter extends BasePresenter {
             }
         });
     }
+
+    public void getComment(int comment_postid) {
+        retrofitHelper.toSubscribe(req.getComment(comment_postid), new Subscriber<CommentBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000","loginonCompleted");
+                mvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "loginononError");
+                mvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(CommentBean user) {
+                Log.d("000000", "loginononNext");
+                mvpView.onGetCommentNext(user);
+            }
+        });
+    }
+
+
+
+
+
 }

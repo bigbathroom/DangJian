@@ -47,8 +47,6 @@ public class LoginFragment extends  BaseFragment implements LoginMvpView{
     @BindView(R.id.iv_weixin)
     ImageView iv_weixin;
 
-
-
     private String phone;
     private String pwd;
     private LoginPresenter loginPresenter;

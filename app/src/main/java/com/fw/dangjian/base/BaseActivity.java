@@ -96,6 +96,4 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMvpV
         super.onPause();
         MobclickAgent.onPause(this);
     }
-
-
 }

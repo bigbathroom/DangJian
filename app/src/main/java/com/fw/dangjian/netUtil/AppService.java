@@ -54,19 +54,20 @@ public interface AppService {
     Observable<HomeBean> getHomePage(@Query("columnid") int columnid,
                                      @Query("pageNum") int pageNum);
 
+
     //获取首页的栏目新闻
     @GET(Constants.HOME_PAGE)
     Observable<HomeBean> getHomePage1(@Query("pageNum") int pageNum,
                                       @Query("name") String name);
 
-    //提交评论
+    //提交文章评论
     @FormUrlEncoded
     @POST(Constants.SUBMIT_COMMENT)
     Observable<KongBean> submitComment(@Field("comment_postid") int id,
                                        @Field("comment_author") String comment_author,
                                        @Field("comment_content") String comment_content);
 
-    //提交评论1
+    //提交文章评论1
     @FormUrlEncoded
     @POST(Constants.SUBMIT_COMMENT)
     Observable<KongBean> submitComment1(@Field("comment_postid") int id,
@@ -74,19 +75,27 @@ public interface AppService {
                                         @Field("comment_content") String comment_content,
                                         @Field("managerid") int managerid);
 
+
     //提交视频评论
     @FormUrlEncoded
-    @POST(Constants.All_COMMENT1)
-    Observable<CommentBean> getComment(@Field("postid") int id);
+    @POST(Constants.SUBMIT_LEARN_COMMENT)
+    Observable<KongBean> submitLearnComment1(@Field("comment_postid") int id,
+                                             @Field("comment_author") String comment_author,
+                                             @Field("comment_content") String comment_content,
+                                             @Field("managerid") int managerid);
 
-
-    //查看视频评论
+    //提交视频评论
     @FormUrlEncoded
-    @POST(Constants.SUBMIT_COMMENT1)
-    Observable<KongBean> submitComment1(@Field("comment_postid") int id,
-                                        @Field("comment_author") String comment_author,
-                                        @Field("comment_content") String comment_content);
-    //                                       @Field("managerid") int managerid
+    @POST(Constants.SUBMIT_LEARN_COMMENT)
+    Observable<KongBean> submitLearnComment(@Field("comment_postid") int id,
+                                            @Field("comment_author") String comment_author,
+                                            @Field("comment_content") String comment_content);
+
+
+    //获取评论
+    @GET(Constants.All_COMMENT1 + "{postid}/")
+    Observable<CommentBean> getComment(@Path("postid") int id);
+
 
     //点赞
     @FormUrlEncoded
@@ -166,7 +175,7 @@ public interface AppService {
 
 
     // 获取用户个人信息
-    @GET(Constants.PROFILE+ "{managerid}/")
+    @GET(Constants.PROFILE + "{managerid}/")
     Observable<MineBean> getUserProfile(@Path("managerid") int managerid);
 
     //    修改用户名
@@ -177,7 +186,7 @@ public interface AppService {
 
     //获取党建e连心
     @GET(Constants.DJE_LIST)
-    Observable<DjeBean> getDJEPage(@Query("columnid") int columnid,@Query("pageNum") int pageNum);
+    Observable<DjeBean> getDJEPage(@Query("columnid") int columnid, @Query("pageNum") int pageNum);
 
     //获取百宝箱类别
     @GET(Constants.BOX_COLUMN)
@@ -197,18 +206,21 @@ public interface AppService {
     Observable<FileBean> getFile(@Path("managerid") int managerid);
 
     //提交视频评论
-    @GET(Constants.VIDEO+ "{id}/")
+    @GET(Constants.VIDEO + "{id}/")
     Observable<VideoBean> getVideo(@Path("id") int id);
 
     //学习课程
     @GET(Constants.COURSE)
     Observable<CourseBean> getCourse(@Query("pageNum") int pageNum);
+
     //大事记
     @GET(Constants.BOOK)
     Observable<BookBean> getBook(@Query("pageNum") int pageNum);
+
     //照片墙
     @GET(Constants.PHOTOWALL)
-    Observable<WaterBean> getWater(@Query("pageNum") int pageNum,@Query("managerid") int managerid);
+    Observable<WaterBean> getWater(@Query("pageNum") int pageNum, @Query("managerid") int managerid);
+
     //党建看板
     @GET(Constants.BOARD)
     Observable<BoardBean> getBoard(@Query("managerid") int managerid);

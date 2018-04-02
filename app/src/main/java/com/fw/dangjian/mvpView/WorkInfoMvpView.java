@@ -1,6 +1,7 @@
 package com.fw.dangjian.mvpView;
 
 import com.fw.dangjian.base.BaseMvpView;
+import com.fw.dangjian.bean.CommentBean;
 import com.fw.dangjian.bean.KongBean;
 
 /**
@@ -11,6 +12,7 @@ import com.fw.dangjian.bean.KongBean;
 
 public interface WorkInfoMvpView extends BaseMvpView {
     void onGetDataNext(KongBean kongBean);
+    void onGetCommentNext(CommentBean kongBean);
     void onCommentNext(KongBean kongBean);
     void onThumbNext(KongBean kongBean);
 }

@@ -25,6 +25,8 @@ import com.fw.dangjian.bean.VideoBean;
 import com.fw.dangjian.dialog.CommentDialog;
 import com.fw.dangjian.mvpView.VideoMvpView;
 import com.fw.dangjian.presenter.VideoInfoPresenter;
+import com.fw.dangjian.util.ConstanceValue;
+import com.fw.dangjian.util.SPUtils;
 import com.fw.dangjian.util.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
@@ -37,13 +39,11 @@ import com.xiao.nicevideoplayer.NiceVideoPlayer;
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager;
 import com.xiao.nicevideoplayer.TxVideoPlayerController;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.R.attr.id;
 
 public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     @BindView(R.id.iv_back)
@@ -68,17 +68,22 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     TextView tv_comment;
     @BindView(R.id.recyclerview)
     RecyclerView nrecycler;
+
+    @BindView(R.id.no_content)
+    RelativeLayout no_content;
+
     @BindView(R.id.rl_comment)
     RelativeLayout rl_comment;
 
     private PingLunAdapter mAdapter;
-    private ArrayList<CommentBean.ResultBean> lists;
     private int count = 0;
     private VideoInfoPresenter videoInfoPresenter;
     private CommentDialog commentDialog;
-    private int postId;
+
     private Intent intent;
     private int studyId;
+    private int managerId;
+    private List<CommentBean.ResultBean> lists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +94,9 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 
         videoInfoPresenter = new VideoInfoPresenter(this);
 
-        intent = getIntent();
+        managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
 
+        intent = getIntent();
         if (intent != null) {
             studyId = intent.getIntExtra("studyId", -1);
         }
@@ -111,9 +117,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         nrecycler.setLayoutManager(layoutManager);
 
-
-        postId = 0;
-        videoInfoPresenter.getComment(postId);
+        videoInfoPresenter.getComment(studyId);
     }
 
 
@@ -144,23 +148,8 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 }
 
                 break;
-            case R.id.iv_comment:
-                commentDialog = new CommentDialog(this);
-                commentDialog.show();
-                commentDialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
-                    @Override
-                    public void onCommit(EditText et, View v) {
-                        String s = et.getText().toString();
-                        if (TextUtils.isEmpty(s)) {
-                            ToastUtils.show(VideoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
-                        }
-                        videoInfoPresenter.commitComment(id, "游客", s);
-                    }
-                });
-
-                break;
             case R.id.iv_praise:
-                videoInfoPresenter.thumb(postId);
+                videoInfoPresenter.thumb(studyId);
                 break;
             case R.id.iv_share:
                 String url = "https://www.baidu.com";
@@ -176,6 +165,25 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 
                 break;
 
+            case R.id.iv_comment:
+                commentDialog = new CommentDialog(this);
+                commentDialog.show();
+                commentDialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
+                    @Override
+                    public void onCommit(EditText et, View v) {
+                        String s = et.getText().toString();
+                        if (TextUtils.isEmpty(s)) {
+                            ToastUtils.show(VideoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
+                        }
+                        if (managerId == -1) {
+                            videoInfoPresenter.commitComment(studyId, "", s);
+                        } else {
+                            videoInfoPresenter.commitComment1(studyId, "", s, managerId);
+                        }
+                    }
+                });
+
+                break;
             case R.id.rl_comment:
                 commentDialog = new CommentDialog(this);
                 commentDialog.show();
@@ -186,13 +194,146 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                         if (TextUtils.isEmpty(s)) {
                             ToastUtils.show(VideoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
                         }
-                        videoInfoPresenter.commitComment(id, "游客", s);
+
+                        if (managerId == -1) {
+                            videoInfoPresenter.commitComment(studyId, "", s);
+
+                        } else {
+                            videoInfoPresenter.commitComment1(studyId, "", s, managerId);
+                        }
                     }
                 });
 
-
                 break;
         }
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 在onStop时释放掉播放器
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // 在全屏或者小窗口时按返回键要先退出全屏或小窗口，
+        // 所以在Activity中onBackPress要交给NiceVideoPlayer先处理。
+        if (NiceVideoPlayerManager.instance().onBackPressd()) return;
+        super.onBackPressed();
+    }
+
+
+    @Override
+    public void onGetDataCompleted() {
+
+    }
+
+    @Override
+    public void onGetDataError(Throwable e) {
+
+    }
+
+    @Override
+    public void onGetDataNext(VideoBean kongBean) {
+
+        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
+            if (kongBean.result != null) {
+
+                String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
+                if (kongBean.result.post_content == null || kongBean.result.post_content.equals("")) {
+//                    ToastUtils.showShort(this,"个"+kongBean.result.post_content);
+
+                    mNiceVideoPlayer.setUp(mVideoUrl, null);
+                } else {
+//                    ToastUtils.showShort(this,"个恶热"+kongBean.result.post_content);
+//                    mNiceVideoPlayer.setUp(Constants.BASE_URL+"images/"+kongBean.result.post_content, null);
+                    mNiceVideoPlayer.setUp(mVideoUrl, null);
+
+                }
+
+                //                mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK); // or NiceVideoPlayer.TYPE_NATIVE
+                TxVideoPlayerController controller = new TxVideoPlayerController(this);
+//        controller.setTitle(mTitle);
+//        controller.setImage(mImageUrl);
+                mNiceVideoPlayer.setController(controller);
+
+                tv_introduce_content1.setText(kongBean.result.post_excerpt);
+                tv_introduce_content2.setText(kongBean.result.post_excerpt);
+            }
+
+        } else {
+            ToastUtils.show(this, kongBean.reason, Toast.LENGTH_SHORT);
+        }
+
+
+    }
+
+    @Override
+    public void onCommentNext(KongBean kongBean) {
+
+        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
+            commentDialog.dismiss();
+            videoInfoPresenter.getComment(studyId);
+            ToastUtils.show(this, "提交成功", Toast.LENGTH_SHORT);
+        } else {
+            ToastUtils.show(this, "提交评论失败", Toast.LENGTH_SHORT);
+        }
+
+    }
+
+
+    @Override
+    public void onGetCommentNext(CommentBean kongBean) {
+
+        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
+
+            if (kongBean.result != null && kongBean.result.size() > 0) {
+                lists = kongBean.result;
+                mAdapter = new PingLunAdapter(lists, this);
+                nrecycler.setAdapter(mAdapter);
+                initAdapterClike();
+                no_content.setVisibility(View.GONE);
+                nrecycler.setVisibility(View.VISIBLE);
+            }else{
+                no_content.setVisibility(View.VISIBLE);
+                nrecycler.setVisibility(View.GONE);
+            }
+
+        } else {
+            ToastUtils.show(this, kongBean.result_msg, Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    public void onThumbNext(KongBean kongBean) {
+        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
+            iv_praise.setImageResource(R.mipmap.praise01);
+        } else {
+            ToastUtils.show(this, "点赞失败", Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     private UMShareListener shareListener = new UMShareListener() {
@@ -234,133 +375,6 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 
         }
     };
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // 在onStop时释放掉播放器
-        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
-    }
-
-    @Override
-    public void onBackPressed() {
-        // 在全屏或者小窗口时按返回键要先退出全屏或小窗口，
-        // 所以在Activity中onBackPress要交给NiceVideoPlayer先处理。
-        if (NiceVideoPlayerManager.instance().onBackPressd()) return;
-        super.onBackPressed();
-    }
-
-
-    @Override
-    public void onGetDataCompleted() {
-
-    }
-
-    @Override
-    public void onGetDataError(Throwable e) {
-
-    }
-
-    @Override
-    public void onGetDataNext(VideoBean kongBean) {
-
-        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
-            if (kongBean.result != null) {
-
-//                mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK); // or NiceVideoPlayer.TYPE_NATIVE
-                String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
-                if (kongBean.result.post_content == null || kongBean.result.post_content.equals("")) {
-//                    ToastUtils.showShort(this,"个"+kongBean.result.post_content);
-
-                    mNiceVideoPlayer.setUp(mVideoUrl, null);
-                } else {
-//                    ToastUtils.showShort(this,"个恶热"+kongBean.result.post_content);
-//                    mNiceVideoPlayer.setUp(Constants.BASE_URL+"images/"+kongBean.result.post_content, null);
-                    mNiceVideoPlayer.setUp(mVideoUrl, null);
-
-                }
-
-                TxVideoPlayerController controller = new TxVideoPlayerController(this);
-//        controller.setTitle(mTitle);
-//        controller.setImage(mImageUrl);
-                mNiceVideoPlayer.setController(controller);
-
-
-
-
-                tv_introduce_content1.setText(kongBean.result.post_excerpt);
-                tv_introduce_content2.setText(kongBean.result.post_excerpt);
-            }
-
-        } else {
-            ToastUtils.show(this, kongBean.reason, Toast.LENGTH_SHORT);
-        }
-
-
-    }
-
-    @Override
-    public void onCommentNext(KongBean kongBean) {
-
-        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
-            commentDialog.dismiss();
-
-            ToastUtils.show(this, "提交成功", Toast.LENGTH_SHORT);
-        } else {
-            ToastUtils.show(this, "提交评论失败", Toast.LENGTH_SHORT);
-        }
-
-    }
-
-    @Override
-    public void onThumbNext(KongBean kongBean) {
-        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
-            iv_praise.setImageResource(R.mipmap.praise01);
-        } else {
-            ToastUtils.show(this, "点赞失败", Toast.LENGTH_SHORT);
-        }
-    }
-
-
-    @Override
-    public void onGetCommentNext(CommentBean kongBean) {
-
-        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
-
-            if (kongBean.result.size() > 0) {
-                mAdapter = new PingLunAdapter(lists, this);
-                nrecycler.setAdapter(mAdapter);
-                initAdapterClike();
-            }
-
-        } else {
-            ToastUtils.show(this, kongBean.result_msg, Toast.LENGTH_SHORT);
-        }
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-
-    }
-
-
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-    }
 
 
 }

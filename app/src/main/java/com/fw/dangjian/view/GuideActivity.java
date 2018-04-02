@@ -1,6 +1,7 @@
 package com.fw.dangjian.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.fw.dangjian.MainActivity;
 import com.fw.dangjian.MyApplication;
 import com.fw.dangjian.R;
 import com.fw.dangjian.adapter.GuidePageAdapter;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,9 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
     @BindView(R.id.guide_ll_point)
     LinearLayout guide_ll_point;
 
+    public int alpha = 15;
+    public int color = Color.parseColor("#D00808");
+
     private ViewGroup vg;//放置圆点
     //实例化原点View
     private ImageView iv_point;
@@ -44,6 +49,8 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
+        StatusBarUtil.setColor(this, color, alpha);
+
 
         MyApplication.getInstance().addActivity(this);
         ButterKnife.bind(this);

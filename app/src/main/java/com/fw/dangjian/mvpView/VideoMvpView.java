@@ -8,7 +8,6 @@ import com.fw.dangjian.bean.VideoBean;
 
 public interface VideoMvpView extends BaseMvpView {
     void onGetDataNext(VideoBean kongBean);
-
     void onCommentNext(KongBean kongBean);
     void onThumbNext(KongBean kongBean);
     void onGetCommentNext(CommentBean kongBean);

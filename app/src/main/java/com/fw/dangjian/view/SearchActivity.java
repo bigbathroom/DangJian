@@ -48,7 +48,7 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
     private HomePresenter homePresenter;
 
     private int refreshTime = 0;
-    int page = 1;
+    int page;
     private String search_content;
 
     @Override
@@ -79,7 +79,7 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
                         requestServer(page, search_content);
                     }
 
-                }, 1000);            //refresh data here
+                }, 200);            //refresh data here
             }
 
             @Override
@@ -89,14 +89,18 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
                         page++;
                         requestServer(page, search_content);
                     }
-                }, 1000);
+                }, 200);
 
             }
         });
+
     }
+
+
 
     private void requestServer(int page, String name) {
         homePresenter.getHomePage1(page, name, this);
+
         mAdapter = new NewSearchAdapter(lists, this);
         nrecycler.setAdapter(mAdapter);
         initAdapterClike();
@@ -107,6 +111,8 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(SearchActivity.this, WorkInfoActivity.class);
+                intent.putExtra("news_id",lists.get(position-1).id);
+                intent.putExtra("title","");
                 startActivity(intent);
             }
         });
@@ -118,13 +124,14 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
             case R.id.left:
                 finish();
                 break;
+
             case R.id.rl_search:
                 search_content = et_search.getText().toString();
                 if (TextUtils.isEmpty(search_content)) {
                     ToastUtils.show(this, "请输入查询内容", Toast.LENGTH_SHORT);
                     return;
                 }
-
+                page = 1;
                 requestServer(page, search_content);
 
                 break;
@@ -139,8 +146,8 @@ public class SearchActivity extends BaseActivity implements HomeMvpView {
     @Override
     public void onGetDataNext(HomeBean homeBean) {
 
-        if (homeBean.result_code != null && homeBean.result_code.equals("01")) {
-            if (homeBean.result.pageInfo.list.size() > 0) {
+        if (homeBean.result_code != null && homeBean.result_code.equals("200")) {
+            if (homeBean.result != null && homeBean.result.pageInfo.list.size() > 0) {
                 switch (page) {
                     case 1:
                         lists.clear();

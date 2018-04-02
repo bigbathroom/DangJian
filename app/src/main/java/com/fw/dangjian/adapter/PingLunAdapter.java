@@ -50,13 +50,12 @@ public interface onItemClickLitener {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Glide.with(context).load(lists.get(position).comment_author_url).into(holder.rv_touxiang);
+        Glide.with(context).load(lists.get(position).comment_author_url).error(R.mipmap.head_portrait).into(holder.rv_touxiang);
         holder.tv_name.setText(lists.get(position).comment_author);
         holder.tv_time.setText("发表于"+lists.get(position).comment_date);
         holder.tv_content.setText(lists.get(position).comment_content);
 
         if (monItemClickLitener != null) {
-
             holder.rlGoods.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

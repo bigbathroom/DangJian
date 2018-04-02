@@ -8,11 +8,6 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-/**
- * 作者：haoran   on https://github.com/woaigmz 2017/9/19.
- * 邮箱：1549112908@qq.com
- * 说明：
- */
 
 public class KeyboardLayout  extends FrameLayout {
 

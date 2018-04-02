@@ -8,6 +8,7 @@
 
     <include
         layout="@layout/head_title"></include>
+
     <com.fw.dangjian.colortrackview.ColorTrackTabLayout
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/menu_select"
         app:tabTextAppearance="@style/TextAppearanceBig"
-        app:tabTextColor="@color/gray3"/>
+       />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"

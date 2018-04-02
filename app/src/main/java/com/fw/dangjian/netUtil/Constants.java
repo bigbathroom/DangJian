@@ -33,20 +33,25 @@ public class Constants {
     public static final String STUDY_COLUMN = "2/column/";
     //获取学习的新闻列表
     public static final String STUDY_LIST = "learn/list/";
+
     //首页栏目新闻
     public static final String HOME_PAGE = "article/list/";
-    //提交评论
-    public static final String SUBMIT_COMMENT = "slender/article/comment/";
+
     //点赞
     public static final String THUMB="slender/article/surname/";
 
-
     //提交视频点赞
     public static final String THUMB1 = "slender/learn/surname/";
+
+    //提交文章评论
+    public static final String SUBMIT_COMMENT = "slender/article/comment/";
+
     //提交视频评论
-    public static final String SUBMIT_COMMENT1 = "slender/learn/comment/";
-    //提交视频评论
+    public static final String SUBMIT_LEARN_COMMENT = "slender/article/comment/";
+
+    //获取视频评论
     public static final String All_COMMENT1 = "slender/comment/";
+
     //互动接口
     public static final String ACTION_LIST = "square/list/";
     //竞答
