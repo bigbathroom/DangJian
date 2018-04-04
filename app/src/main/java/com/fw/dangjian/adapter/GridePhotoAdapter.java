@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.fw.dangjian.R;
+import com.fw.dangjian.bean.WaterBean;
 
 import java.util.List;
 
@@ -18,9 +20,9 @@ import java.util.List;
 public class GridePhotoAdapter  extends BaseAdapter {
     private Context context;
 
-    private List<Integer> images;
+    private List<WaterBean.ResultBean.ImgAarrayBean> images;
 
-    public GridePhotoAdapter(List<Integer> images, Context context) {
+    public GridePhotoAdapter(List<WaterBean.ResultBean.ImgAarrayBean> images, Context context) {
         super();
         this.context = context;
         this.images = images;
@@ -30,12 +32,12 @@ public class GridePhotoAdapter  extends BaseAdapter {
     @Override
     public int getCount() {
 
-//        if (null != images) {
-//            return images.size;
-//        } else {
-//            return 0;
-//        }
-        return 7;
+        if (null != images) {
+            return images.size();
+        } else {
+            return 0;
+        }
+
 
     }
 
@@ -71,7 +73,7 @@ public class GridePhotoAdapter  extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.image.setImageResource(images.get(position));
+        Glide.with(context).load(images.get(position).url).into(viewHolder.image);
 
         return convertView;
     }

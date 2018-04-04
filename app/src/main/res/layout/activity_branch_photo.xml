@@ -8,9 +8,17 @@
     tools:context="com.fw.dangjian.view.BranchPhotoActivity">
     <include layout="@layout/head_title"></include>
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+    <include  layout="@layout/layout_no_content"
+        android:id="@+id/no_content"
+        android:visibility="gone"/>
+
+    <include  layout="@layout/layout_no_net"
+        android:id="@+id/no_net"
+        android:visibility="gone"/>
+
 </LinearLayout>

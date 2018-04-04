@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
+import com.fw.dangjian.bean.WaterBean;
 import com.fw.dangjian.view.WaterFallActivity;
 
 import java.util.ArrayList;
@@ -26,11 +27,13 @@ import butterknife.ButterKnife;
 
 public class BranchAdapter extends RecyclerView.Adapter<BranchAdapter.ViewHolder> {
 
-    private List<String> lists;
+    private List<WaterBean.ResultBean> lists;
     private Context context;
     private onItemClickLitener monItemClickLitener;
+    private String activityName;
+    private ArrayList<String> imageLists;
 
-    public BranchAdapter(List<String> lists, Context context) {
+    public BranchAdapter(List<WaterBean.ResultBean> lists, Context context) {
         this.lists = lists;
         this.context = context;
     }
@@ -52,25 +55,26 @@ public class BranchAdapter extends RecyclerView.Adapter<BranchAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        ArrayList<Integer> pictures = new ArrayList<>();
-        pictures.add(R.mipmap.er);
-        pictures.add(R.mipmap.wu);
-        pictures.add(R.mipmap.si);
-        pictures.add(R.mipmap.ba);
-        pictures.add(R.mipmap.liu);
-        pictures.add(R.mipmap.si);
-        pictures.add(R.mipmap.qi);
 
+        imageLists = new ArrayList<>();
+        imageLists.clear();
 
+        activityName = lists.get(position).activityName;
 
-        GridePhotoAdapter pictureAdapter = new GridePhotoAdapter(pictures, context);
+        for (int i = 0;i<lists.get(position).imgAarray.size();i++){
+            imageLists.add(lists.get(position).imgAarray.get(i).url);
+        }
 
+        holder.tv_title.setText(lists.get(position).activityName);
+
+        GridePhotoAdapter pictureAdapter = new GridePhotoAdapter(lists.get(position).imgAarray, context);
         holder.gv.setAdapter(pictureAdapter);
         holder.gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(context, WaterFallActivity.class);
-                intent.putExtra("title", "互动课题活动");
+                intent.putExtra("title", activityName);
+                intent.putStringArrayListExtra("photos", imageLists);
                 context.startActivity(intent);
             }
         });
@@ -79,7 +83,8 @@ public class BranchAdapter extends RecyclerView.Adapter<BranchAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, WaterFallActivity.class);
-                intent.putExtra("title", "互动课题活动");
+                intent.putExtra("title",activityName);
+                intent.putStringArrayListExtra("photos", imageLists);
                 context.startActivity(intent);
             }
         });
@@ -97,7 +102,7 @@ public class BranchAdapter extends RecyclerView.Adapter<BranchAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 5;
+        return lists.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

@@ -73,12 +73,9 @@ public class CommentDialog extends Dialog{
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_commit:
-
                 if (null != listener) {
                     listener.onCommit(et_comment, view);
                 }
-
-//                ToastUtils.show(context,"哈哈哈", Toast.LENGTH_SHORT);
                 break;
         }
     }

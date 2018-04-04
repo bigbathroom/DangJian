@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.fw.dangjian.R;
 
 import java.util.ArrayList;
@@ -23,12 +24,12 @@ import butterknife.ButterKnife;
 
 public class WaterFallAdapter extends RecyclerView.Adapter<WaterFallAdapter.ViewHolder> {
 
-    private List<Integer> lists;
+    private List<String> lists;
     private Context context;
     private onItemClickLitener monItemClickLitener;
     private List<Integer> heightList;//装产出的随机数
 
-    public WaterFallAdapter(List<Integer> lists, Context context) {
+    public WaterFallAdapter(List<String> lists, Context context) {
         this.lists = lists;
         this.context = context;
 
@@ -56,7 +57,8 @@ public class WaterFallAdapter extends RecyclerView.Adapter<WaterFallAdapter.View
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.imageView.setImageResource(lists.get(position));
+        Glide.with(context).load(lists.get(position)).into(holder.imageView);
+
         //由于需要实现瀑布流的效果,所以就需要动态的改变控件的高度了
         ViewGroup.LayoutParams params = holder.imageView.getLayoutParams();
         params.height=heightList.get(position);

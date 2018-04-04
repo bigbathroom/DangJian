@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fw.dangjian.R;
 import com.fw.dangjian.base.BaseActivity;
 
@@ -27,7 +28,7 @@ public class BigPhotoActivity extends BaseActivity {
     TextView tv_title;
     @BindView(R.id.view_page)
     ViewPager view_page;
-    private ArrayList<Integer> image1;
+    private ArrayList<String> image1;
 
     private List<View> viewList;//图片资源的集合
     private int index;
@@ -45,7 +46,7 @@ public class BigPhotoActivity extends BaseActivity {
         Intent intent = getIntent();
         if(intent!=null){
             index = intent.getIntExtra("index", 0);
-            image1 = intent.getIntegerArrayListExtra("image");
+            image1 = intent.getStringArrayListExtra("image");
         }
 
         viewList = new ArrayList<>();
@@ -57,7 +58,7 @@ public class BigPhotoActivity extends BaseActivity {
             //new ImageView并设置全屏和图片资源
             ImageView imageView = new ImageView(this);
             imageView.setLayoutParams(params);
-            imageView.setBackgroundResource(image1.get(i));
+            Glide.with(this).load(image1.get(i)).into(imageView);
             //将ImageView加入到集合中
             viewList.add(imageView);
         }

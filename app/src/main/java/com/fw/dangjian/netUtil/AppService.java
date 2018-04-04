@@ -224,6 +224,8 @@ public interface AppService {
     //党建看板
     @GET(Constants.BOARD)
     Observable<BoardBean> getBoard(@Query("managerid") int managerid);
+
+
 }
 
 

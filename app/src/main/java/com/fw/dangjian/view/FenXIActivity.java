@@ -46,11 +46,11 @@ public class FenXIActivity extends BaseActivity implements BoardMvpView{
     LineChartView lineChart;
 
     String[] weeks = {"周一","周二","周三","周四","周五","周六","周日"};//X轴的标注
-    int[] weather = {9,7,6,7,8,6,8};//图表的数据
-
+//    int[] weather = {7,9,6,5,8,6,9};
     private List<PointValue> mPointValues = new ArrayList<PointValue>();
     private List<AxisValue> mAxisValues = new ArrayList<AxisValue>();
     private BoardPresenter boardPresenter;
+    private int[] weather;
 
     @Override
     protected int fillView() {
@@ -66,12 +66,36 @@ public class FenXIActivity extends BaseActivity implements BoardMvpView{
 
         boardPresenter = new BoardPresenter();
         boardPresenter.getBoard(managerId,this);
-
-        getAxisLables();//获取x轴的标注
-        getAxisPoints();//获取坐标点
-        initLineChart();//初始化
     }
 
+    @Override
+    public void onGetDataNext(BoardBean boardBean) {
+        if(boardBean.result_code != null&&boardBean.result_code.equals("200")){
+            tv_count1.setText(boardBean.result.memberCount);
+            tv_count2.setText(boardBean.result.committeeCount);
+            tv_count3.setText(boardBean.result.branchCount);
+            tv_count4.setText(boardBean.result.todayInfoCount);
+            tv_count4.setText(boardBean.result.totleInfoCount);
+
+            int day1 = Integer.valueOf(boardBean.result.weekInfoCount.day1).intValue();
+            int day2 = Integer.valueOf(boardBean.result.weekInfoCount.day2).intValue();
+            int day3 = Integer.valueOf(boardBean.result.weekInfoCount.day3).intValue();
+            int day4 = Integer.valueOf(boardBean.result.weekInfoCount.day4).intValue();
+            int day5 = Integer.valueOf(boardBean.result.weekInfoCount.day5).intValue();
+            int day6 = Integer.valueOf(boardBean.result.weekInfoCount.day6).intValue();
+            int day7 = Integer.valueOf(boardBean.result.weekInfoCount.day7).intValue();
+
+            //图表的数据
+            weather = new int[]{day1,day2,day3,day4,day5,day6,day7};
+
+            getAxisLables();//获取x轴的标注
+            getAxisPoints();//获取坐标点
+            initLineChart();//初始化
+
+        }else{
+
+        }
+    }
     /**
      * 初始化LineChart的一些设置
      */
@@ -126,7 +150,6 @@ public class FenXIActivity extends BaseActivity implements BoardMvpView{
             mAxisValues.add(new AxisValue(i).setLabel(weeks[i]));
         }
     }
-
     /**
      * 图表的每个点的显示
      */
@@ -148,19 +171,6 @@ public class FenXIActivity extends BaseActivity implements BoardMvpView{
             case R.id.left:
                 finish();
                 break;
-        }
-    }
-
-    @Override
-    public void onGetDataNext(BoardBean boardBean) {
-        if(boardBean.result_code != null&&boardBean.result_code.equals("200")){
-            tv_count1.setText(boardBean.result.memberCount);
-            tv_count2.setText(boardBean.result.committeeCount);
-            tv_count3.setText(boardBean.result.branchCount);
-            tv_count4.setText(boardBean.result.todayInfoCount);
-            tv_count4.setText(boardBean.result.totleInfoCount);
-        }else{
-
         }
     }
 }

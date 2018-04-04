@@ -8,7 +8,6 @@
     android:background="@color/toolbar"
     tools:context="com.fw.dangjian.view.ChangeNameActivity">
 
-
     <include
         layout="@layout/head_title"></include>
     <EditText
