@@ -2,6 +2,7 @@ package com.fw.dangjian.netUtil;
 
 import android.util.Log;
 import com.fw.dangjian.MyApplication;
+import com.fw.dangjian.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,17 +29,39 @@ public class RetrofitHelper {
     public static RetrofitHelper retrofitHelper;
     public static Retrofit retrofit;
 
+    public static final String key= "GLwIRjUyRHCbK8wtcOtZJ3flAfTgPkKEGXRI9v8wvcWXd//ZWzn1n3=H+4UAMsE==+9+pjuawFrCoqqRS4DmDC2I4Xy2+Oxqqw7VWb8fgaxXsv3a/AhPG1jEUDQHYYD7F5NrfnkIu+jloVRA03Hc50V8En4BbE/XxOgASVc+RJYqG0ySP/JdjYZouRYfJpS4luUDU1F42r21e5Ah5fiPhjqKL5EsfyT28v5NE0BYEWxC3vVSakmFQbZvvQM1P5HpoiEzg3WEtWB=k0OUQcFuHg0EPXPY0EyFYQQmF8AfEwepPtzk13XghQji8mqzqNCChNWb38c7VDes/cPBhMfzAFzmSg66";
+
+    public static String timeString;
+
     private RetrofitHelper() {
         //进行retrofit的初始化
         initRetrofit();
     }
 
     private void initRetrofit() {
+
+
+
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(15, TimeUnit.SECONDS);//超时时间15S
         builder.readTimeout(15, TimeUnit.SECONDS);
         builder.writeTimeout(15, TimeUnit.SECONDS);
         builder.retryOnConnectionFailure(false);//设置失败重练
+        builder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+
+                timeString = StringUtils.getTimeString();
+
+                Request request = chain.request()
+                        .newBuilder()
+                        .addHeader("timestamp", timeString)
+                        .addHeader("assetionkey", StringUtils.getBase64(key+timeString))
+                        .build();
+                return chain.proceed(request);
+            }
+        });
+
         //应用程序拦截器
        /* builder.addInterceptor(new ApplicationCacheIntercept());
         builder.addNetworkInterceptor(netInterceptor);//网络拦截器

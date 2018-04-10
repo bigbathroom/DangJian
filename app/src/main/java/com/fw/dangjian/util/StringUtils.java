@@ -1,8 +1,12 @@
 package com.fw.dangjian.util;
 
+import android.util.Base64;
+
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -135,6 +139,58 @@ public class StringUtils {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
         String format = "zhiyuan-test/"+sdf.format(new Date(l)) + l+".png";
         return format;
+    }
+
+    /**
+     * 获取时间戳
+     *
+     * @return 获取时间戳
+     */
+    public static String getTimeString() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
+        Calendar calendar = Calendar.getInstance();
+        return df.format(calendar.getTime());
+    }
+
+    /**
+     * 时间戳转换为字符串
+     * @param time:时间戳
+     * @return
+     */
+    public static String times(String time) {
+        SimpleDateFormat sdr = new SimpleDateFormat("yyyyMMddHHmm");
+        @SuppressWarnings("unused")
+        long lcc = Long.valueOf(time);
+        int i = Integer.parseInt(time);
+        String times = sdr.format(new Date(i * 1000L));
+        return times;
+    }
+
+
+    // 加密
+    public static String getBase64(String str) {
+        String result = "";
+        if( str != null) {
+            try {
+                result = new String(Base64.encode(str.getBytes("utf-8"), Base64.NO_WRAP),"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    // 解密
+    public static String getFromBase64(String str) {
+        String result = "";
+        if (str != null) {
+            try {
+                result = new String(Base64.decode(str, Base64.NO_WRAP), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
 }

@@ -45,6 +45,8 @@ import rx.Observable;
 
 public interface AppService {
 
+
+
     //获取首页的新闻类别
     @GET(Constants.HOME_COLUMN)
     Observable<ColumnBean> getHomeColumn();
@@ -64,15 +66,15 @@ public interface AppService {
     @FormUrlEncoded
     @POST(Constants.SUBMIT_COMMENT)
     Observable<KongBean> submitComment(@Field("comment_postid") int id,
-                                       @Field("comment_author") String comment_author,
-                                       @Field("comment_content") String comment_content);
+                                       @Query("comment_author") String comment_author,
+                                       @Query("comment_content") String comment_content);
 
     //提交文章评论1
     @FormUrlEncoded
     @POST(Constants.SUBMIT_COMMENT)
     Observable<KongBean> submitComment1(@Field("comment_postid") int id,
-                                        @Field("comment_author") String comment_author,
-                                        @Field("comment_content") String comment_content,
+                                        @Query("comment_author") String comment_author,
+                                        @Query("comment_content") String comment_content,
                                         @Field("managerid") int managerid);
 
 
@@ -80,16 +82,16 @@ public interface AppService {
     @FormUrlEncoded
     @POST(Constants.SUBMIT_LEARN_COMMENT)
     Observable<KongBean> submitLearnComment1(@Field("comment_postid") int id,
-                                             @Field("comment_author") String comment_author,
-                                             @Field("comment_content") String comment_content,
+                                             @Query("comment_author") String comment_author,
+                                             @Query("comment_content") String comment_content,
                                              @Field("managerid") int managerid);
 
     //提交视频评论
     @FormUrlEncoded
     @POST(Constants.SUBMIT_LEARN_COMMENT)
     Observable<KongBean> submitLearnComment(@Field("comment_postid") int id,
-                                            @Field("comment_author") String comment_author,
-                                            @Field("comment_content") String comment_content);
+                                            @Query("comment_author") String comment_author,
+                                            @Query("comment_content") String comment_content);
 
 
     //获取评论

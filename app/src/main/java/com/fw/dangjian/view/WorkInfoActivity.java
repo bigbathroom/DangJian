@@ -24,9 +24,11 @@ import com.fw.dangjian.bean.CommentBean;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.dialog.CommentDialog;
 import com.fw.dangjian.mvpView.WorkInfoMvpView;
+import com.fw.dangjian.netUtil.RetrofitHelper;
 import com.fw.dangjian.presenter.WorkInfoPresenter;
 import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
+import com.fw.dangjian.util.StringUtils;
 import com.fw.dangjian.util.ToastUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -35,7 +37,9 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -79,6 +83,8 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     private PingLunAdapter mAdapter;
     private List<CommentBean.ResultBean> lists;
 
+    private String timeString;
+
     @Override
     protected int fillView() {
         return R.layout.activity_work_info;
@@ -115,17 +121,22 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
             banner_url = intent.getStringExtra("url");
         }
 
-        url = BASE_URL+"note/" + id + "?managerid=" + managerId;
+        timeString = StringUtils.getTimeString();
+
+        url = BASE_URL + "note/" + id + "?managerid=" + managerId;
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("assetionkey", StringUtils.getBase64(RetrofitHelper.key + timeString));
+        map.put("timestamp",   timeString);
 
         if (id == -1) {
-            wv.loadUrl(banner_url);
-            if (title != null){
+            wv.loadUrl(banner_url, map);
+            if (title != null) {
                 tv_title.setText(title);
             }
-
         } else {
-            wv.loadUrl(url);
-            if (title != null){
+            wv.loadUrl(url, map);
+            if (title != null) {
                 tv_title.setText(title);
             }
 
@@ -136,7 +147,6 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                     workInfoPresenter.getComment(id);
                 }
             }, 1000);
-
         }
 
     }
@@ -169,6 +179,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                             ToastUtils.show(WorkInfoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
                         }
 
+
                         if (managerId == -1) {
                             workInfoPresenter.commitComment(id, "", s);
                         } else {
@@ -193,12 +204,11 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 web.setThumb(new UMImage(this, R.mipmap.thumb));  //缩略图
                 web.setDescription("实时发布党新闻和活动");//描述
                 new ShareAction(this).withMedia(web)
-                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN_CIRCLE)
+                        .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN_CIRCLE)
                         .setCallback(shareListener).open();
                 break;
         }
     }
-
 
 
     @Override
@@ -212,7 +222,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
             rl_pinglun.setVisibility(View.VISIBLE);
 
-            if (kongBean.result!= null && kongBean.result.size() > 0) {
+            if (kongBean.result != null && kongBean.result.size() > 0) {
                 lists = kongBean.result;
                 mAdapter = new PingLunAdapter(lists, this);
                 nrecycler.setAdapter(mAdapter);
@@ -221,7 +231,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 linearLayout_no_content.setVisibility(View.GONE);
                 nrecycler.setVisibility(View.VISIBLE);
 
-            }else{
+            } else {
                 linearLayout_no_content.setVisibility(View.VISIBLE);
                 nrecycler.setVisibility(View.GONE);
             }

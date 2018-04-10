@@ -6,6 +6,7 @@ package com.fw.dangjian.netUtil;
 
 public class Constants {
 
+
     //    总地址
     public static final String BASE_URL = "http://dangjian.yaoyu-soft.com/langur/api/";
 

@@ -135,6 +135,7 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
 
                 break;
             case R.id.rv_touxiang:
+
                 AndPermission.with(getActivity())
                         .permission(Permission.CAMERA)
                         .rationale(mRationale)
