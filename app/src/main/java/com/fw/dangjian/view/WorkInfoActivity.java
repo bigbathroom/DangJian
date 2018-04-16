@@ -127,7 +127,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
 
         Map<String, String> map = new HashMap<String, String>();
         map.put("assetionkey", StringUtils.getBase64(RetrofitHelper.key + timeString));
-        map.put("timestamp",   timeString);
+        map.put("timestamp", timeString);
 
         if (id == -1) {
             wv.loadUrl(banner_url, map);
@@ -169,24 +169,23 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 finish();
                 break;
             case R.id.rl_comment:
-                commentDialog = new CommentDialog(this);
-                commentDialog.show();
-                commentDialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
-                    @Override
-                    public void onCommit(EditText et, View v) {
-                        String s = et.getText().toString();
-                        if (TextUtils.isEmpty(s)) {
-                            ToastUtils.show(WorkInfoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
-                        }
-
-
-                        if (managerId == -1) {
-                            workInfoPresenter.commitComment(id, "", s);
-                        } else {
+                if (managerId == -1) {
+                    startActivity(new Intent(this,LoginActivity.class));
+                } else {
+                    commentDialog = new CommentDialog(this);
+                    commentDialog.show();
+                    commentDialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
+                        @Override
+                        public void onCommit(EditText et, View v) {
+                            String s = et.getText().toString();
+                            if (TextUtils.isEmpty(s)) {
+                                ToastUtils.show(WorkInfoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
+                            }
                             workInfoPresenter.commitComment1(id, "", s, managerId);
                         }
-                    }
-                });
+                    });
+                }
+
                 break;
             case R.id.iv_commment:
 

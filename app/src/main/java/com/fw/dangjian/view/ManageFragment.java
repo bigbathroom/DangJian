@@ -1,36 +1,44 @@
 package com.fw.dangjian.view;
 
+import android.content.Intent;
+import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.fw.dangjian.MyListView;
 import com.fw.dangjian.R;
-import com.fw.dangjian.adapter.BookDataAdapter;
+import com.fw.dangjian.adapter.DataBookAdapter;
 import com.fw.dangjian.base.BaseFragment;
 import com.fw.dangjian.bean.BookBean;
 import com.fw.dangjian.mvpView.BookMvpView;
 import com.fw.dangjian.presenter.BookPresenter;
+import com.fw.dangjian.util.ToastUtils;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
-public class ManageFragment extends BaseFragment implements BookMvpView,AdapterView.OnItemClickListener{
+public class ManageFragment extends BaseFragment implements BookMvpView{
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.recyclerview)
-    MyListView nrecycler;
-    @BindView(R.id.rl_lv)
-    RelativeLayout rl_lv;
-    @BindView(R.id.ll_no_content)
-    LinearLayout ll_no_content;
+    XRecyclerView nrecycler;
+    @BindView(R.id.no_content)
+    LinearLayout linearLayout_no_content;
+    @BindView(R.id.tv_kong)
+    TextView tv_kong;
+    @BindView(R.id.no_net)
+    LinearLayout linearLayout_no_net;
 
-    BookDataAdapter  adapter;
+
+    DataBookAdapter adapter;
     private BookPresenter bookPresenter;
     private List<BookBean.ResultBean.PageInfoBean.ListBean> lists;
+    int page = 1;
+    private int refreshTime = 0;
 
     @Override
     protected View fillView() {
@@ -40,34 +48,68 @@ public class ManageFragment extends BaseFragment implements BookMvpView,AdapterV
     @Override
     protected void initUi() {
         tv_title.setText("大事记");
-    /*    nrecycler.setLayoutManager(new GridLayoutManager(getActivity(),1));
 
-        mAdapter = new DataBookAdapter(lists, getActivity());
-        nrecycler.setAdapter(mAdapter);
-
-        mAdapter.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.book_head,null));
-        mAdapter.setonItemClickLitener(new DataBookAdapter.onItemClickLitener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), WorkInfoActivity.class);
-                startActivity(intent);
-            }
-        });*/
-
-      /*  //header
-        View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.book_head, null);
-        //可以添加多个HeaderView
-        nrecycler.addHeaderView(headerView);*/
-
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        nrecycler.setLayoutManager(layoutManager);
 
         bookPresenter = new BookPresenter();
-        bookPresenter.getBookPage(1,this);
-
     }
 
     @Override
     protected void initData() {
 
+        lists = new ArrayList<>();
+        requestServer(page);
+
+        nrecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                refreshTime++;
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        page = 1;
+                        requestServer(page);
+                    }
+
+                }, 200);            //refresh data here
+            }
+
+            @Override
+            public void onLoadMore() {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        page++;
+                        requestServer(page);
+                    }
+                }, 200);
+
+            }
+        });
+
+        adapter = new DataBookAdapter(lists, getActivity());
+        nrecycler.setAdapter(adapter);
+
+        initAdapterClike();
+    }
+
+    private void requestServer(int page) {
+
+        bookPresenter.getBookPage(page, this);
+    }
+
+    private void initAdapterClike() {
+
+        adapter.setonItemClickLitener(new DataBookAdapter.onItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                Intent intent = new Intent(getActivity(), WorkInfoActivity.class);
+                intent.putExtra("news_id", lists.get(position-1).id);
+                intent.putExtra("title", "大事记");
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -76,23 +118,76 @@ public class ManageFragment extends BaseFragment implements BookMvpView,AdapterV
 
     }
 
+
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onGetDataNext(BookBean djeBean) {
+
+        if (djeBean.result_code != null && djeBean.result_code.equals("200")) {
+            if (djeBean.result.pageInfo.list.size() > 0) {
+                switch (page) {
+                    case 1:
+                        lists.clear();
+                        lists.addAll(djeBean.result.pageInfo.list);
+                        break;
+                    default:
+                        lists.addAll(djeBean.result.pageInfo.list);
+                        break;
+                }
+
+                linearLayout_no_content.setVisibility(View.GONE);
+                linearLayout_no_net.setVisibility(View.GONE);
+                nrecycler.setVisibility(View.VISIBLE);
+                nrecycler.loadMoreComplete();
+                nrecycler.refreshComplete();
+                adapter.notifyDataSetChanged();
+
+            } else {
+                switch (page) {
+                    case 1:
+                        linearLayout_no_content.setVisibility(View.VISIBLE);
+                        linearLayout_no_net.setVisibility(View.GONE);
+                        nrecycler.setVisibility(View.GONE);
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
+                        break;
+                    default:
+                        ToastUtils.showShort(act, "没有更多数据");
+                        page--;
+                        linearLayout_no_content.setVisibility(View.GONE);
+                        linearLayout_no_net.setVisibility(View.GONE);
+                        nrecycler.setVisibility(View.VISIBLE);
+                        adapter.notifyDataSetChanged();
+                        nrecycler.loadMoreComplete();
+                        nrecycler.refreshComplete();
+                        break;
+                }
+            }
+        } else {
+            switch (page) {
+                case 1:
+                    linearLayout_no_content.setVisibility(View.GONE);
+                    linearLayout_no_net.setVisibility(View.VISIBLE);
+                    nrecycler.setVisibility(View.GONE);
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
+                    break;
+                default:
+                    ToastUtils.showShort(act, "网络错误");
+                    page--;
+                    linearLayout_no_content.setVisibility(View.GONE);
+                    linearLayout_no_net.setVisibility(View.GONE);
+                    nrecycler.setVisibility(View.VISIBLE);
+                    nrecycler.loadMoreComplete();
+                    nrecycler.refreshComplete();
+                    break;
+            }
+        }
     }
 
     @Override
-    public void onGetDataNext(BookBean bookBean) {
-        if (bookBean.result_code != null && bookBean.result_code.equals("200")){
-            if(bookBean.result.pageInfo.list.size()>0){
-                rl_lv.setVisibility(View.VISIBLE);
-                ll_no_content.setVisibility(View.GONE);
-                lists = bookBean.result.pageInfo.list;
-                adapter = new BookDataAdapter(lists, getActivity());
-                nrecycler.setAdapter(adapter);
-            }else{
-                rl_lv.setVisibility(View.GONE);
-                ll_no_content.setVisibility(View.VISIBLE);
-            }
-        }
+    public void onGetDataError(Throwable e) {
+        super.onGetDataError(e);
+        nrecycler.loadMoreComplete();
+        nrecycler.refreshComplete();
     }
 }

@@ -147,7 +147,7 @@ public class StringUtils {
      * @return 获取时间戳
      */
     public static String getTimeString() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
         Calendar calendar = Calendar.getInstance();
         return df.format(calendar.getTime());
     }

@@ -8,71 +8,20 @@
 
     <include layout="@layout/head_title"></include>
 
-    <ScrollView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:divider="@color/white"
+        android:paddingTop="40dp"
+        android:background="@mipmap/book_bg"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <include  layout="@layout/layout_no_content"
+        android:id="@+id/no_content"
+        android:visibility="gone"/>
 
-            <RelativeLayout
-                android:id="@+id/rl_lv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="10dp">
+    <include  layout="@layout/layout_no_net"
+        android:id="@+id/no_net"
+        android:visibility="gone"/>
 
-                <ImageView
-                    android:id="@+id/iv_book"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@mipmap/booktitle" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/iv_book"
-                    android:background="@mipmap/book_bg">
-
-                    <com.fw.dangjian.MyListView
-                        android:id="@+id/recyclerview"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:divider="@color/white"
-                        android:paddingTop="40dp" />
-                </RelativeLayout>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_no_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-
-                <ImageView
-                    android:id="@+id/iv_bg"
-                    android:layout_width="60dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="100dp" />
-
-                <TextView
-                    android:id="@+id/tv_kong"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="当前内容为空"
-                    android:textColor="@color/gray9"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-    </ScrollView>
 </LinearLayout>

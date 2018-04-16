@@ -153,7 +153,8 @@
                     android:paddingLeft="15dp"
                     android:text="D. They will be fined"
                     android:textColor="@color/gray6"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
             </RadioGroup>
 
             <LinearLayout
@@ -161,18 +162,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone"
+                >
 
                 <CheckBox
                     android:id="@+id/CheckBox1"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
                     android:background="@color/white"
                     android:button="@null"
                     android:drawableLeft="@drawable/btn_selector"
-                    android:paddingLeft="15dp"
-                    android:text="" />
+                    android:paddingLeft="30dp"
+                    android:text="  D They will be fined"
+
+                    />
 
                 <View
                     android:layout_width="match_parent"
@@ -189,7 +193,7 @@
                     android:background="@color/white"
                     android:button="@null"
                     android:drawableLeft="@drawable/btn_selector"
-                    android:paddingLeft="15dp"
+                    android:paddingLeft="30dp"
                     android:text="" />
 
                 <View
@@ -207,7 +211,7 @@
                     android:background="@color/white"
                     android:button="@null"
                     android:drawableLeft="@drawable/btn_selector"
-                    android:paddingLeft="15dp"
+                    android:paddingLeft="30dp"
                     android:text="" />
 
                 <View
@@ -225,8 +229,9 @@
                     android:background="@color/white"
                     android:button="@null"
                     android:drawableLeft="@drawable/btn_selector"
-                    android:paddingLeft="15dp"
-                    android:text="" />
+                    android:paddingLeft="30dp"
+                    android:text=""
+                    android:visibility="gone"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -243,8 +248,9 @@
                     android:background="@color/white"
                     android:button="@null"
                     android:drawableLeft="@drawable/btn_selector"
-                    android:paddingLeft="15dp"
-                    android:text="" />
+                    android:paddingLeft="30dp"
+                    android:text=""
+                    android:visibility="gone"/>
 
             </LinearLayout>
 

@@ -5,6 +5,7 @@ import com.fw.dangjian.bean.QuizBean;
 import com.fw.dangjian.bean.SubmitBean;
 import com.fw.dangjian.mvpView.QuizMvpView;
 
+import okhttp3.RequestBody;
 import rx.Subscriber;
 
 /**
@@ -38,8 +39,9 @@ public class QuizPersenter extends BasePresenter {
     }
 
 
-    public void submitAnswer(int squareid,String answer){
-        retrofitHelper.toSubscribe(req.submitQuestion(squareid,answer), new Subscriber<SubmitBean>() {
+    public void submitAnswer(int managerId, RequestBody answer){
+
+        retrofitHelper.toSubscribe(req.submitQuestion(managerId,answer), new Subscriber<SubmitBean>() {
             @Override
             public void onCompleted() {
                 mvpView.onGetDataCompleted();
@@ -56,4 +58,27 @@ public class QuizPersenter extends BasePresenter {
             }
         });
     }
+
+
+
+
+
+  /*  public void submitAnswer(int managerId,List<Answer> answer){
+        retrofitHelper.toSubscribe(req.submitQuestion(10,answer), new Subscriber<SubmitBean>() {
+            @Override
+            public void onCompleted() {
+                mvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(SubmitBean submitBean) {
+                mvpView.onSubmitDataNext(submitBean);
+            }
+        });
+    }*/
 }

@@ -26,6 +26,7 @@ public class RegistProActivity extends BaseActivity{
     WebView wv;
     private int type;
 
+    public  String timeString;
     @Override
     protected int fillView() {
         return R.layout.activity_regist_pro;
@@ -37,9 +38,11 @@ public class RegistProActivity extends BaseActivity{
 
         type = getIntent().getIntExtra("type", -1);
 
+        timeString = StringUtils.getTimeString();
         Map<String, String> map = new HashMap<String, String>();
-        map.put("assetionkey", StringUtils.getBase64(RetrofitHelper.key + RetrofitHelper.timeString));
-        map.put("timestamp", RetrofitHelper.timeString);
+
+        map.put("assetionkey", StringUtils.getBase64(RetrofitHelper.key + timeString));
+        map.put("timestamp", timeString);
 
         if (type == 1) {
             tv_title.setText("注册协议");

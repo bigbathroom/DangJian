@@ -182,6 +182,7 @@ public class LoginFragment extends  BaseFragment implements LoginMvpView{
         if (kongBean.result_code!= null&&kongBean.result_code.equals("200")){
 
                 if (kongBean.result != null){
+
                     managerid = kongBean.result.managerid;
 
                     SPUtils.put(getActivity(), ConstanceValue.LOGIN_TOKEN,managerid);

@@ -3,6 +3,7 @@ package com.fw.dangjian.view;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -21,13 +22,18 @@ import com.fw.dangjian.bean.SubmitBean;
 import com.fw.dangjian.dialog.ResultDialog;
 import com.fw.dangjian.mvpView.QuizMvpView;
 import com.fw.dangjian.presenter.QuizPersenter;
+import com.fw.dangjian.util.ConstanceValue;
+import com.fw.dangjian.util.SPUtils;
 import com.fw.dangjian.util.ToastUtils;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class QuizActivity extends BaseActivity implements QuizMvpView {
 
@@ -82,6 +88,10 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     private int squareId;
 
     String choiceId = "";
+    int selectId =-1;
+
+    List<Integer> selectIds= new ArrayList<>();
+
     private int count;
     int allCount = 0;
     private List<QuizBean.ResultBean.SubjectBean> subject;
@@ -89,7 +99,8 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     private ArrayList<String> cbId;
     private ResultDialog resultDialog;
     private CountDownTimer timer;
-
+    private Answer[] answer;
+    int managerId;
     @Override
     protected int fillView() {
         return R.layout.activity_quiz;
@@ -100,6 +111,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
         left.setVisibility(View.VISIBLE);
         tv_title.setText("在线知识竞答");
 
+        managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
         answerList = new ArrayList<>();
         cbId = new ArrayList<>();
 
@@ -111,7 +123,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
 
         Intent intent = getIntent();
-        if(intent != null){
+        if (intent != null) {
             squareId = intent.getIntExtra("squareId", -1);
         }
         quizPersenter = new QuizPersenter(this);
@@ -123,7 +135,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
         quizPersenter.GetQuestion(squareId);
     }
 
-    @OnClick({R.id.left, R.id.rb_1, R.id.rb_2, R.id.rb_3, R.id.rb_4,R.id.CheckBox1,R.id.CheckBox2,R.id.CheckBox3,R.id.CheckBox4,R.id.CheckBox5,R.id.tv_next})
+    @OnClick({R.id.left, R.id.rb_1, R.id.rb_2, R.id.rb_3, R.id.rb_4, R.id.CheckBox1, R.id.CheckBox2, R.id.CheckBox3, R.id.CheckBox4, R.id.CheckBox5, R.id.tv_next})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.left:
@@ -131,48 +143,48 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
                 break;
             case R.id.rb_1:
                 choiceId = "a";
+                selectId = 0;
                 setEnable();
-                rb_2.setChecked(false);
-                rb_3.setChecked(false);
-                rb_4.setChecked(false);
                 break;
             case R.id.rb_2:
                 choiceId = "b";
+                selectId = 1;
                 setEnable();
-                rb_1.setChecked(false);
-                rb_3.setChecked(false);
-                rb_4.setChecked(false);
+
                 break;
             case R.id.rb_3:
                 choiceId = "c";
+                selectId = 2;
                 setEnable();
-                rb_1.setChecked(false);
-                rb_2.setChecked(false);
-                rb_4.setChecked(false);
+
                 break;
             case R.id.rb_4:
                 choiceId = "d";
+                selectId = 3;
                 setEnable();
-                rb_1.setChecked(false);
-                rb_2.setChecked(false);
-                rb_3.setChecked(false);
+
                 break;
 
             case R.id.CheckBox1:
+
                 setEnable1();
                 break;
             case R.id.CheckBox2:
+
                 setEnable1();
                 break;
             case R.id.CheckBox3:
+
                 setEnable1();
 
                 break;
             case R.id.CheckBox4:
+
                 setEnable1();
 
                 break;
             case R.id.CheckBox5:
+
                 setEnable1();
 
                 break;
@@ -191,47 +203,107 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
 //                把答案和题号装成对象添加到集合中
                 cbId.clear();
-                if(CheckBox1.isChecked()){
+                if (CheckBox1.isChecked()) {
                     cbId.add("a");
+                    selectIds.add(0);
                 }
-                if(CheckBox2.isChecked()){
+                if (CheckBox2.isChecked()) {
                     cbId.add("b");
+                    selectIds.add(1);
                 }
-                if(CheckBox3.isChecked()){
+                if (CheckBox3.isChecked()) {
                     cbId.add("c");
+                    selectIds.add(2);
                 }
-                if(CheckBox4.isChecked()){
+                if (CheckBox4.isChecked()) {
                     cbId.add("d");
+                    selectIds.add(3);
                 }
-                if(CheckBox5.isChecked()){
+                if (CheckBox5.isChecked()) {
                     cbId.add("e");
+                    selectIds.add(4);
                 }
 
-                Answer answerBean= new Answer();
+//                整理答案到bean类
+                Answer answerBean = new Answer();
                 List<String> option_opt = new ArrayList<>();
 
-                if(subject.get(allCount-1).subject_type == 1){
+                if (subject.get(allCount - 1).subject_type == 1) {
                     option_opt.add(choiceId);
-                }else{
-                    for(int i = 0;i<cbId.size();i++){
+                } else {
+                    for (int i = 0; i < cbId.size(); i++) {
                         option_opt.add(cbId.get(i));
                     }
                 }
 
-                answerBean.setSubject_id(subject.get(allCount-1).id);
+                answerBean.setSubject_id(subject.get(allCount - 1).id);
                 answerBean.setOption_opt(option_opt);
+
                 answerList.add(answerBean);
 
-
-                if(subject.get(allCount-1).subject_type == 1){
-                    if (choiceId .equals("")) {
-                        iv_right.setVisibility(View.VISIBLE);
-                    } else {
-                        iv_wrong.setVisibility(View.VISIBLE);
+//                判断对错
+                if (subject.get(allCount - 1).subject_type == 1) {
+//                    单选对错
+                    if (selectId == -1) {
+                        ToastUtils.showShort(act,"请先选择答案");
+                    }else{
+                        if (subject.get(allCount - 1).optionEntity.get(selectId).isOk == 1) {
+                            iv_right.setVisibility(View.VISIBLE);
+                            iv_wrong.setVisibility(View.GONE);
+                        } else {
+                            iv_wrong.setVisibility(View.VISIBLE);
+                            iv_right.setVisibility(View.GONE);
+                        }
                     }
-                }else{
-//                    多选判断对错
+                } else {
+//                   多选判断对错
 
+                    if(selectIds.size()>0){
+                        if(selectIds.size() == 1){
+                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1) {
+                                iv_right.setVisibility(View.VISIBLE);
+                                iv_wrong.setVisibility(View.GONE);
+                            } else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                            }
+                        }else if(selectIds.size() == 2){
+                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1) {
+                                iv_right.setVisibility(View.VISIBLE);
+                                iv_wrong.setVisibility(View.GONE);
+                            } else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                            }
+                        }else if(selectIds.size() == 3){
+
+                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(2).intValue()).isOk == 1) {
+                                iv_right.setVisibility(View.VISIBLE);
+                                iv_wrong.setVisibility(View.GONE);
+                            } else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                            }
+                        }else if(selectIds.size() == 4){
+
+                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(2).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(3).intValue()).isOk == 1) {
+                                iv_right.setVisibility(View.VISIBLE);
+                                iv_wrong.setVisibility(View.GONE);
+                            } else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                            }
+                        }else if(selectIds.size() == 5){
+
+                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(2).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(3).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(4).intValue()).isOk == 1) {
+                                iv_right.setVisibility(View.VISIBLE);
+                                iv_wrong.setVisibility(View.GONE);
+                            } else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                            }
+                        }
+                    }
                 }
 
 
@@ -240,39 +312,20 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            rb_1.setEnabled(true);
-                            rb_2.setEnabled(true);
-                            rb_3.setEnabled(true);
-                            rb_4.setEnabled(true);
-                            CheckBox1.setEnabled(true);
-                            CheckBox2.setEnabled(true);
-                            CheckBox3.setEnabled(true);
-                            CheckBox4.setEnabled(true);
-                            CheckBox5.setEnabled(true);
-                            rb_1.setChecked(false);
-                            rb_2.setChecked(false);
-                            rb_3.setChecked(false);
-                            rb_4.setChecked(false);
-                            CheckBox1.setChecked(false);
-                            CheckBox2.setChecked(false);
-                            CheckBox3.setChecked(false);
-                            CheckBox4.setChecked(false);
-                            CheckBox5.setChecked(false);
-                            iv_wrong.setVisibility(View.GONE);
-                            iv_right.setVisibility(View.GONE);
 
                             setChoiceData(allCount);
                             allCount = allCount + 1;
                         }
-                    }, 1500);
+                    }, 1000);
 
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+
                             submitChoice();
                         }
-                    },500);
+                    }, 1000);
                 }
 
                 break;
@@ -282,6 +335,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     private void setEnable() {
         tv_next.setEnabled(true);
     }
+
     private void setEnable1() {
         if (CheckBox1.isChecked() == true || CheckBox2.isChecked() == true || CheckBox3.isChecked() == true || CheckBox4.isChecked() == true || CheckBox5.isChecked() == true) {
             tv_next.setEnabled(true);
@@ -290,9 +344,13 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
 
     private void submitChoice() {
+        Gson gson = new Gson();
+        String json = gson.toJson(answerList);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),json);
 
-        String answer = answerList.toString();
-        quizPersenter.submitAnswer(squareId,answer);
+        Log.i("HHH","answer答案"+json);
+        quizPersenter.submitAnswer(managerId,body);
+
     }
 
 
@@ -318,59 +376,111 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     @Override
     public void onSubmitDataNext(SubmitBean submitBean) {
 
-        if(submitBean.result_code != null && submitBean.result_code.equals("200")){
+        if (submitBean.result_code != null && submitBean.result_code.equals("200")) {
 
-            resultDialog = new ResultDialog(this, R.style.MyDarkDialog,"","") {
+          /*  resultDialog = new ResultDialog(this, R.style.MyDarkDialog, "", "") {
                 @Override
                 public void confirm() {
-                   dismiss();
+                    dismiss();
                     QuizActivity.this.finish();
                 }
             };
-            resultDialog.show();
+            resultDialog.show();*/
 
-        }else{
-            ToastUtils.show(this, submitBean.result_msg, Toast.LENGTH_SHORT);
+           finish();
+        } else {
+            Toast.makeText(this, submitBean.result_msg, Toast.LENGTH_SHORT).show();
         }
-    }
 
+    }
 
 
     public void setChoiceData(int allCount) {
-        int pageNum = allCount+1;
-        tv_question_num.setText( pageNum + "/" + count);
+
+        rg.clearCheck();
+
+        CheckBox1.setChecked(false);
+        CheckBox2.setChecked(false);
+        CheckBox3.setChecked(false);
+        CheckBox4.setChecked(false);
+        CheckBox5.setChecked(false);
+
+        iv_wrong.setVisibility(View.GONE);
+        iv_right.setVisibility(View.GONE);
+
+        choiceId = "";
+        selectId = -1;
+        selectIds.clear();
+        cbId.clear();
+
+        int pageNum = allCount + 1;
+        tv_question_num.setText(pageNum + "/" + count);
         tv_question.setText(subject.get(allCount).subject_name);
-        if(subject.get(allCount).subject_type == 1){
+        if (subject.get(allCount).subject_type == 1) {
             tv_type.setText("单选");
             rg.setVisibility(View.VISIBLE);
-            rb_1.setText("A " + subject.get(allCount).optionEntity.get(0).option_name);
-            rb_2.setText("B " + subject.get(allCount).optionEntity.get(1).option_name);
-            rb_3.setText("C " + subject.get(allCount).optionEntity.get(2).option_name);
-            rb_4.setText("D " + subject.get(allCount).optionEntity.get(3).option_name);
+            ll_cb.setVisibility(View.GONE);
 
-        }else{
+            if (subject.get(allCount).optionEntity.size() == 4) {
+                rb_4.setVisibility(View.VISIBLE);
+                rb_1.setText("A " + subject.get(allCount).optionEntity.get(0).option_name);
+                rb_2.setText("B " + subject.get(allCount).optionEntity.get(1).option_name);
+                rb_3.setText("C " + subject.get(allCount).optionEntity.get(2).option_name);
+                rb_4.setText("D " + subject.get(allCount).optionEntity.get(3).option_name);
+            } else if (subject.get(allCount).optionEntity.size() == 3) {
+                rb_4.setVisibility(View.GONE);
+                rb_1.setText("A " + subject.get(allCount).optionEntity.get(0).option_name);
+                rb_2.setText("B " + subject.get(allCount).optionEntity.get(1).option_name);
+                rb_3.setText("C " + subject.get(allCount).optionEntity.get(2).option_name);
+            }
+
+        } else {
             tv_type.setText("多选");
+            rg.setVisibility(View.GONE);
             ll_cb.setVisibility(View.VISIBLE);
-            CheckBox1.setText("A " + subject.get(allCount).optionEntity.get(0).option_name);
-            CheckBox2.setText("B " + subject.get(allCount).optionEntity.get(1).option_name);
-            CheckBox3.setText("C " + subject.get(allCount).optionEntity.get(2).option_name);
-            CheckBox4.setText("D " + subject.get(allCount).optionEntity.get(3).option_name);
-
-            if(subject.get(0).optionEntity.size()>4){
-                CheckBox5.setVisibility(View.VISIBLE);
-                CheckBox5.setText("E " + subject.get(allCount).optionEntity.get(4).option_name);
-            }else{
+            if (subject.get(allCount).optionEntity.size() == 4) {
                 CheckBox5.setVisibility(View.GONE);
+                CheckBox4.setVisibility(View.VISIBLE);
+                CheckBox1.setText("    A " + subject.get(allCount).optionEntity.get(0).option_name);
+                CheckBox2.setText("    B " + subject.get(allCount).optionEntity.get(1).option_name);
+                CheckBox3.setText("    C " + subject.get(allCount).optionEntity.get(2).option_name);
+                CheckBox4.setText("    D " + subject.get(allCount).optionEntity.get(3).option_name);
+            } else if (subject.get(allCount).optionEntity.size() == 3) {
+                CheckBox4.setVisibility(View.GONE);
+                CheckBox5.setVisibility(View.GONE);
+                CheckBox1.setText("    A " + subject.get(allCount).optionEntity.get(0).option_name);
+                CheckBox2.setText("    B " + subject.get(allCount).optionEntity.get(1).option_name);
+                CheckBox3.setText("    C " + subject.get(allCount).optionEntity.get(2).option_name);
+            } else if (subject.get(allCount).optionEntity.size() == 5) {
+                CheckBox4.setVisibility(View.VISIBLE);
+                CheckBox5.setVisibility(View.VISIBLE);
+                CheckBox1.setText("    A " + subject.get(allCount).optionEntity.get(0).option_name);
+                CheckBox2.setText("    B " + subject.get(allCount).optionEntity.get(1).option_name);
+                CheckBox3.setText("    C " + subject.get(allCount).optionEntity.get(2).option_name);
+                CheckBox4.setText("    D " + subject.get(allCount).optionEntity.get(3).option_name);
+                CheckBox5.setText("    E " + subject.get(allCount).optionEntity.get(4).option_name);
             }
         }
+
+        rb_1.setEnabled(true);
+        rb_2.setEnabled(true);
+        rb_3.setEnabled(true);
+        rb_4.setEnabled(true);
+        CheckBox1.setEnabled(true);
+        CheckBox2.setEnabled(true);
+        CheckBox3.setEnabled(true);
+        CheckBox4.setEnabled(true);
+        CheckBox5.setEnabled(true);
+
     }
 
     public void startCount(int mins) {
-        timer = new CountDownTimer(mins*60*1000, 1000) {
+        timer = new CountDownTimer(mins * 60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 tv_time.setText(String.format("%02d", millisUntilFinished / 60000) + ":" + String.format("%02d", (millisUntilFinished % 60000) / 1000));
             }
+
             @Override
             public void onFinish() {
                 tv_time.setText("00:00");
@@ -380,7 +490,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
                     public void run() {
                         submitChoice();
                     }
-                },500);
+                }, 500);
 
             }
         };
@@ -391,7 +501,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(timer != null) {
+        if (timer != null) {
             timer.cancel();
         }
     }

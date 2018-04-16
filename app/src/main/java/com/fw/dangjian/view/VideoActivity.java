@@ -84,6 +84,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     private int studyId;
     private int managerId;
     private List<CommentBean.ResultBean> lists;
+    private String shareUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,8 +153,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 videoInfoPresenter.thumb(studyId);
                 break;
             case R.id.iv_share:
-                String url = "https://www.baidu.com";
-                UMWeb web = new UMWeb(url);
+                UMWeb web = new UMWeb(shareUrl);
                 web.setTitle("党建");//标题
                 web.setThumb(new UMImage(this, R.mipmap.thumb));  //缩略图
                 web.setDescription("实时发布党新闻和活动");//描述
@@ -166,43 +166,42 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 break;
 
             case R.id.iv_comment:
-                commentDialog = new CommentDialog(this);
-                commentDialog.show();
-                commentDialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
-                    @Override
-                    public void onCommit(EditText et, View v) {
-                        String s = et.getText().toString();
-                        if (TextUtils.isEmpty(s)) {
-                            ToastUtils.show(VideoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
-                        }
-                        if (managerId == -1) {
-                            videoInfoPresenter.commitComment(studyId, "", s);
-                        } else {
+                if (managerId == -1) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                } else {
+                    commentDialog = new CommentDialog(this);
+                    commentDialog.show();
+                    commentDialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
+                        @Override
+                        public void onCommit(EditText et, View v) {
+                            String s = et.getText().toString();
+                            if (TextUtils.isEmpty(s)) {
+                                ToastUtils.show(VideoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
+                            }
                             videoInfoPresenter.commitComment1(studyId, "", s, managerId);
                         }
-                    }
-                });
+                    });
+                }
 
                 break;
             case R.id.rl_comment:
-                commentDialog = new CommentDialog(this);
-                commentDialog.show();
-                commentDialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
-                    @Override
-                    public void onCommit(EditText et, View v) {
-                        String s = et.getText().toString();
-                        if (TextUtils.isEmpty(s)) {
-                            ToastUtils.show(VideoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
-                        }
-
-                        if (managerId == -1) {
-                            videoInfoPresenter.commitComment(studyId, "", s);
-
-                        } else {
+                if (managerId == -1) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                } else {
+                    commentDialog = new CommentDialog(this);
+                    commentDialog.show();
+                    commentDialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
+                        @Override
+                        public void onCommit(EditText et, View v) {
+                            String s = et.getText().toString();
+                            if (TextUtils.isEmpty(s)) {
+                                ToastUtils.show(VideoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
+                            }
                             videoInfoPresenter.commitComment1(studyId, "", s, managerId);
                         }
-                    }
-                });
+                    });
+                }
+
 
                 break;
         }
@@ -243,20 +242,17 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 
                 String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
                 if (kongBean.result.post_content == null || kongBean.result.post_content.equals("")) {
-//                    ToastUtils.showShort(this,"个"+kongBean.result.post_content);
-
-                    mNiceVideoPlayer.setUp(mVideoUrl, null);
+//                    mNiceVideoPlayer.setUp(mVideoUrl, null);
+                    shareUrl="";
                 } else {
-//                    ToastUtils.showShort(this,"个恶热"+kongBean.result.post_content);
-//                    mNiceVideoPlayer.setUp(Constants.BASE_URL+"images/"+kongBean.result.post_content, null);
-                    mNiceVideoPlayer.setUp(mVideoUrl, null);
-
+                    shareUrl = kongBean.result.post_content;
+                    mNiceVideoPlayer.setUp(kongBean.result.post_content, null);
                 }
 
-                //                mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK); // or NiceVideoPlayer.TYPE_NATIVE
+              mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_NATIVE); // or NiceVideoPlayer.TYPE_IJK
                 TxVideoPlayerController controller = new TxVideoPlayerController(this);
-//        controller.setTitle(mTitle);
-//        controller.setImage(mImageUrl);
+//              controller.setTitle(mTitle);
+//              controller.setImage(mImageUrl);
                 mNiceVideoPlayer.setController(controller);
 
                 tv_introduce_content1.setText(kongBean.result.post_excerpt);
@@ -264,7 +260,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
             }
 
         } else {
-            ToastUtils.show(this, kongBean.reason, Toast.LENGTH_SHORT);
+            ToastUtils.show(this, kongBean.result_msg, Toast.LENGTH_SHORT);
         }
 
 
@@ -296,7 +292,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 initAdapterClike();
                 no_content.setVisibility(View.GONE);
                 nrecycler.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 no_content.setVisibility(View.VISIBLE);
                 nrecycler.setVisibility(View.GONE);
             }

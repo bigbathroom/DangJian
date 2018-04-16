@@ -21,7 +21,9 @@ import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.RegistBean;
 import com.fw.dangjian.mvpView.RegistMvpView;
 import com.fw.dangjian.presenter.RegistPresenter;
+import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.KeyboardLayout;
+import com.fw.dangjian.util.SPUtils;
 import com.fw.dangjian.util.StringUtils;
 import com.fw.dangjian.util.ToastUtils;
 
@@ -49,7 +51,7 @@ public class RegistFragment extends BaseFragment implements RegistMvpView {
     private String zym;
     private String pwd;
     private RegistPresenter registPresenter;
-
+    private int managerid;
 
     @Override
     protected View fillView() {
@@ -137,6 +139,11 @@ public class RegistFragment extends BaseFragment implements RegistMvpView {
     public void onRegisterNext(RegistBean kongBean) {
         btn_login.setEnabled(false);
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
+
+            managerid = kongBean.result.managerid;
+
+            SPUtils.put(getActivity(), ConstanceValue.LOGIN_TOKEN,managerid);
+
 
             jumpToActivity(MainActivity.class);
             getActivity().finish();

@@ -27,6 +27,7 @@ import com.fw.dangjian.bean.WaterBean;
 import java.util.Map;
 
 import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -44,7 +45,6 @@ import rx.Observable;
  */
 
 public interface AppService {
-
 
 
     //获取首页的新闻类别
@@ -128,11 +128,9 @@ public interface AppService {
     Observable<QuizBean> getQuestion(@Path("squareid") int squareid);
 
     //提交答案
-    @FormUrlEncoded
     @POST(Constants.SUBMIT)
-    Observable<SubmitBean> submitQuestion(@Field("squareid") int squareid,
-                                          @Field("answer") String answer);
-
+    Observable<SubmitBean> submitQuestion(@Header("managerid") int managerid,
+                                          @Body RequestBody answer);
 
     //登陆
     @FormUrlEncoded
@@ -207,7 +205,7 @@ public interface AppService {
     @GET(Constants.FILE + "{managerid}/")
     Observable<FileBean> getFile(@Path("managerid") int managerid);
 
-    //提交视频评论
+    //获取视频
     @GET(Constants.VIDEO + "{id}/")
     Observable<VideoBean> getVideo(@Path("id") int id);
 
