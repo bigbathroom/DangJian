@@ -20,7 +20,8 @@
 
     <style name="inputDialog" parent="@android:style/Theme.Holo.Light.Dialog">
 
-        <item name="android:windowBackground">@color/graye</item>
+        <!--<item name="android:windowBackground">@color/grayf6</item>-->
+        <item name="android:windowBackground">@null</item>
         <!--背景-->
         <item name="android:windowFrame">@null</item>
         <!--设置无边框-->

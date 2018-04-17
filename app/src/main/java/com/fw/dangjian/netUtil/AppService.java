@@ -18,9 +18,11 @@ import com.fw.dangjian.bean.MineBean;
 import com.fw.dangjian.bean.MoneyBean;
 import com.fw.dangjian.bean.QuizBean;
 import com.fw.dangjian.bean.RegistBean;
+import com.fw.dangjian.bean.ScoreBean;
 import com.fw.dangjian.bean.StudyBean;
 import com.fw.dangjian.bean.StudyPageBean;
 import com.fw.dangjian.bean.SubmitBean;
+import com.fw.dangjian.bean.TotalScoreBean;
 import com.fw.dangjian.bean.VideoBean;
 import com.fw.dangjian.bean.WaterBean;
 
@@ -130,7 +132,13 @@ public interface AppService {
     //提交答案
     @POST(Constants.SUBMIT)
     Observable<SubmitBean> submitQuestion(@Header("managerid") int managerid,
+                                          @Query("testId") int testId,
+                                          @Query("times") String times,
                                           @Body RequestBody answer);
+
+    //成绩单
+    @GET(Constants.RESULT + "{squareid}/")
+    Observable<ScoreBean> getResult(@Header("managerid") int managerid,@Path("squareid") int squareid);
 
     //登陆
     @FormUrlEncoded
@@ -209,6 +217,13 @@ public interface AppService {
     @GET(Constants.VIDEO + "{id}/")
     Observable<VideoBean> getVideo(@Path("id") int id);
 
+    //记笔记
+    @FormUrlEncoded
+    @POST(Constants.NOTE )
+    Observable<KongBean> submitNote(@Field("managerid") int managerid,
+                                    @Field("postId") int postId,
+                                    @Query("content") String content);
+
     //学习课程
     @GET(Constants.COURSE)
     Observable<CourseBean> getCourse(@Query("pageNum") int pageNum);
@@ -224,6 +239,10 @@ public interface AppService {
     //党建看板
     @GET(Constants.BOARD)
     Observable<BoardBean> getBoard(@Query("managerid") int managerid);
+
+    // 获取总成绩单
+    @GET(Constants.TOTAL_SCORE)
+    Observable<TotalScoreBean> getTotalScore(@Header("managerid") int managerid);
 
 
 }

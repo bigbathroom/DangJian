@@ -9,7 +9,7 @@ import java.util.List;
 public class ActionBean {
 
     /**
-     * result : {"pageNum":1,"pageSize":10,"size":2,"orderBy":null,"startRow":1,"endRow":2,"total":2,"pages":1,"list":[{"square_region":"甘肃省白银市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","square_name":"中共中央总书记、国家主席","id":1,"square_time":5},{"square_region":"甘肃省白银市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","square_name":"中共中央总书记、国家主席","id":2,"square_time":10}],"firstPage":1,"prePage":0,"nextPage":0,"lastPage":1,"isFirstPage":true,"isLastPage":true,"hasPreviousPage":false,"hasNextPage":false,"navigatePages":8,"navigatepageNums":[1]}
+     * result : {"pageNum":1,"pageSize":10,"size":3,"orderBy":null,"startRow":1,"endRow":3,"total":3,"pages":1,"list":[{"square_region":"北京市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","score":null,"times":null,"square_name":"《党章》题库","count":null,"id":1,"state":null,"square_time":5},{"square_region":"北京市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","score":null,"times":null,"square_name":"党建知识竞赛试题库","count":null,"id":2,"state":null,"square_time":10},{"square_region":"北京市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","score":null,"times":null,"square_name":"党建及党的知识测试题","count":null,"id":3,"state":null,"square_time":3}],"firstPage":1,"prePage":0,"nextPage":0,"lastPage":1,"isFirstPage":true,"isLastPage":true,"hasPreviousPage":false,"hasNextPage":false,"navigatePages":8,"navigatepageNums":[1]}
      * result_msg : 请求成功！
      * result_code : 200
      */
@@ -22,13 +22,13 @@ public class ActionBean {
         /**
          * pageNum : 1
          * pageSize : 10
-         * size : 2
+         * size : 3
          * orderBy : null
          * startRow : 1
-         * endRow : 2
-         * total : 2
+         * endRow : 3
+         * total : 3
          * pages : 1
-         * list : [{"square_region":"甘肃省白银市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","square_name":"中共中央总书记、国家主席","id":1,"square_time":5},{"square_region":"甘肃省白银市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","square_name":"中共中央总书记、国家主席","id":2,"square_time":10}]
+         * list : [{"square_region":"北京市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","score":null,"times":null,"square_name":"《党章》题库","count":null,"id":1,"state":null,"square_time":5},{"square_region":"北京市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","score":null,"times":null,"square_name":"党建知识竞赛试题库","count":null,"id":2,"state":null,"square_time":10},{"square_region":"北京市","square_author":"马宝晶","square_photo":"/upload/image/test.jpg","score":null,"times":null,"square_name":"党建及党的知识测试题","count":null,"id":3,"state":null,"square_time":3}]
          * firstPage : 1
          * prePage : 0
          * nextPage : 0
@@ -63,19 +63,27 @@ public class ActionBean {
 
         public static class ListBean {
             /**
-             * square_region : 甘肃省白银市
+             * square_region : 北京市
              * square_author : 马宝晶
              * square_photo : /upload/image/test.jpg
-             * square_name : 中共中央总书记、国家主席
+             * score : null
+             * times : null
+             * square_name : 《党章》题库
+             * count : null
              * id : 1
+             * state : null
              * square_time : 5
              */
 
             public String square_region;
             public String square_author;
             public String square_photo;
+            public Object score;
+            public String times;
             public String square_name;
+            public Object count;
             public int id;
+            public String state;
             public int square_time;
         }
     }

@@ -39,9 +39,9 @@ public class QuizPersenter extends BasePresenter {
     }
 
 
-    public void submitAnswer(int managerId, RequestBody answer){
+    public void submitAnswer(int managerId,int testId,String times, RequestBody answer){
 
-        retrofitHelper.toSubscribe(req.submitQuestion(managerId,answer), new Subscriber<SubmitBean>() {
+        retrofitHelper.toSubscribe(req.submitQuestion(managerId,testId,times,answer), new Subscriber<SubmitBean>() {
             @Override
             public void onCompleted() {
                 mvpView.onGetDataCompleted();
@@ -58,27 +58,4 @@ public class QuizPersenter extends BasePresenter {
             }
         });
     }
-
-
-
-
-
-  /*  public void submitAnswer(int managerId,List<Answer> answer){
-        retrofitHelper.toSubscribe(req.submitQuestion(10,answer), new Subscriber<SubmitBean>() {
-            @Override
-            public void onCompleted() {
-                mvpView.onGetDataCompleted();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                mvpView.onGetDataError(e);
-            }
-
-            @Override
-            public void onNext(SubmitBean submitBean) {
-                mvpView.onSubmitDataNext(submitBean);
-            }
-        });
-    }*/
 }

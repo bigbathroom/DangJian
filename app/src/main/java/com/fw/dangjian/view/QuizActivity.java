@@ -101,6 +101,8 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     private CountDownTimer timer;
     private Answer[] answer;
     int managerId;
+    private String times;
+
     @Override
     protected int fillView() {
         return R.layout.activity_quiz;
@@ -125,6 +127,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
         Intent intent = getIntent();
         if (intent != null) {
             squareId = intent.getIntExtra("squareId", -1);
+            times = intent.getStringExtra("times");
         }
         quizPersenter = new QuizPersenter(this);
 
@@ -142,24 +145,24 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
                 finish();
                 break;
             case R.id.rb_1:
-                choiceId = "a";
+                choiceId = "A";
                 selectId = 0;
                 setEnable();
                 break;
             case R.id.rb_2:
-                choiceId = "b";
+                choiceId = "B";
                 selectId = 1;
                 setEnable();
 
                 break;
             case R.id.rb_3:
-                choiceId = "c";
+                choiceId = "C";
                 selectId = 2;
                 setEnable();
 
                 break;
             case R.id.rb_4:
-                choiceId = "d";
+                choiceId = "D";
                 selectId = 3;
                 setEnable();
 
@@ -204,23 +207,23 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 //                把答案和题号装成对象添加到集合中
                 cbId.clear();
                 if (CheckBox1.isChecked()) {
-                    cbId.add("a");
+                    cbId.add("A");
                     selectIds.add(0);
                 }
                 if (CheckBox2.isChecked()) {
-                    cbId.add("b");
+                    cbId.add("B");
                     selectIds.add(1);
                 }
                 if (CheckBox3.isChecked()) {
-                    cbId.add("c");
+                    cbId.add("C");
                     selectIds.add(2);
                 }
                 if (CheckBox4.isChecked()) {
-                    cbId.add("d");
+                    cbId.add("D");
                     selectIds.add(3);
                 }
                 if (CheckBox5.isChecked()) {
-                    cbId.add("e");
+                    cbId.add("E");
                     selectIds.add(4);
                 }
 
@@ -348,8 +351,9 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
         String json = gson.toJson(answerList);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),json);
 
+
         Log.i("HHH","answer答案"+json);
-        quizPersenter.submitAnswer(managerId,body);
+        quizPersenter.submitAnswer(managerId,squareId,times,body);
 
     }
 
@@ -386,6 +390,9 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
                 }
             };
             resultDialog.show();*/
+            Intent intent = new Intent(this,ScoreActivity.class);
+            intent.putExtra("testId",squareId);
+           startActivity(intent);
 
            finish();
         } else {

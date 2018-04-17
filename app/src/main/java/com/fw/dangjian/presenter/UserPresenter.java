@@ -5,8 +5,10 @@ import android.util.Log;
 import com.fw.dangjian.base.BasePresenter;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.MineBean;
+import com.fw.dangjian.bean.TotalScoreBean;
 import com.fw.dangjian.mvpView.ChangeNameMvpView;
 import com.fw.dangjian.mvpView.PutPasswordMvpView;
+import com.fw.dangjian.mvpView.TotalScoreMvpView;
 import com.fw.dangjian.mvpView.UserCenterMvpView;
 import com.fw.dangjian.util.RetrofitParameterBuilder;
 
@@ -19,7 +21,6 @@ import rx.Subscriber;
 
 public class UserPresenter extends BasePresenter {
 
-    String myToken ="";
     public UserPresenter() {
     }
 
@@ -118,4 +119,28 @@ public class UserPresenter extends BasePresenter {
             }
         });
     }
+
+    public void getTotalScore(int managerid,final TotalScoreMvpView userCenterMvpView) {
+        retrofitHelper.toSubscribe(req.getTotalScore(managerid), new Subscriber<TotalScoreBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000", "onCompleted");
+                userCenterMvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "onError");
+                userCenterMvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(TotalScoreBean userProfile) {
+                Log.d("000000", "onNext " + userProfile);
+                userCenterMvpView.onGetDataNext(userProfile);
+            }
+        });
+    }
+
+
 }

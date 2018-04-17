@@ -41,8 +41,8 @@ public class VideoInfoPresenter extends BasePresenter {
     }
 
 
-    public void commitComment(int comment_postid,String comment_author,String comment_content) {
-        retrofitHelper.toSubscribe(req.submitLearnComment(comment_postid,comment_author,comment_content), new Subscriber<KongBean>() {
+    public void submitNote(int managerid,int postId,String content) {
+        retrofitHelper.toSubscribe(req.submitNote(managerid,postId,content), new Subscriber<KongBean>() {
             @Override
             public void onCompleted() {
                 Log.d("000000","loginonCompleted");
@@ -58,7 +58,7 @@ public class VideoInfoPresenter extends BasePresenter {
             @Override
             public void onNext(KongBean user) {
                 Log.d("000000", "loginononNext");
-                mvpView.onCommentNext(user);
+                mvpView.onNoteNext(user);
             }
         });
     }

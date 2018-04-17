@@ -57,7 +57,8 @@ public class Constants {
     public static final String QUIZ = "square/list/";
     //提交
     public static final String SUBMIT = "square/answer/";
-
+    //成绩单
+    public static final String RESULT ="square/result/";
     //党建e连心列表
     public static final String DJE_LIST = "article/list/";
     //获取百宝箱栏目
@@ -71,7 +72,8 @@ public class Constants {
     public static final String FILE = "square/record/";
     //视频地址
     public static final String VIDEO = "learn/";
-
+    //记笔记
+    public static final String NOTE = "slender/learn/note/";
     //获取学习课程
     public static final String COURSE = "article/list/";
     //获取大事记
@@ -81,4 +83,6 @@ public class Constants {
 
     //党建看板
     public static final String BOARD = "board/";
+    //获取总成绩单
+    public static final String TOTAL_SCORE = "square/result/mytest/";
 }

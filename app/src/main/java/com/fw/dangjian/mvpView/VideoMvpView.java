@@ -11,4 +11,5 @@ public interface VideoMvpView extends BaseMvpView {
     void onCommentNext(KongBean kongBean);
     void onThumbNext(KongBean kongBean);
     void onGetCommentNext(CommentBean kongBean);
+    void onNoteNext(KongBean kongBean);
 }

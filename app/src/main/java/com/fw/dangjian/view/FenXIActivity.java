@@ -75,7 +75,7 @@ public class FenXIActivity extends BaseActivity implements BoardMvpView{
             tv_count2.setText(boardBean.result.committeeCount);
             tv_count3.setText(boardBean.result.branchCount);
             tv_count4.setText(boardBean.result.todayInfoCount);
-            tv_count4.setText(boardBean.result.totleInfoCount);
+            tv_count5.setText(boardBean.result.totleInfoCount);
 
             int day1 = Integer.valueOf(boardBean.result.weekInfoCount.day1).intValue();
             int day2 = Integer.valueOf(boardBean.result.weekInfoCount.day2).intValue();

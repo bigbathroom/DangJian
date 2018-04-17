@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grayf6"
+    android:orientation="vertical"
+    tools:context="com.fw.dangjian.view.ScoreActivity">
+
+    <include layout="@layout/head_title"></include>
+
+    <TextView
+        android:id="@+id/tv_title1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:textColor="@color/gray3"
+        android:textSize="16sp"
+        android:text="竞答"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您本次的成绩为"
+            android:textColor="@color/gray3"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv1"
+            android:text="0"
+            android:textColor="#EE7708"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/score"
+            android:text="分"
+            android:textColor="@color/gray3"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="综合"
+            android:textColor="#EE7708"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"
+            android:text="正确率："
+            android:textColor="@color/gray3"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/pecrcent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="0%"
+            android:textColor="#EE7708"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/pecrcent"
+            android:layout_marginTop="15dp"
+            android:background="@color/graye" />
+
+        <TextView
+            android:id="@+id/total_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总题：0"
+            android:textSize="15sp"
+            android:textColor="@color/gray3"
+            android:layout_below="@+id/pecrcent"
+            android:layout_marginTop="40dp"/>
+
+        <TextView
+            android:id="@+id/wrong_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="错题：0"
+            android:textSize="15sp"
+            android:textColor="@color/gray3"
+            android:layout_below="@+id/pecrcent"
+            android:layout_marginTop="65dp"/>
+
+        <TextView
+            android:id="@+id/right_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正题：0"
+            android:textSize="15sp"
+            android:textColor="@color/gray3"
+            android:layout_below="@+id/pecrcent"
+            android:layout_marginTop="90dp"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

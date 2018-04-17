@@ -92,6 +92,24 @@
             android:layout_marginTop="8dp"
             android:background="@mipmap/comment" />
 
+
+        <TextView
+            android:id="@+id/book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_comment"
+            android:layout_marginLeft="20dp"
+            android:padding="2dp"
+            android:layout_marginTop="8dp"
+            android:text="笔记"
+            android:textColor="#0978AA"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:background="@drawable/shape_book"/>
+
+
+
+
         <ImageView
             android:id="@+id/iv_praise"
             android:layout_width="20dp"

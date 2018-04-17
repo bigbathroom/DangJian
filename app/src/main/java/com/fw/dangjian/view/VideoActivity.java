@@ -22,6 +22,7 @@ import com.fw.dangjian.adapter.PingLunAdapter;
 import com.fw.dangjian.bean.CommentBean;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.VideoBean;
+import com.fw.dangjian.dialog.BookDialog;
 import com.fw.dangjian.dialog.CommentDialog;
 import com.fw.dangjian.mvpView.VideoMvpView;
 import com.fw.dangjian.presenter.VideoInfoPresenter;
@@ -58,6 +59,8 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     TextView tv_introduce;
     @BindView(R.id.iv_comment)
     ImageView iv_comment;
+    @BindView(R.id.book)
+    TextView book;
     @BindView(R.id.iv_praise)
     ImageView iv_praise;
     @BindView(R.id.iv_share)
@@ -85,6 +88,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     private int managerId;
     private List<CommentBean.ResultBean> lists;
     private String shareUrl;
+    private BookDialog bookDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +136,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
         });
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_introduce, R.id.iv_comment, R.id.iv_praise, R.id.iv_share, R.id.tv_comment, R.id.rl_comment})
+    @OnClick({R.id.iv_back, R.id.tv_introduce, R.id.iv_comment, R.id.book,R.id.iv_praise, R.id.iv_share, R.id.tv_comment, R.id.rl_comment})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -182,6 +186,27 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                         }
                     });
                 }
+
+                break;
+            case R.id.book:
+
+                if (managerId == -1) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                } else {
+                    bookDialog = new BookDialog(this);
+                    bookDialog.show();
+                    bookDialog.setOnCommitListener(new BookDialog.OnCommitListener() {
+                        @Override
+                        public void onCommit(EditText et, View v) {
+                            String s = et.getText().toString();
+                            if (TextUtils.isEmpty(s)) {
+                                ToastUtils.show(VideoActivity.this, "请先输入笔记", Toast.LENGTH_SHORT);
+                            }
+                            videoInfoPresenter.submitNote(managerId,studyId,s);
+                        }
+                    });
+                }
+
 
                 break;
             case R.id.rl_comment:
@@ -243,7 +268,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
                 if (kongBean.result.post_content == null || kongBean.result.post_content.equals("")) {
 //                    mNiceVideoPlayer.setUp(mVideoUrl, null);
-                    shareUrl="";
+                    shareUrl="https://www.baidu.com";
                 } else {
                     shareUrl = kongBean.result.post_content;
                     mNiceVideoPlayer.setUp(kongBean.result.post_content, null);
@@ -300,6 +325,18 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
         } else {
             ToastUtils.show(this, kongBean.result_msg, Toast.LENGTH_SHORT);
         }
+    }
+
+    @Override
+    public void onNoteNext(KongBean kongBean) {
+        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
+            bookDialog.dismiss();
+            ToastUtils.show(this, "提交成功", Toast.LENGTH_SHORT);
+        } else {
+            ToastUtils.show(this, "提交失败", Toast.LENGTH_SHORT);
+        }
+
+
     }
 
     @Override

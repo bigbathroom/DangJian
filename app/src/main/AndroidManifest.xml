@@ -58,14 +58,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".view.SplashActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-        <activity android:name=".MainActivity">
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".view.DJEActivity" />
         <activity android:name=".view.QuizActivity" />
         <activity
@@ -110,11 +109,9 @@
         <activity android:name=".view.ResetPswActivity" />
         <activity android:name=".view.Main2Activity" />
         <activity android:name=".view.ChannelActivity" />
-        <activity android:name=".view.SearchActivity"
-            android:windowSoftInputMode="adjustPan"/>
-
-
-
+        <activity
+            android:name=".view.SearchActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.GuideActivity" />
         <!-- 定位 -->
         <service android:name="com.amap.api.location.APSService" />
@@ -174,7 +171,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".view.CourseActivity"></activity>
+        <activity android:name=".view.CourseActivity" />
+        <activity android:name=".view.ScoreActivity" />
+        <activity android:name=".view.TotalScoreActivity"></activity>
     </application>
 
 </manifest>

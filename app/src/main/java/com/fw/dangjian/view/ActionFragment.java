@@ -108,10 +108,17 @@ public class ActionFragment extends BaseFragment implements ActionMvpView{
             @Override
             public void onItemClick(View view, int position) {
 
-                Intent intent = new Intent(getActivity(), QuizActivity.class);
-                intent.putExtra("squareId",lists.get(position-2).id);
+                if (lists.get(position-2).state != null && lists.get(position-2).state.equals("1")){
+                    Intent intent = new Intent(getActivity(), ScoreActivity.class);
+                    intent.putExtra("testId",lists.get(position-2).id);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(getActivity(), QuizActivity.class);
+                    intent.putExtra("squareId",lists.get(position-2).id);
+                    intent.putExtra("times",lists.get(position-2).times);
+                    startActivity(intent);
+                }
 
-                startActivity(intent);
             }
         });
 
