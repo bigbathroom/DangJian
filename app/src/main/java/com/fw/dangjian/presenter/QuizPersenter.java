@@ -39,7 +39,7 @@ public class QuizPersenter extends BasePresenter {
     }
 
 
-    public void submitAnswer(int managerId,int testId,String times, RequestBody answer){
+    public void submitAnswer(int managerId,int testId,int times, RequestBody answer){
 
         retrofitHelper.toSubscribe(req.submitQuestion(managerId,testId,times,answer), new Subscriber<SubmitBean>() {
             @Override

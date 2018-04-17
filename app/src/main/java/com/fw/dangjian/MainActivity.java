@@ -91,6 +91,20 @@ public class MainActivity extends AppCompatActivity {
         }
         showFragment(selindex);
 
+        if (selindex == 0){
+            rd_home.setChecked(true);
+        }else if (selindex == 1){
+            rd_action.setChecked(true);
+        }else if (selindex == 2){
+            rd_study.setChecked(true);
+        }else if (selindex == 3){
+            rd_manage.setChecked(true);
+        }else{
+            rd_home.setChecked(true);
+        }
+
+
+
 
         SPUtils.put(this, ConstanceValue.IS_FIRST_START,"true");
     }

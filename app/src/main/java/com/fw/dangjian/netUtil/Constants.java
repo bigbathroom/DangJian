@@ -85,4 +85,8 @@ public class Constants {
     public static final String BOARD = "board/";
     //获取总成绩单
     public static final String TOTAL_SCORE = "square/result/mytest/";
+    //获取单个笔记
+    public static final String GET_NOTE ="slender/learn/getNote/";
+    //获取所有笔记
+    public static final String GET_ALL_NOTE ="slender/learn/getNotes/";
 }

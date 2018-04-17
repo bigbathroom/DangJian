@@ -25,7 +25,7 @@
         android:textColor="@color/gray6"
         android:textSize="16sp"
         android:layout_toRightOf="@+id/rv_touxiang"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"/>
     <TextView
         android:id="@+id/tv_time"

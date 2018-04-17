@@ -90,7 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
-            android:background="@mipmap/comment" />
+            android:background="@mipmap/comment"
+            android:visibility="gone"/>
 
 
         <TextView
@@ -98,16 +99,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/iv_comment"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:padding="2dp"
             android:layout_marginTop="8dp"
-            android:text="笔记"
+            android:text="我的笔记"
             android:textColor="#0978AA"
             android:textSize="12sp"
             android:gravity="center"
             android:background="@drawable/shape_book"/>
-
-
 
 
         <ImageView

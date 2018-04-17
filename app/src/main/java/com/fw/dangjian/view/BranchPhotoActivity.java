@@ -112,12 +112,12 @@ public class BranchPhotoActivity extends BaseActivity implements BranchMvpView{
                 imageLists = new ArrayList<>();
                 imageLists.clear();
 
-                for (int i = 0;i<lists.get(position).imgAarray.size();i++){
-                    imageLists.add(lists.get(position).imgAarray.get(i).url);
+                for (int i = 0;i<lists.get(position-1).imgAarray.size();i++){
+                    imageLists.add(lists.get(position-1).imgAarray.get(i).url);
                 }
 
                 Intent intent = new Intent(BranchPhotoActivity.this, WaterFallActivity.class);
-                intent.putExtra("title", lists.get(position).activityName);
+                intent.putExtra("title", lists.get(position-1).activityName);
                 intent.putStringArrayListExtra("photos", imageLists);
                 startActivity(intent);
             }

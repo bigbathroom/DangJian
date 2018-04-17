@@ -29,9 +29,11 @@ public class BookDialog extends Dialog{
     private Context context;
     private OnCommitListener listener;
 
-    public BookDialog(Context context) {
+    String s;
+    public BookDialog(Context context,String s) {
         this(context, R.style.inputDialog);
         this.context = context;
+        this.s = s;
     }
 
     public BookDialog(Context context, int themeResId) {
@@ -43,6 +45,10 @@ public class BookDialog extends Dialog{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_dialog_layout);
         ButterKnife.bind(this);
+        if(!s.equals("")){
+            et_comment.setHint(s);
+        }
+
         initListener();
     }
 

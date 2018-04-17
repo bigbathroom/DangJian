@@ -123,7 +123,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
 
         timeString = StringUtils.getTimeString();
 
-        url = BASE_URL + "note/" + id + "?managerid=" + managerId;
+        url = BASE_URL + "/note/" + id+ "?managerid=" + managerId;
 
         Map<String, String> map = new HashMap<String, String>();
         map.put("assetionkey", StringUtils.getBase64(RetrofitHelper.key + timeString));
@@ -139,7 +139,6 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
             if (title != null) {
                 tv_title.setText(title);
             }
-
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -148,7 +147,6 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 }
             }, 1000);
         }
-
     }
 
     private void initAdapterClike() {
@@ -198,7 +196,8 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 workInfoPresenter.thumb(id);
                 break;
             case R.id.iv_share:
-                UMWeb web = new UMWeb(url);
+                String  shareUrl = BASE_URL + "/share/note/" + id + "?managerid=" + managerId+"&&"+"timestamp="+timeString+"&&"+"assetionkey="+StringUtils.getBase64(RetrofitHelper.key + timeString);
+                UMWeb web = new UMWeb(shareUrl);
                 web.setTitle("党建");//标题
                 web.setThumb(new UMImage(this, R.mipmap.thumb));  //缩略图
                 web.setDescription("实时发布党新闻和活动");//描述

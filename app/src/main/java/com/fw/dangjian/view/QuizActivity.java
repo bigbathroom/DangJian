@@ -28,6 +28,7 @@ import com.fw.dangjian.util.ToastUtils;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -102,6 +103,8 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     private Answer[] answer;
     int managerId;
     private String times;
+    private Date getDate;
+    private Date endDate;
 
     @Override
     protected int fillView() {
@@ -351,9 +354,14 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
         String json = gson.toJson(answerList);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),json);
 
+        endDate = new Date(System.currentTimeMillis());
+
+
+        long times = endDate.getTime() - getDate.getTime();
+        int i = (int)times;
 
         Log.i("HHH","answer答案"+json);
-        quizPersenter.submitAnswer(managerId,squareId,times,body);
+        quizPersenter.submitAnswer(managerId,squareId,i,body);
 
     }
 
@@ -362,6 +370,9 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     public void onGetDataNext(QuizBean actionBean) {
 
         if (actionBean.result_code != null && actionBean.result_code.equals("200")) {
+
+            getDate = new Date(System.currentTimeMillis());
+
             int time = actionBean.result.square_time;
             startCount(time);
             count = actionBean.result.subject.size();
@@ -382,6 +393,8 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
         if (submitBean.result_code != null && submitBean.result_code.equals("200")) {
 
+
+
           /*  resultDialog = new ResultDialog(this, R.style.MyDarkDialog, "", "") {
                 @Override
                 public void confirm() {
@@ -393,7 +406,6 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
             Intent intent = new Intent(this,ScoreActivity.class);
             intent.putExtra("testId",squareId);
            startActivity(intent);
-
            finish();
         } else {
             Toast.makeText(this, submitBean.result_msg, Toast.LENGTH_SHORT).show();

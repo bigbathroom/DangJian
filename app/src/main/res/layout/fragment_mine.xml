@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
-                    android:src="@mipmap/course" />
+                    android:src="@mipmap/mine_book" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -215,7 +215,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/iv_course"
-                    android:text="学习课程"
+                    android:text="我的笔记"
                     android:textColor="@color/gray3"
                     android:textSize="13sp" />
 
@@ -241,7 +241,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
-                    android:src="@mipmap/password" />
+                    android:src="@mipmap/mine_score" />
 
                 <TextView
                     android:layout_width="wrap_content"

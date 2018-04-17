@@ -78,6 +78,7 @@ public class NiceVideoPlayer extends FrameLayout
      **/
     public static final int MODE_TINY_WINDOW = 12;
 
+
     /**
      * IjkPlayer
      **/

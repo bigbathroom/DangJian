@@ -21,6 +21,7 @@ import com.fw.dangjian.R;
 import com.fw.dangjian.adapter.PingLunAdapter;
 import com.fw.dangjian.bean.CommentBean;
 import com.fw.dangjian.bean.KongBean;
+import com.fw.dangjian.bean.NoteBean;
 import com.fw.dangjian.bean.VideoBean;
 import com.fw.dangjian.dialog.BookDialog;
 import com.fw.dangjian.dialog.CommentDialog;
@@ -89,6 +90,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     private List<CommentBean.ResultBean> lists;
     private String shareUrl;
     private BookDialog bookDialog;
+    private String content ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,18 +195,8 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 if (managerId == -1) {
                     startActivity(new Intent(this, LoginActivity.class));
                 } else {
-                    bookDialog = new BookDialog(this);
-                    bookDialog.show();
-                    bookDialog.setOnCommitListener(new BookDialog.OnCommitListener() {
-                        @Override
-                        public void onCommit(EditText et, View v) {
-                            String s = et.getText().toString();
-                            if (TextUtils.isEmpty(s)) {
-                                ToastUtils.show(VideoActivity.this, "请先输入笔记", Toast.LENGTH_SHORT);
-                            }
-                            videoInfoPresenter.submitNote(managerId,studyId,s);
-                        }
-                    });
+
+                    videoInfoPresenter.getNote(managerId,studyId);
                 }
 
 
@@ -264,8 +256,8 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
             if (kongBean.result != null) {
-
                 String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
+
                 if (kongBean.result.post_content == null || kongBean.result.post_content.equals("")) {
 //                    mNiceVideoPlayer.setUp(mVideoUrl, null);
                     shareUrl="https://www.baidu.com";
@@ -279,6 +271,9 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 //              controller.setTitle(mTitle);
 //              controller.setImage(mImageUrl);
                 mNiceVideoPlayer.setController(controller);
+
+                mNiceVideoPlayer.start();
+
 
                 tv_introduce_content1.setText(kongBean.result.post_excerpt);
                 tv_introduce_content2.setText(kongBean.result.post_excerpt);
@@ -340,6 +335,28 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     }
 
     @Override
+    public void onGetNoteNext(NoteBean kongBean) {
+        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
+            content = kongBean.result.content;
+
+            bookDialog = new BookDialog(this,content);
+            bookDialog.show();
+            bookDialog.setOnCommitListener(new BookDialog.OnCommitListener() {
+                @Override
+                public void onCommit(EditText et, View v) {
+                    String s = et.getText().toString();
+                    if (TextUtils.isEmpty(s)) {
+                        ToastUtils.show(VideoActivity.this, "请先输入笔记", Toast.LENGTH_SHORT);
+                    }
+                    videoInfoPresenter.submitNote(managerId,studyId,s);
+                }
+            });
+        } else {
+            ToastUtils.show(this, "获取笔记失败", Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
     public void onThumbNext(KongBean kongBean) {
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
             iv_praise.setImageResource(R.mipmap.praise01);
@@ -376,7 +393,6 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
          */
         @Override
         public void onStart(SHARE_MEDIA platform) {
-
         }
 
         /**

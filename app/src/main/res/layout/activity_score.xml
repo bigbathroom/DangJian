@@ -10,20 +10,9 @@
 
     <include layout="@layout/head_title"></include>
 
-    <TextView
-        android:id="@+id/tv_title1"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:textColor="@color/gray3"
-        android:textSize="16sp"
-        android:text="竞答"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="@color/white"
         android:gravity="center">
@@ -126,6 +115,21 @@
             android:textColor="@color/gray3"
             android:layout_below="@+id/pecrcent"
             android:layout_marginTop="90dp"/>
+
+        <TextView
+            android:id="@+id/test_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_red2"
+            android:text="再测一次"
+            android:textSize="14sp"
+            android:padding="3dp"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="90dp"/>
+
+
+
     </RelativeLayout>
 
 

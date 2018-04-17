@@ -18,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/image"
         android:layout_marginRight="5dp"
-        android:textSize="13dp"
+        android:textSize="14sp"
         android:text="新华社北京新华社北京新华社北京新华社北京"
-        android:maxLines="3"
+        android:maxLines="5"
         android:ellipsize="end"
         android:visibility="gone"/>
 
@@ -53,9 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/image"
         android:layout_marginLeft="15dp"
-        android:textSize="13dp"
+        android:textSize="14sp"
         android:text="新华社北京新华社北京新华社北京新华社北京"
-        android:maxLines="3"
+        android:maxLines="5"
         android:ellipsize="end"/>
 
 </RelativeLayout>

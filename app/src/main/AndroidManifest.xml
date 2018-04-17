@@ -107,7 +107,6 @@
         <activity android:name=".view.RegistProActivity" />
         <activity android:name=".view.ChangeNameActivity" />
         <activity android:name=".view.ResetPswActivity" />
-        <activity android:name=".view.Main2Activity" />
         <activity android:name=".view.ChannelActivity" />
         <activity
             android:name=".view.SearchActivity"

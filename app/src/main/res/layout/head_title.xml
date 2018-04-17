@@ -41,6 +41,7 @@
         android:layout_centerInParent="true"
         android:text="党建"
         android:textSize="@dimen/title_size"
+        android:maxLength="200"
         />
 
     <ImageView

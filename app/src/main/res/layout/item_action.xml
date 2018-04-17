@@ -35,15 +35,17 @@
 
             <TextView
                 android:id="@+id/tv_again"
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:background="@color/toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_red1"
                 android:text="再测一次"
-                android:textSize="14sp"
+                android:padding="3dp"
+                android:textSize="12sp"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/redf0"
                 android:layout_alignParentRight="true"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                />
 
         </RelativeLayout>
 

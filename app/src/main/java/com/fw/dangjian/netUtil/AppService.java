@@ -1,6 +1,7 @@
 package com.fw.dangjian.netUtil;
 
 import com.fw.dangjian.bean.ActionBean;
+import com.fw.dangjian.bean.AllNoteBean;
 import com.fw.dangjian.bean.BoardBean;
 import com.fw.dangjian.bean.BookBean;
 import com.fw.dangjian.bean.BoxBean;
@@ -16,6 +17,7 @@ import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.LoginBean;
 import com.fw.dangjian.bean.MineBean;
 import com.fw.dangjian.bean.MoneyBean;
+import com.fw.dangjian.bean.NoteBean;
 import com.fw.dangjian.bean.QuizBean;
 import com.fw.dangjian.bean.RegistBean;
 import com.fw.dangjian.bean.ScoreBean;
@@ -133,7 +135,7 @@ public interface AppService {
     @POST(Constants.SUBMIT)
     Observable<SubmitBean> submitQuestion(@Header("managerid") int managerid,
                                           @Query("testId") int testId,
-                                          @Query("times") String times,
+                                          @Query("times") int times,
                                           @Body RequestBody answer);
 
     //成绩单
@@ -243,6 +245,14 @@ public interface AppService {
     // 获取总成绩单
     @GET(Constants.TOTAL_SCORE)
     Observable<TotalScoreBean> getTotalScore(@Header("managerid") int managerid);
+
+    //获取单个笔记
+    @GET(Constants.GET_NOTE + "{postid}")
+    Observable<NoteBean> getNote(@Header("managerid") int managerid, @Path("postid") int postid);
+
+    //获取所有笔记
+    @GET(Constants.GET_ALL_NOTE)
+    Observable<AllNoteBean> getAllNote(@Header("managerid") int managerid);
 
 
 }

@@ -26,8 +26,6 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
-    @BindView(R.id.tv_title1)
-    TextView tv_title1;
     @BindView(R.id.score)
     TextView score;
     @BindView(R.id.pecrcent)
@@ -38,6 +36,9 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     TextView wrong_question;
     @BindView(R.id.right_question)
     TextView right_question;
+    @BindView(R.id.test_again)
+    TextView test_again;
+
 
     int managerId;
     private ScorePresenter scorePresenter;
@@ -52,14 +53,13 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     @Override
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
-        tv_title.setText("我的成绩单");
-
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
 
         testId = getIntent().getIntExtra("testId", -1);
 
         scorePresenter = new ScorePresenter(this);
         scorePresenter.GetResult(managerId,testId);
+//        Toast.makeText(this, ""+testId, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
             //设置百分数精确度2即保留两位小数
             nt.setMinimumFractionDigits(0);
             float result = (float)count/totleCount*100;
-            tv_title1.setText(scoreBean.result.square_name);
+            tv_title.setText(scoreBean.result.square_name);
             score.setText(scoreBean.result.score+"");
             pecrcent.setText((int)result+"%");
             total_question.setText("总题："+scoreBean.result.totleCount+"");
@@ -94,20 +94,25 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     public void onBackPressed() {
         super.onBackPressed();
 
-
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("index", 1);
         startActivity(intent);
         finish();
     }
 
-    @OnClick({R.id.left})
+    @OnClick({R.id.left,R.id.test_again})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.left:
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("index", 1);
                 startActivity(intent);
+                finish();
+                break;
+            case R.id.test_again:
+                Intent intent1 = new Intent(this, MainActivity.class);
+                intent1.putExtra("index", 1);
+                startActivity(intent1);
                 finish();
                 break;
         }
