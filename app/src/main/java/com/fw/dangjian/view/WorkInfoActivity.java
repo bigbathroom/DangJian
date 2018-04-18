@@ -44,6 +44,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.fw.dangjian.netUtil.Constants.BASE_SHARE_URL;
 import static com.fw.dangjian.netUtil.Constants.BASE_URL;
 
 public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
@@ -196,7 +197,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 workInfoPresenter.thumb(id);
                 break;
             case R.id.iv_share:
-                String  shareUrl = BASE_URL + "/share/note/" + id + "?managerid=" + managerId+"&&"+"timestamp="+timeString+"&&"+"assetionkey="+StringUtils.getBase64(RetrofitHelper.key + timeString);
+                String  shareUrl = BASE_SHARE_URL + "/share/note/" + id + "?managerid=" + managerId+"&&"+"timestamp="+timeString+"&&"+"assetionkey="+StringUtils.getBase64(RetrofitHelper.key + timeString);
                 UMWeb web = new UMWeb(shareUrl);
                 web.setTitle("党建");//标题
                 web.setThumb(new UMImage(this, R.mipmap.thumb));  //缩略图
@@ -292,7 +293,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
          */
         @Override
         public void onResult(SHARE_MEDIA platform) {
-            Toast.makeText(WorkInfoActivity.this, "成功了", Toast.LENGTH_LONG).show();
+            Toast.makeText(WorkInfoActivity.this, "成功", Toast.LENGTH_LONG).show();
         }
 
         /**

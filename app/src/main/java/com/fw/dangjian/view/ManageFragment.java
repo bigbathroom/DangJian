@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
-import com.fw.dangjian.adapter.DataBookAdapter;
+import com.fw.dangjian.adapter.DataBookAdapter1;
 import com.fw.dangjian.base.BaseFragment;
 import com.fw.dangjian.bean.BookBean;
 import com.fw.dangjian.mvpView.BookMvpView;
@@ -34,7 +34,7 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
     LinearLayout linearLayout_no_net;
 
 
-    DataBookAdapter adapter;
+    DataBookAdapter1 adapter;
     private BookPresenter bookPresenter;
     private List<BookBean.ResultBean.PageInfoBean.ListBean> lists;
     int page = 1;
@@ -42,7 +42,7 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
 
     @Override
     protected View fillView() {
-        return layoutinflater.inflate(R.layout.activity_data_book, null);
+        return layoutinflater.inflate(R.layout.activity_data_book1, null);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
             }
         });
 
-        adapter = new DataBookAdapter(lists, getActivity());
+        adapter = new DataBookAdapter1(lists, getActivity());
         nrecycler.setAdapter(adapter);
 
         initAdapterClike();
@@ -100,7 +100,7 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
 
     private void initAdapterClike() {
 
-        adapter.setonItemClickLitener(new DataBookAdapter.onItemClickLitener() {
+        adapter.setonItemClickLitener(new DataBookAdapter1.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
 

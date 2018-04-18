@@ -24,6 +24,7 @@ import com.fw.dangjian.bean.ScoreBean;
 import com.fw.dangjian.bean.StudyBean;
 import com.fw.dangjian.bean.StudyPageBean;
 import com.fw.dangjian.bean.SubmitBean;
+import com.fw.dangjian.bean.SubmitBean1;
 import com.fw.dangjian.bean.TotalScoreBean;
 import com.fw.dangjian.bean.VideoBean;
 import com.fw.dangjian.bean.WaterBean;
@@ -222,9 +223,18 @@ public interface AppService {
     //记笔记
     @FormUrlEncoded
     @POST(Constants.NOTE )
-    Observable<KongBean> submitNote(@Field("managerid") int managerid,
-                                    @Field("postId") int postId,
-                                    @Query("content") String content);
+    Observable<SubmitBean1> submitNote(@Field("managerid") int managerid,
+                                       @Field("postId") int postId,
+                                       @Query("content") String content);
+
+    //记笔记
+    @FormUrlEncoded
+    @POST(Constants.NOTE )
+    Observable<SubmitBean1> changeNote(@Field("managerid") int managerid,
+                                       @Field("id") int id,
+                                       @Query("content") String content);
+
+
 
     //学习课程
     @GET(Constants.COURSE)

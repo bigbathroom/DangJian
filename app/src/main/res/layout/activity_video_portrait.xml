@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/iv_comment"
             android:layout_marginLeft="10dp"
-            android:padding="2dp"
+            android:padding="3dp"
             android:layout_marginTop="8dp"
             android:text="我的笔记"
             android:textColor="#0978AA"

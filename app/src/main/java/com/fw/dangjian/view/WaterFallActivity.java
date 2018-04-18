@@ -23,9 +23,6 @@ public class WaterFallActivity extends BaseActivity implements WaterMvpView{
     RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
-
-    @BindView(R.id.tv_title1)
-    TextView tv_title1;
     @BindView(R.id.recyclerview)
     RecyclerView nrecycler;
 
@@ -45,11 +42,10 @@ public class WaterFallActivity extends BaseActivity implements WaterMvpView{
     protected void initUi() {
 
         left.setVisibility(View.VISIBLE);
-        tv_title.setText("照片详情");
         intent = getIntent();
         if (intent != null){
             title = intent.getStringExtra("title");
-            tv_title1.setText(title);
+            tv_title.setText(title);
             photos = intent.getStringArrayListExtra("photos");
 
         }

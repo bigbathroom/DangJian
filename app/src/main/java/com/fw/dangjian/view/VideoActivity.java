@@ -22,6 +22,7 @@ import com.fw.dangjian.adapter.PingLunAdapter;
 import com.fw.dangjian.bean.CommentBean;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.NoteBean;
+import com.fw.dangjian.bean.SubmitBean1;
 import com.fw.dangjian.bean.VideoBean;
 import com.fw.dangjian.dialog.BookDialog;
 import com.fw.dangjian.dialog.CommentDialog;
@@ -91,6 +92,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     private String shareUrl;
     private BookDialog bookDialog;
     private String content ="";
+    private int noteId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,6 +187,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                                 ToastUtils.show(VideoActivity.this, "请先输入评论", Toast.LENGTH_SHORT);
                             }
                             videoInfoPresenter.commitComment1(studyId, "", s, managerId);
+
                         }
                     });
                 }
@@ -323,22 +326,20 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     }
 
     @Override
-    public void onNoteNext(KongBean kongBean) {
+    public void onNoteNext(SubmitBean1 kongBean) {
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
             bookDialog.dismiss();
             ToastUtils.show(this, "提交成功", Toast.LENGTH_SHORT);
         } else {
             ToastUtils.show(this, "提交失败", Toast.LENGTH_SHORT);
         }
-
-
     }
 
     @Override
     public void onGetNoteNext(NoteBean kongBean) {
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
             content = kongBean.result.content;
-
+            noteId = kongBean.result.id;
             bookDialog = new BookDialog(this,content);
             bookDialog.show();
             bookDialog.setOnCommitListener(new BookDialog.OnCommitListener() {
@@ -348,7 +349,13 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                     if (TextUtils.isEmpty(s)) {
                         ToastUtils.show(VideoActivity.this, "请先输入笔记", Toast.LENGTH_SHORT);
                     }
-                    videoInfoPresenter.submitNote(managerId,studyId,s);
+
+                    if(noteId == -1){
+                        videoInfoPresenter.submitNote(managerId,studyId,s);
+                    }else{
+                        videoInfoPresenter.changeNote(managerId,noteId,s);
+                    }
+
                 }
             });
         } else {
@@ -364,6 +371,12 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
             ToastUtils.show(this, "点赞失败", Toast.LENGTH_SHORT);
         }
     }
+
+
+
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -401,7 +414,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
          */
         @Override
         public void onResult(SHARE_MEDIA platform) {
-            Toast.makeText(VideoActivity.this, "成功了", Toast.LENGTH_LONG).show();
+            Toast.makeText(VideoActivity.this, "分享成功", Toast.LENGTH_LONG).show();
         }
 
         /**
@@ -420,7 +433,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
          */
         @Override
         public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(VideoActivity.this, "取消了", Toast.LENGTH_LONG).show();
+            Toast.makeText(VideoActivity.this, "取消", Toast.LENGTH_LONG).show();
 
         }
     };

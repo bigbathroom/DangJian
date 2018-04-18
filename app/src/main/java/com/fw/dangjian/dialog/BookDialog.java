@@ -46,7 +46,7 @@ public class BookDialog extends Dialog{
         setContentView(R.layout.book_dialog_layout);
         ButterKnife.bind(this);
         if(!s.equals("")){
-            et_comment.setHint(s);
+            et_comment.setText(s);
         }
 
         initListener();

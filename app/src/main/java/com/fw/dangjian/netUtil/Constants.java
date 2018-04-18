@@ -9,6 +9,7 @@ public class Constants {
 
     //    总地址
     public static final String BASE_URL = "http://dangjian.yaoyu-soft.com/langur/api/";
+    public static final String BASE_SHARE_URL = "http://dangjian.yaoyu-soft.com/langur/";
     //    登录
     public static final String LOGIN = "login/";
     //    获取验证码
