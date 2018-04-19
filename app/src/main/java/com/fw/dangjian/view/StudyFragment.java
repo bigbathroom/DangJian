@@ -41,7 +41,7 @@ public class StudyFragment extends BaseFragment implements StudyMvpView{
 
     @Override
     protected void initUi() {
-        tv_title.setText("学习视频");
+        tv_title.setText("学习资料");
         studyPresenter = new StudyPresenter();
         studyPresenter.getColunm(this);
 

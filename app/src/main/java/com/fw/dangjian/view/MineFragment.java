@@ -185,7 +185,11 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
                     Intent intent4 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent4);
                 } else {
-                    Intent intent1 = new Intent(getActivity(), FileActivity.class);
+//                    我的档案信息
+                  /*  Intent intent1 = new Intent(getActivity(), FileActivity.class);
+                    startActivity(intent1);*/
+                    Intent intent1 = new Intent(getActivity(), WebActivity.class);
+                    intent1.putExtra("flag_id",100);
                     startActivity(intent1);
                 }
 
@@ -195,7 +199,7 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
                     Intent intent4 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent4);
                 } else {
-                    Intent intent1 = new Intent(getActivity(), BranchPhotoActivity.class);
+                    Intent intent1 = new Intent(getActivity(), DJEActivity.class);
                     startActivity(intent1);
                 }
 

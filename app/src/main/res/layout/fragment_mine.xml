@@ -53,17 +53,18 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:id="@+id/rl_ku"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/white"
                 android:layout_marginTop="10dp"
-                android:visibility="gone">
+                android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/iv_ku"
@@ -79,7 +80,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/iv_ku"
-                    android:text="我的档案信息"
+                    android:text="学习计划"
                     android:textColor="@color/gray3"
                     android:textSize="13sp" />
 
@@ -96,8 +97,8 @@
                 android:id="@+id/rl_photo"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/white"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/iv_photo"
@@ -113,7 +114,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/iv_photo"
-                    android:text="支部照片"
+                    android:text="支部活动"
                     android:textColor="@color/gray3"
                     android:textSize="13sp" />
 
@@ -130,8 +131,8 @@
                 android:id="@+id/rl_manager"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/white"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/iv_manager"
@@ -164,8 +165,8 @@
                 android:id="@+id/rl_user"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/white"
                 android:layout_marginTop="8dp"
+                android:background="@color/white"
                 android:visibility="gone">
 
                 <ImageView
@@ -199,8 +200,8 @@
                 android:id="@+id/rl_course"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/white"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/iv_course"
@@ -233,8 +234,8 @@
                 android:id="@+id/rl_score"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/white"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/iv_score"
@@ -262,12 +263,13 @@
                     android:layout_marginRight="22dp"
                     android:visibility="gone" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rl_psw"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/white"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/iv_psw"
@@ -295,6 +297,7 @@
                     android:layout_marginRight="22dp"
                     android:visibility="gone" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rl_spec"
                 android:layout_width="match_parent"

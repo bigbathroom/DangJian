@@ -15,6 +15,7 @@ import com.fw.dangjian.bean.HomeBean;
 import com.fw.dangjian.bean.IdentifyCode;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.LoginBean;
+import com.fw.dangjian.bean.MeetBean;
 import com.fw.dangjian.bean.MineBean;
 import com.fw.dangjian.bean.MoneyBean;
 import com.fw.dangjian.bean.NoteBean;
@@ -126,7 +127,7 @@ public interface AppService {
 
     //互动接口
     @GET(Constants.ACTION_LIST)
-    Observable<ActionBean> getAction(@Query("pageNum") int pageNum);
+    Observable<ActionBean> getAction(@Header("managerid") int managerid,@Query("pageNum") int pageNum);
 
     //在线竞答
     @GET(Constants.QUIZ + "{squareid}/")
@@ -243,7 +244,9 @@ public interface AppService {
     //大事记
     @GET(Constants.BOOK)
     Observable<BookBean> getBook(@Query("pageNum") int pageNum);
-
+    //会议纪要
+    @GET(Constants.MEET)
+    Observable<MeetBean> getMeeting(@Query("pageNum") int pageNum);
     //照片墙
     @GET(Constants.PHOTOWALL)
     Observable<WaterBean> getWater(@Query("pageNum") int pageNum, @Query("managerid") int managerid);
@@ -263,7 +266,6 @@ public interface AppService {
     //获取所有笔记
     @GET(Constants.GET_ALL_NOTE)
     Observable<AllNoteBean> getAllNote(@Header("managerid") int managerid);
-
 
 }
 

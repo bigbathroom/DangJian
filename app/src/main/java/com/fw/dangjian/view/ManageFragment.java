@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.fw.dangjian.R;
 import com.fw.dangjian.adapter.DataBookAdapter1;
 import com.fw.dangjian.base.BaseFragment;
-import com.fw.dangjian.bean.BookBean;
+import com.fw.dangjian.bean.MeetBean;
 import com.fw.dangjian.mvpView.BookMvpView;
 import com.fw.dangjian.presenter.BookPresenter;
 import com.fw.dangjian.util.ToastUtils;
@@ -36,9 +36,10 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
 
     DataBookAdapter1 adapter;
     private BookPresenter bookPresenter;
-    private List<BookBean.ResultBean.PageInfoBean.ListBean> lists;
+//    private List<BookBean.ResultBean.PageInfoBean.ListBean> lists;
     int page = 1;
     private int refreshTime = 0;
+    private List<MeetBean.ResultBean.PageInfoBean.ListBean> lists;
 
     @Override
     protected View fillView() {
@@ -47,7 +48,7 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
 
     @Override
     protected void initUi() {
-        tv_title.setText("大事记");
+        tv_title.setText("会议纪要");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -95,7 +96,8 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
 
     private void requestServer(int page) {
 
-        bookPresenter.getBookPage(page, this);
+//        bookPresenter.getBookPage(page, this);
+        bookPresenter.getMeetingPage(page, this);
     }
 
     private void initAdapterClike() {
@@ -104,9 +106,10 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
             @Override
             public void onItemClick(View view, int position) {
 
-                Intent intent = new Intent(getActivity(), WorkInfoActivity.class);
-                intent.putExtra("news_id", lists.get(position-1).id);
-                intent.putExtra("title", "大事记");
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("id", lists.get(position-1).id);
+                intent.putExtra("flag_id", 200);
+                intent.putExtra("title", "会议纪要");
                 startActivity(intent);
             }
         });
@@ -120,7 +123,7 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
 
 
     @Override
-    public void onGetDataNext(BookBean djeBean) {
+    public void onGetDataNext(MeetBean djeBean) {
 
         if (djeBean.result_code != null && djeBean.result_code.equals("200")) {
             if (djeBean.result.pageInfo.list.size() > 0) {

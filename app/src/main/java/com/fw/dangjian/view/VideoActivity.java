@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -198,8 +199,31 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 if (managerId == -1) {
                     startActivity(new Intent(this, LoginActivity.class));
                 } else {
-
                     videoInfoPresenter.getNote(managerId,studyId);
+//                    ToastUtils.show(this, ""+studyId, Toast.LENGTH_SHORT);
+
+                    new Handler().postDelayed(new Runnable(){
+                        public void run() {
+                            bookDialog = new BookDialog(VideoActivity.this,content);
+                            bookDialog.show();
+                            bookDialog.setOnCommitListener(new BookDialog.OnCommitListener() {
+                                @Override
+                                public void onCommit(EditText et, View v) {
+                                    String s = et.getText().toString();
+                                    if (TextUtils.isEmpty(s)) {
+                                        ToastUtils.show(VideoActivity.this, "请先输入笔记", Toast.LENGTH_SHORT);
+                                    }
+
+                                    if(noteId == -1){
+                                        videoInfoPresenter.submitNote(managerId,studyId,s);
+                                    }else{
+                                        videoInfoPresenter.changeNote(managerId,noteId,s);
+                                    }
+
+                                }
+                            });
+                        }
+                    }, 500);
                 }
 
 
@@ -338,28 +362,14 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     @Override
     public void onGetNoteNext(NoteBean kongBean) {
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
-            content = kongBean.result.content;
-            noteId = kongBean.result.id;
-            bookDialog = new BookDialog(this,content);
-            bookDialog.show();
-            bookDialog.setOnCommitListener(new BookDialog.OnCommitListener() {
-                @Override
-                public void onCommit(EditText et, View v) {
-                    String s = et.getText().toString();
-                    if (TextUtils.isEmpty(s)) {
-                        ToastUtils.show(VideoActivity.this, "请先输入笔记", Toast.LENGTH_SHORT);
-                    }
 
-                    if(noteId == -1){
-                        videoInfoPresenter.submitNote(managerId,studyId,s);
-                    }else{
-                        videoInfoPresenter.changeNote(managerId,noteId,s);
-                    }
+            if(kongBean.result!=null){
+                content = kongBean.result.content;
+                noteId = kongBean.result.id;
+            }
 
-                }
-            });
         } else {
-            ToastUtils.show(this, "获取笔记失败", Toast.LENGTH_SHORT);
+//            ToastUtils.show(this, "获取笔记失败", Toast.LENGTH_SHORT);
         }
     }
 

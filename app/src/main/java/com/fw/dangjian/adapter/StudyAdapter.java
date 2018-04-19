@@ -53,7 +53,7 @@ public interface onItemClickLitener {
         Glide.with(context).load(lists.get(position).cover_url).into(holder.iv_goods);
         holder.tv_title.setText(lists.get(position).post_title);
         holder.tv_name.setText(lists.get(position).post_source);
-
+        holder.tv_time.setText(lists.get(position).post_date);
         if (monItemClickLitener != null) {
 
             holder.rlGoods.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,8 @@ static class ViewHolder extends RecyclerView.ViewHolder {
     TextView tv_title;
     @BindView(R.id.tv_name)
     TextView tv_name;
-
+    @BindView(R.id.tv_time)
+    TextView tv_time;
 
     ViewHolder(View view) {
         super(view);

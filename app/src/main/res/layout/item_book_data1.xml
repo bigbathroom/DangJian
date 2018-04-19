@@ -31,9 +31,21 @@
             android:padding="15dp">
 
             <TextView
+                android:id="@+id/show_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/image"
+                android:textSize="15sp"
+                android:text="主持人："
+                android:textStyle="bold"
+                android:textColor="@color/gray3"
+                android:ellipsize="end" />
+            <TextView
                 android:id="@+id/show_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/show_name"
+                android:layout_marginTop="10dp"
                 android:layout_toLeftOf="@id/image"
                 android:textSize="15sp"
                 android:text="新华社北京新华社北京新华社北京新华社北京"

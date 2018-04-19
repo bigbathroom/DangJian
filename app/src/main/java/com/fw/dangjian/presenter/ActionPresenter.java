@@ -17,9 +17,9 @@ import rx.Subscriber;
 public class ActionPresenter extends BasePresenter {
 
 
-   public void getActionPage(int pageNum, final ActionMvpView actionMvpView) {
+   public void getActionPage(int managerid,int pageNum, final ActionMvpView actionMvpView) {
 
-        retrofitHelper.toSubscribe(req.getAction(pageNum), new Subscriber<ActionBean>() {
+        retrofitHelper.toSubscribe(req.getAction(managerid,pageNum), new Subscriber<ActionBean>() {
             @Override
             public void onCompleted() {
                 Log.d("000000", "onCompleted");

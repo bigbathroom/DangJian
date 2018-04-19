@@ -172,7 +172,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".view.CourseActivity" />
         <activity android:name=".view.ScoreActivity" />
-        <activity android:name=".view.TotalScoreActivity"></activity>
+        <activity android:name=".view.TotalScoreActivity" />
+        <activity android:name=".view.WebActivity"></activity>
     </application>
 
 </manifest>

@@ -393,8 +393,6 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
         if (submitBean.result_code != null && submitBean.result_code.equals("200")) {
 
-
-
           /*  resultDialog = new ResultDialog(this, R.style.MyDarkDialog, "", "") {
                 @Override
                 public void confirm() {
@@ -403,10 +401,11 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
                 }
             };
             resultDialog.show();*/
+
             Intent intent = new Intent(this,ScoreActivity.class);
             intent.putExtra("testId",squareId);
-           startActivity(intent);
-           finish();
+            startActivityForResult(intent,30);
+
         } else {
             Toast.makeText(this, submitBean.result_msg, Toast.LENGTH_SHORT).show();
         }
@@ -522,6 +521,16 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
         super.onDestroy();
         if (timer != null) {
             timer.cancel();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 30){
+            if(resultCode == 10){
+                setResult(40);
+                finish();
+            }
         }
     }
 }

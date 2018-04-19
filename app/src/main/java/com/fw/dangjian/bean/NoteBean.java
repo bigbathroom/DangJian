@@ -6,8 +6,9 @@ package com.fw.dangjian.bean;
 
 public class NoteBean {
 
+
     /**
-     * result : {"id":7,"managerid":10,"postId":135,"addtime":"2018-04-17 18:01:43","content":"哈哈哈哈"}
+     * result : {"id":9,"managerid":10,"postId":135,"addtime":"2018-04-17 20:28:12","content":"坎坎坷坷哈"}
      * result_msg : 请求成功！
      * result_code : 200
      */
@@ -18,11 +19,11 @@ public class NoteBean {
 
     public static class ResultBean {
         /**
-         * id : 7
+         * id : 9
          * managerid : 10
          * postId : 135
-         * addtime : 2018-04-17 18:01:43
-         * content : 哈哈哈哈
+         * addtime : 2018-04-17 20:28:12
+         * content : 坎坎坷坷哈
          */
 
         public int id;

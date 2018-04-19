@@ -52,7 +52,7 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
     @Override
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
-        tv_title.setText("党建e连心");
+        tv_title.setText("支部活动");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -111,7 +111,7 @@ public class DJEActivity extends BaseActivity implements DJEMvpView{
 
                 Intent intent = new Intent(DJEActivity.this,WorkInfoActivity.class);
                 intent.putExtra("news_id",lists.get(position-1).id);
-                intent.putExtra("title","党建e连心");
+                intent.putExtra("title","支部活动");
                 startActivity(intent);
             }
         });

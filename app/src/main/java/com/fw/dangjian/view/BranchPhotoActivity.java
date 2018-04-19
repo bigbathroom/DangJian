@@ -58,7 +58,7 @@ public class BranchPhotoActivity extends BaseActivity implements BranchMvpView{
     @Override
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
-        tv_title.setText("支部照片墙");
+        tv_title.setText("党建e连心");
 
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
 

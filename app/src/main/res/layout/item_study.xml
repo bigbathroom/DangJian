@@ -65,14 +65,30 @@
                 android:textSize="13sp" />
 
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="新华社记者李刚摄"
-                android:textColor="@color/gray9"
-                android:textSize="12sp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="新华社记者李刚摄"
+                    android:textColor="@color/gray9"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2018-09"
+                    android:textColor="@color/gray9"
+                    android:textSize="12sp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+
 
         </LinearLayout>
 

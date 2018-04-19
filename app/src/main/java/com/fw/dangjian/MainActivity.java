@@ -11,7 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.fw.dangjian.base.BaseFragment;
 import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
 import com.fw.dangjian.view.ActionFragment;
@@ -69,9 +68,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         act = this;
-
+        SPUtils.put(this, ConstanceValue.IS_FIRST_START,"true");
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
         MyApplication.getInstance().addActivity(this);
+
         fragmentManager = getSupportFragmentManager();
         if (savedInstanceState != null) {
             //读取上一次界面Save的时候tab选中的状态
@@ -83,33 +83,28 @@ public class MainActivity extends AppCompatActivity {
             mineFragment = (MineFragment) fragmentManager.findFragmentByTag(FRAGMENT_TAG[4]);
         }
 
-        initlistener();
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             selindex = extras.getInt("index", 0);
         }
-        showFragment(selindex);
 
-        if (selindex == 0){
-            rd_home.setChecked(true);
-        }else if (selindex == 1){
-            rd_action.setChecked(true);
-        }else if (selindex == 2){
-            rd_study.setChecked(true);
-        }else if (selindex == 3){
-            rd_manage.setChecked(true);
-        }else{
-            rd_home.setChecked(true);
-        }
+        initlistener();
 
-
-
-
-        SPUtils.put(this, ConstanceValue.IS_FIRST_START,"true");
     }
     private void initlistener() {
-        menu_group.check(R.id.rd_home);
+        if (selindex == 0){
+            menu_group.check(R.id.rd_home);
+        }else if (selindex == 1){
+            menu_group.check(R.id.rd_action);
+        }else if (selindex == 2){
+            menu_group.check(R.id.rd_study);
+        }else if (selindex == 3){
+            menu_group.check(R.id.rd_manage);
+        }else if (selindex == 4){
+            menu_group.check(R.id.rd_mine);
+        }
+        showFragment(selindex);
+
         menu_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -131,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                         showFragment(3);
                         break;
                     case R.id.rd_mine:
+
                         if (managerId == -1) {
                             startActivity(new Intent(MainActivity.this,LoginActivity.class));
                             if (flag == 1){
@@ -198,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                     manageFragment = new ManageFragment();
                     ft.add(R.id.frame, manageFragment, FRAGMENT_TAG[i]);
                 }
+
                 break;
             case 4:
 //                StatusBarUtil.setColor(act,color_mine , 0);
@@ -207,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                     mineFragment = new MineFragment();
                     ft.add(R.id.frame, mineFragment, FRAGMENT_TAG[i]);
                 }
+
                 break;
 
         }
@@ -232,13 +230,6 @@ public class MainActivity extends AppCompatActivity {
         //保存tab选中的状态
         outState.putInt(PRV_SELINDEX, selindex);
         super.onSaveInstanceState(outState);
-    }
-
-    public void changeRadioButton(int checkedId, BaseFragment fragment, int i) {
-        menu_group.check(checkedId);
-//        StatusBarUtil.setColor(act, color, alpha);
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.add(R.id.frame, fragment, FRAGMENT_TAG[i]);
     }
 
     public void onResume() {

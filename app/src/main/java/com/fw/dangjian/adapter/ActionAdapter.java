@@ -61,7 +61,12 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         holder.tv_time.setText("学时:" + lists.get(position).square_time + "分钟");
 
 
-        if (lists.get(position).state != null && lists.get(position).state.equals("1")) {
+        if (lists.get(position).state == null) {
+
+            holder.tv_title.setTextColor(context.getResources().getColor(R.color.gray3));
+            holder.tv_again.setVisibility(View.GONE);
+
+        } else {
             holder.tv_title.setTextColor(context.getResources().getColor(R.color.gray9));
 
             holder.tv_again.setVisibility(View.VISIBLE);
@@ -74,9 +79,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     context.startActivity(intent);
                 }
             });
-        } else {
-            holder.tv_title.setTextColor(context.getResources().getColor(R.color.gray3));
-            holder.tv_again.setVisibility(View.GONE);
+
         }
 
 

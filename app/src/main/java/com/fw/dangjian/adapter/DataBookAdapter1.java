@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
-import com.fw.dangjian.bean.BookBean;
+import com.fw.dangjian.bean.MeetBean;
 
 import java.util.List;
 
@@ -21,12 +21,12 @@ import butterknife.ButterKnife;
  */
 
 public class DataBookAdapter1 extends RecyclerView.Adapter<DataBookAdapter1.ViewHolder> {
-    private List<BookBean.ResultBean.PageInfoBean.ListBean> lists;
+    private List<MeetBean.ResultBean.PageInfoBean.ListBean> lists;
     private Context context;
     private onItemClickLitener monItemClickLitener;
 
 
-    public DataBookAdapter1(List<BookBean.ResultBean.PageInfoBean.ListBean> lists, Context context) {
+    public DataBookAdapter1(List<MeetBean.ResultBean.PageInfoBean.ListBean> lists, Context context) {
         this.lists = lists;
         this.context = context;
     }
@@ -49,8 +49,9 @@ public class DataBookAdapter1 extends RecyclerView.Adapter<DataBookAdapter1.View
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.show_title.setText(lists.get(position).post_title);
-            holder.show_time.setText(lists.get(position).post_date);
+            holder.show_name.setText("主持人："+lists.get(position).meeting_author);
+            holder.show_title.setText(lists.get(position).post_excerpt);
+            holder.show_time.setText(lists.get(position).meeting_date_gmt);
 
         if (monItemClickLitener != null) {
 
@@ -75,6 +76,8 @@ public class DataBookAdapter1 extends RecyclerView.Adapter<DataBookAdapter1.View
 
         @BindView(R.id.rl_goods)
         RelativeLayout rlGoods;
+        @BindView(R.id.show_name)
+        TextView show_name;
         @BindView(R.id.show_title)
         TextView show_title;
         @BindView(R.id.show_time)

@@ -90,19 +90,19 @@ public class VideoInfoPresenter extends BasePresenter {
         retrofitHelper.toSubscribe(req.getNote(managerid,comment_postid), new Subscriber<NoteBean>() {
             @Override
             public void onCompleted() {
-                Log.d("000000","loginonCompleted");
+                Log.d("000000","NoteCompleted");
                 mvpView.onGetDataCompleted();
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d("000000", "loginononError");
+                Log.d("000000", "NoteError");
                 mvpView.onGetDataError(e);
             }
 
             @Override
             public void onNext(NoteBean user) {
-                Log.d("000000", "loginononNext");
+                Log.d("000000", "NoteNext");
                 mvpView.onGetNoteNext(user);
             }
         });

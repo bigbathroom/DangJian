@@ -59,7 +59,6 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
 
         scorePresenter = new ScorePresenter(this);
         scorePresenter.GetResult(managerId,testId);
-//        Toast.makeText(this, ""+testId, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -104,15 +103,11 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.left:
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("index", 1);
-                startActivity(intent);
+                setResult(10);
                 finish();
                 break;
             case R.id.test_again:
-                Intent intent1 = new Intent(this, MainActivity.class);
-                intent1.putExtra("index", 1);
-                startActivity(intent1);
+                setResult(10);
                 finish();
                 break;
         }

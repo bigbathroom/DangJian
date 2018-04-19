@@ -79,6 +79,8 @@ public class Constants {
     public static final String COURSE = "article/list/";
     //获取大事记
     public static final String BOOK = "bigevent/list/";
+    //会议纪要
+    public static final String MEET = "meeting/list/";
     //照片墙
     public static final String PHOTOWALL = "branchPhotoWall";
 

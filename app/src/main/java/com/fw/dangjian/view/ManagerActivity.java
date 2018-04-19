@@ -65,7 +65,7 @@ public class ManagerActivity extends BaseActivity {
 
                 break;
             case R.id.ll1:
-                Intent intent1 = new Intent(this, DJEActivity.class);
+                Intent intent1 = new Intent(this, BranchPhotoActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.ll2:
