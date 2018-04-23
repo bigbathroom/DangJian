@@ -70,7 +70,7 @@ public class ActionFragment extends BaseFragment implements ActionMvpView {
 
         handler = new MyHandler();
         actionPresenter = new ActionPresenter();
-        ToastUtils.showShort(getActivity(), ""+managerId, false);
+//        ToastUtils.showShort(getActivity(), ""+managerId, false);
 
     }
 

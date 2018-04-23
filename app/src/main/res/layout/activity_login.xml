@@ -5,21 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@mipmap/bg_login"
     tools:context="com.fw.dangjian.view.LoginActivity">
 
-    <include
-        layout="@layout/head_title"></include>
+    <RelativeLayout
+        android:id="@+id/left"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        >
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/back"
+            />
+    </RelativeLayout>
+
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout3"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/toolbar"
+        android:layout_height="45dp"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/white"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@color/toolbar"
+        app:tabSelectedTextColor="@color/toolbar"
+        app:tabTextColor="@color/gray9"
         app:tabTextAppearance="@style/TabLayoutTextStyle"
+        android:layout_marginTop="190dp"
         />
 
 

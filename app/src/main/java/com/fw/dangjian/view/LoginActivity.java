@@ -2,28 +2,29 @@ package com.fw.dangjian.view;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import com.fw.dangjian.MyApplication;
 import com.fw.dangjian.R;
-import com.fw.dangjian.base.BaseActivity;
+import com.jaeger.library.StatusBarUtil;
 import com.umeng.socialize.UMShareAPI;
 
 import java.lang.reflect.Field;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity {
-    @BindView(R.id.tv_title)
-    TextView tv_title;
+public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.left)
     RelativeLayout left;
 
@@ -38,18 +39,18 @@ public class LoginActivity extends BaseActivity {
     private int index = 0;
 
     @Override
-    protected int fillView() {
-        return R.layout.activity_login;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        MyApplication.getInstance().addActivity(this);
+        ButterKnife.bind(this);
+        StatusBarUtil.setTranslucent(this, 15);
+        initData();
     }
 
-    @Override
-    protected void initUi() {
-        left.setVisibility(View.VISIBLE);
-        tv_title.setText("登录");
-    }
 
-    @Override
-    protected void initData() {
+
+    public void initData() {
 
         tablayout.post(new Runnable() {
             @Override
@@ -100,26 +101,6 @@ public class LoginActivity extends BaseActivity {
 
         vp.setCurrentItem(index);
 
-        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (position == 0){
-                    tv_title.setText("登录");
-                }else if(position == 1){
-                    tv_title.setText("注册");
-                }
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     public void setIndicator(TabLayout tabs, int leftDip, int rightDip) {

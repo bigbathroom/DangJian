@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg_login"
+    android:background="#F3EBD5"
     android:id="@+id/main_ll"
     tools:context="com.fw.dangjian.view.LoginFragment">
 
@@ -15,7 +15,7 @@
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="210dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/shape_edit"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"

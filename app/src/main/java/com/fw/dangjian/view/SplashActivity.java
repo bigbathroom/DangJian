@@ -1,25 +1,38 @@
 package com.fw.dangjian.view;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 
 import com.fw.dangjian.MainActivity;
+import com.fw.dangjian.MyApplication;
 import com.fw.dangjian.R;
-import com.fw.dangjian.base.BaseActivity;
 import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
+import com.jaeger.library.StatusBarUtil;
 
-public class SplashActivity extends BaseActivity {
+import butterknife.ButterKnife;
+
+public class SplashActivity extends AppCompatActivity {
 
     private boolean isFirst=true;
-    @Override
-    protected int fillView() {
-        return R.layout.activity_splash;
-    }
 
     @Override
-    protected void initUi() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        MyApplication.getInstance().addActivity(this);
+        ButterKnife.bind(this);
+        StatusBarUtil.setTranslucent(this, 15);
+        initUi();
+        initData();
+    }
+
+
+    public void initUi() {
+
         isFirst=getIsFirst();
 
         new Handler(new Handler.Callback() {
@@ -42,8 +55,7 @@ public class SplashActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void initData() {
+    public void initData() {
 
     }
 

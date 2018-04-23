@@ -251,7 +251,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/iv_score"
-                    android:text="我的成绩单"
+                    android:text="成绩单"
                     android:textColor="@color/gray3"
                     android:textSize="13sp" />
 

@@ -48,7 +48,7 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
 
     @Override
     protected void initUi() {
-        tv_title.setText("会议纪要");
+        tv_title.setText("会议");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -109,7 +109,7 @@ public class ManageFragment extends BaseFragment implements BookMvpView{
                 Intent intent = new Intent(getActivity(), WebActivity.class);
                 intent.putExtra("id", lists.get(position-1).id);
                 intent.putExtra("flag_id", 200);
-                intent.putExtra("title", "会议纪要");
+                intent.putExtra("title", "会议详情");
                 startActivity(intent);
             }
         });

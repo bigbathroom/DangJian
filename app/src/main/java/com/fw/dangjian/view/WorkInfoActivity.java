@@ -317,4 +317,10 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
         }
     };
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        wv.removeAllViews();
+        wv.destroy();
+    }
 }
