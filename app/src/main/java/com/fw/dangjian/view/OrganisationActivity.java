@@ -3,25 +3,20 @@ package com.fw.dangjian.view;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fw.dangjian.R;
-import com.fw.dangjian.adapter.CourseAdapter;
+import com.fw.dangjian.adapter.OrgansitionAdapter;
 import com.fw.dangjian.base.BaseActivity;
 import com.fw.dangjian.bean.AllNoteBean;
-import com.fw.dangjian.bean.KongBean;
-import com.fw.dangjian.dialog.BookDialog;
-import com.fw.dangjian.mvpView.AllNoteMvpView;
+import com.fw.dangjian.bean.OrganisationBean;
+import com.fw.dangjian.mvpView.OrganisationMvpView;
 import com.fw.dangjian.presenter.UserPresenter;
 import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
-import com.fw.dangjian.util.ToastUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -30,7 +25,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CourseActivity extends BaseActivity implements AllNoteMvpView{
+public class OrganisationActivity extends BaseActivity implements OrganisationMvpView {
+
     @BindView(R.id.left)
     RelativeLayout left;
     @BindView(R.id.tv_title)
@@ -44,25 +40,28 @@ public class CourseActivity extends BaseActivity implements AllNoteMvpView{
     @BindView(R.id.no_net)
     LinearLayout linearLayout_no_net;
 
+
     UserPresenter userPresenter;
     int page = 1;
 
-    private CourseAdapter mAdapter;
+    private OrgansitionAdapter mAdapter;
     private int refreshTime = 0;
     private MyHandler handler;
     private List<AllNoteBean.ResultBean> lists;
     int managerId;
-    BookDialog  bookDialog;
+
+
     @Override
     protected int fillView() {
-        return R.layout.activity_course;
+        return R.layout.activity_organisation;
     }
 
     @Override
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
-        tv_title.setText("我的笔记");
+        tv_title.setText("组织架构");
         userPresenter = new UserPresenter();
+
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -70,7 +69,6 @@ public class CourseActivity extends BaseActivity implements AllNoteMvpView{
         nrecycler.setLayoutManager(layoutManager);
 
         handler = new MyHandler();
-
     }
 
     @Override
@@ -80,8 +78,8 @@ public class CourseActivity extends BaseActivity implements AllNoteMvpView{
         nrecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                refreshTime ++;
-                new Handler().postDelayed(new Runnable(){
+                refreshTime++;
+                new Handler().postDelayed(new Runnable() {
                     public void run() {
                         page = 1;
                         requestServer(page);
@@ -92,56 +90,34 @@ public class CourseActivity extends BaseActivity implements AllNoteMvpView{
 
             @Override
             public void onLoadMore() {
-                new Handler().postDelayed(new Runnable(){
+                new Handler().postDelayed(new Runnable() {
                     public void run() {
                         page++;
                         requestServer(page);
                     }
                 }, 200);
 
-            }
+           }
         });
 
-        mAdapter = new CourseAdapter(lists, this);
+        mAdapter = new OrgansitionAdapter(lists, this);
         nrecycler.setAdapter(mAdapter);
         initAdapterClike();
     }
 
 
     private void initAdapterClike() {
-        mAdapter.setonItemClickLitener(new CourseAdapter.onItemClickLitener() {
-
-            private int id;
-
+        mAdapter.setonItemClickLitener(new OrgansitionAdapter.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
 
-                id = lists.get(position - 1).id;
-                bookDialog = new BookDialog(CourseActivity.this,lists.get(position-1).content);
-                bookDialog.show();
-                bookDialog.setOnCommitListener(new BookDialog.OnCommitListener() {
-                    @Override
-                    public void onCommit(EditText et, View v) {
-                        String s = et.getText().toString();
-                        if (TextUtils.isEmpty(s)) {
-                            ToastUtils.show(CourseActivity.this, "请先输入笔记", Toast.LENGTH_SHORT);
-                        }else{
-                            changeNote(s,id);
-                        }
-                    }
-                });
             }
         });
 
     }
 
-
-    private void changeNote(String s,int id) {
-//        ToastUtils.show(CourseActivity.this, "managerId"+managerId+"ID"+id, Toast.LENGTH_SHORT);
-        userPresenter.changeNote(managerId,id,s,this);
-    }
     private void requestServer(int page) {
-        userPresenter.getTotalNote(managerId,this);
+        userPresenter.getOrgansition(managerId,page, this);
     }
 
 
@@ -154,49 +130,37 @@ public class CourseActivity extends BaseActivity implements AllNoteMvpView{
         }
     }
 
+
     @Override
-    public void onGetDataNext(AllNoteBean noteBean) {
-         if (noteBean.result_code != null && noteBean.result_code.equals("200")){
-             if(noteBean.result.size()>0){
-                switch (page) {
-                    case 1:
-                        lists.clear();
-                        lists.addAll(noteBean.result);
-                        break;
-                    default:
-                        lists.addAll(noteBean.result);
-                        break;
-                }
-                handler.sendEmptyMessageDelayed(1, 500);
-            }else{
-                switch (page) {
-                    case 1:
-                        lists.clear();
-                        handler.sendEmptyMessageDelayed(2, 500);
-                        break;
-                    default:
-                        ToastUtils.showShort(this, "没有更多数据", false);
-                        page--;
-                        handler.sendEmptyMessageDelayed(1, 500);
-                        break;
-                }
+    public void onGetDataNext(OrganisationBean noteBean) {
+       /* if (noteBean.result_code != null && noteBean.result_code.equals("200")){
+        if(noteBean.result.size()>0){
+            switch (page) {
+                case 1:
+                    lists.clear();
+                    lists.addAll(noteBean.result);
+                    break;
+                default:
+                    lists.addAll(noteBean.result);
+                    break;
             }
+            handler.sendEmptyMessageDelayed(1, 500);
         }else{
-            handler.sendEmptyMessageDelayed(3, 500);
+            switch (page) {
+                case 1:
+                    lists.clear();
+                    handler.sendEmptyMessageDelayed(2, 500);
+                    break;
+                default:
+                    ToastUtils.showShort(this, "没有更多数据", false);
+                    page--;
+                    handler.sendEmptyMessageDelayed(1, 500);
+                    break;
+            }
         }
-    }
-
-
-    @Override
-    public void onNoteNext(KongBean kongBean) {
-        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
-            bookDialog.dismiss();
-            requestServer(1);
-            ToastUtils.show(this, "提交成功", Toast.LENGTH_SHORT);
-        } else {
-            ToastUtils.show(this, "提交失败", Toast.LENGTH_SHORT);
-        }
-
+    }else{
+        handler.sendEmptyMessageDelayed(3, 500);
+    }*/
     }
 
     class MyHandler extends Handler {

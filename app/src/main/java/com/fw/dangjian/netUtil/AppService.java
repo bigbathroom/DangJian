@@ -19,6 +19,7 @@ import com.fw.dangjian.bean.MeetBean;
 import com.fw.dangjian.bean.MineBean;
 import com.fw.dangjian.bean.MoneyBean;
 import com.fw.dangjian.bean.NoteBean;
+import com.fw.dangjian.bean.OrganisationBean;
 import com.fw.dangjian.bean.QuizBean;
 import com.fw.dangjian.bean.RegistBean;
 import com.fw.dangjian.bean.ScoreBean;
@@ -266,6 +267,16 @@ public interface AppService {
     //获取所有笔记
     @GET(Constants.GET_ALL_NOTE)
     Observable<AllNoteBean> getAllNote(@Header("managerid") int managerid);
+
+    //修改我的我的笔记
+    @FormUrlEncoded
+    @POST(Constants.changeMyNote)
+    Observable<KongBean> changeMyNote(@Header("managerid") int managerid,
+                                       @Field("id") int id,
+                                       @Query("content") String content);
+    //获取所有组织架构
+    @GET(Constants.ORGANISITION)
+    Observable<OrganisationBean> getOrgansition(@Header("managerid") int managerid,@Query("pageNum") int pageNum);
 
 }
 

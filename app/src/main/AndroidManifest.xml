@@ -173,7 +173,8 @@
         <activity android:name=".view.CourseActivity" />
         <activity android:name=".view.ScoreActivity" />
         <activity android:name=".view.TotalScoreActivity" />
-        <activity android:name=".view.WebActivity"></activity>
+        <activity android:name=".view.WebActivity" />
+        <activity android:name=".view.OrganisationActivity"></activity>
     </application>
 
 </manifest>

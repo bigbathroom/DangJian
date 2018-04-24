@@ -6,9 +6,11 @@ import com.fw.dangjian.base.BasePresenter;
 import com.fw.dangjian.bean.AllNoteBean;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.MineBean;
+import com.fw.dangjian.bean.OrganisationBean;
 import com.fw.dangjian.bean.TotalScoreBean;
 import com.fw.dangjian.mvpView.AllNoteMvpView;
 import com.fw.dangjian.mvpView.ChangeNameMvpView;
+import com.fw.dangjian.mvpView.OrganisationMvpView;
 import com.fw.dangjian.mvpView.PutPasswordMvpView;
 import com.fw.dangjian.mvpView.TotalScoreMvpView;
 import com.fw.dangjian.mvpView.UserCenterMvpView;
@@ -161,6 +163,51 @@ public class UserPresenter extends BasePresenter {
 
             @Override
             public void onNext(AllNoteBean userProfile) {
+                Log.d("000000", "onNext " + userProfile);
+                userCenterMvpView.onGetDataNext(userProfile);
+            }
+        });
+    }
+
+    public void changeNote(int managerid,int Id,String content,final AllNoteMvpView mvpView) {
+        retrofitHelper.toSubscribe(req.changeMyNote(managerid,Id,content), new Subscriber<KongBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000","loginonCompleted");
+                mvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "loginononError");
+                mvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(KongBean user) {
+                Log.d("000000", "loginononNext");
+                mvpView.onNoteNext(user);
+            }
+        });
+    }
+
+
+    public void getOrgansition(int managerid, int page,final OrganisationMvpView userCenterMvpView) {
+        retrofitHelper.toSubscribe(req.getOrgansition(managerid,page), new Subscriber<OrganisationBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000", "onCompleted");
+                userCenterMvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "onError");
+                userCenterMvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(OrganisationBean userProfile) {
                 Log.d("000000", "onNext " + userProfile);
                 userCenterMvpView.onGetDataNext(userProfile);
             }

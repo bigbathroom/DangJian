@@ -91,5 +91,9 @@ public class Constants {
     //获取单个笔记
     public static final String GET_NOTE ="slender/learn/getNote/";
     //获取所有笔记
-    public static final String GET_ALL_NOTE ="slender/learn/getNotes/";
+    public static final String GET_ALL_NOTE ="slender/learn/getMeetingNotes/";
+    //修改我的我的笔记
+    public static final String changeMyNote ="slender/learn/meetingNote/";
+    //获取组织架构
+    public static final String ORGANISITION ="";
 }

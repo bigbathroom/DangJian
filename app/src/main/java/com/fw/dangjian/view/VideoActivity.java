@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -81,6 +80,16 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     @BindView(R.id.rl_comment)
     RelativeLayout rl_comment;
 
+    @BindView(R.id.rl_book)
+    RelativeLayout rl_book;
+    @BindView(R.id.et_biji)
+    EditText et_biji;
+    @BindView(R.id.tv_cancle)
+    TextView tv_cancle;
+    @BindView(R.id.tv_sure)
+    TextView tv_sure;
+
+
     private PingLunAdapter mAdapter;
     private int count = 0;
     private VideoInfoPresenter videoInfoPresenter;
@@ -141,7 +150,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
         });
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_introduce, R.id.iv_comment, R.id.book,R.id.iv_praise, R.id.iv_share, R.id.tv_comment, R.id.rl_comment})
+    @OnClick({R.id.iv_back, R.id.tv_introduce, R.id.iv_comment, R.id.book,R.id.iv_praise, R.id.iv_share, R.id.tv_comment, R.id.rl_comment, R.id.tv_cancle, R.id.tv_sure})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -220,9 +229,10 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                     startActivity(new Intent(this, LoginActivity.class));
                 } else {
                     videoInfoPresenter.getNote(managerId,studyId);
-//                    ToastUtils.show(this, ""+studyId, Toast.LENGTH_SHORT);
 
-                    new Handler().postDelayed(new Runnable(){
+                    rl_book.setVisibility(View.VISIBLE);
+
+                   /* new Handler().postDelayed(new Runnable(){
                         public void run() {
                             bookDialog = new BookDialog(VideoActivity.this,content);
                             bookDialog.show();
@@ -247,9 +257,30 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                                 }
                             });
                         }
-                    }, 500);
+                    }, 500);*/
                 }
+                break;
 
+            case R.id.tv_cancle:
+                et_biji.setText("");
+                rl_book.setVisibility(View.GONE);
+
+                break;
+            case R.id.tv_sure:
+
+                String s = et_biji.getText().toString();
+
+                if (TextUtils.isEmpty(s)) {
+                    ToastUtils.show(VideoActivity.this, "请先输入笔记", Toast.LENGTH_SHORT);
+                }else{
+
+                    if(noteId == -1||noteId == 0){
+                        videoInfoPresenter.submitNote(managerId,studyId,s);
+                    }else{
+                        videoInfoPresenter.changeNote(managerId,noteId,s);
+                    }
+
+                }
 
                 break;
         }
@@ -261,6 +292,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
             if(kongBean.result!=null){
                 content = kongBean.result.content;
                 noteId = kongBean.result.id;
+                et_biji.setText(content);
             }
         } else {
 //            ToastUtils.show(this, "获取笔记失败", Toast.LENGTH_SHORT);
@@ -367,7 +399,8 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     @Override
     public void onNoteNext(SubmitBean1 kongBean) {
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
-            bookDialog.dismiss();
+//            bookDialog.dismiss();
+            rl_book.setVisibility(View.GONE);
             ToastUtils.show(this, "提交成功", Toast.LENGTH_SHORT);
         } else {
             ToastUtils.show(this, "提交失败", Toast.LENGTH_SHORT);
