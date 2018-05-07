@@ -72,7 +72,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                 public void onClick(View view) {
                     Intent intent = new Intent(context, QuizActivity.class);
                     intent.putExtra("squareId", lists.get(position).id);
-                    intent.putExtra("times", lists.get(position).times);
+                    intent.putExtra("title", lists.get(position).square_name);
                     context.startActivity(intent);
                 }
             });

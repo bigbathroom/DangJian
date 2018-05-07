@@ -202,9 +202,11 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 web.setTitle("党建");//标题
                 web.setThumb(new UMImage(this, R.mipmap.thumb));  //缩略图
                 web.setDescription("实时发布党新闻和活动");//描述
+
                 new ShareAction(this).withMedia(web)
                         .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN_CIRCLE)
                         .setCallback(shareListener).open();
+
                 break;
         }
     }

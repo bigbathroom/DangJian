@@ -103,7 +103,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     private CountDownTimer timer;
     private Answer[] answer;
     int managerId;
-    private String times;
+    private String titles;
     private Date getDate;
     private Date endDate;
 
@@ -115,7 +115,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     @Override
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
-        tv_title.setText("在线知识竞答");
+
 
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
         answerList = new ArrayList<>();
@@ -126,12 +126,13 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
         iv_wrong.setVisibility(View.GONE);
         iv_right.setVisibility(View.GONE);
         tv_next.setEnabled(false);
-
+        tv_next.setBackgroundResource(R.drawable.bt_gray);
 
         Intent intent = getIntent();
         if (intent != null) {
             squareId = intent.getIntExtra("squareId", -1);
-            times = intent.getStringExtra("times");
+            titles = intent.getStringExtra("title");
+            tv_title.setText(titles);
 //            Toast.makeText(this, "squareId"+squareId, Toast.LENGTH_SHORT).show();
         }
         quizPersenter = new QuizPersenter(this);
@@ -199,6 +200,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
             case R.id.tv_next:
                 tv_next.setEnabled(false);
+                tv_next.setBackgroundResource(R.drawable.bt_gray);
                 rb_1.setEnabled(false);
                 rb_2.setEnabled(false);
                 rb_3.setEnabled(false);
@@ -395,7 +397,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
                             setChoiceData(allCount);
                             allCount = allCount + 1;
                         }
-                    }, 1000);
+                    }, 4000);
 
                 } else {
                     new Handler().postDelayed(new Runnable() {
@@ -404,7 +406,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
                             submitChoice();
                         }
-                    }, 1000);
+                    }, 4000);
                 }
 
                 break;
@@ -413,11 +415,13 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
     private void setEnable() {
         tv_next.setEnabled(true);
+        tv_next.setBackgroundResource(R.drawable.bt_blue);
     }
 
     private void setEnable1() {
         if (CheckBox1.isChecked() == true || CheckBox2.isChecked() == true || CheckBox3.isChecked() == true || CheckBox4.isChecked() == true || CheckBox5.isChecked() == true) {
             tv_next.setEnabled(true);
+            tv_next.setBackgroundResource(R.drawable.bt_blue);
         }
     }
 
@@ -447,7 +451,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
             getDate = new Date(System.currentTimeMillis());
 
             int time = actionBean.result.square_time;
-            startCount(time);
+//            startCount(time);
             count = actionBean.result.subject.size();
             subject = actionBean.result.subject;
 

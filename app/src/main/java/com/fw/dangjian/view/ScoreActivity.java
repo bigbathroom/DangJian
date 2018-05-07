@@ -26,8 +26,8 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
-    @BindView(R.id.score)
-    TextView score;
+    @BindView(R.id.total_score)
+    TextView total_score;
     @BindView(R.id.pecrcent)
     TextView pecrcent;
     @BindView(R.id.total_question)
@@ -78,9 +78,10 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
             nt.setMinimumFractionDigits(0);
             float result = (float)count/totleCount*100;
             tv_title.setText(scoreBean.result.square_name);
-            score.setText(scoreBean.result.score+"");
+
             pecrcent.setText((int)result+"%");
-            total_question.setText("总题："+scoreBean.result.totleCount+"");
+            total_score.setText("总分数："+scoreBean.result.score);
+            total_question.setText("总题："+scoreBean.result.totleCount);
             right_question.setText("正题："+scoreBean.result.count);
             wrong_question.setText("错题："+wrong);
         } else {

@@ -55,7 +55,7 @@ public class TotalScoreActivity extends BaseActivity implements TotalScoreMvpVie
     @Override
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
-        tv_title.setText("我的成绩单");
+        tv_title.setText("我的成绩");
 
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
 

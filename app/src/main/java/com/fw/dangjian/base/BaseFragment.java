@@ -34,13 +34,14 @@ public abstract class BaseFragment extends Fragment implements BaseMvpView{
         initFragment();
         view = fillView();
         ButterKnife.bind(this, view);
-
-
         initUi();
         initData();
 
+
         return view;
     }
+
+
     /**
      * 初始化fragment
      */

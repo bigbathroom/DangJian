@@ -1,5 +1,8 @@
 package com.fw.dangjian.view;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -7,8 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fw.dangjian.MyApplication;
 import com.fw.dangjian.R;
-import com.fw.dangjian.base.BaseActivity;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.mvpView.PutPasswordMvpView;
 import com.fw.dangjian.presenter.UserPresenter;
@@ -16,16 +19,16 @@ import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
 import com.fw.dangjian.util.StringUtils;
 import com.fw.dangjian.util.ToastUtils;
+import com.jaeger.library.StatusBarUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ResetPswActivity extends BaseActivity implements PutPasswordMvpView{
+public class ResetPswActivity extends AppCompatActivity implements PutPasswordMvpView{
 
     @BindView(R.id.left)
     RelativeLayout left;
-    @BindView(R.id.tv_title)
-    TextView tv_title;
     @BindView(R.id.et_old_psw)
     EditText et_old_psw;
     @BindView(R.id.et_again_psw)
@@ -36,22 +39,17 @@ public class ResetPswActivity extends BaseActivity implements PutPasswordMvpView
     int managerid;
 
     @Override
-    protected int fillView() {
-        return R.layout.activity_reset_psw;
-    }
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    @Override
-    protected void initUi() {
-        left.setVisibility(View.VISIBLE);
-        tv_title.setText("修改密码");
+        setContentView(R.layout.activity_reset_psw);
+        MyApplication.getInstance().addActivity(this);
+        ButterKnife.bind(this);
+        StatusBarUtil.setTranslucent(this, 15);
         managerid = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
         userPresenter = new UserPresenter();
     }
 
-    @Override
-    protected void initData() {
-
-    }
 
     @OnClick({R.id.left,R.id.tv_login})
     public void onViewClicked(View view) {
@@ -94,6 +92,16 @@ public class ResetPswActivity extends BaseActivity implements PutPasswordMvpView
             ToastUtils.show(this,"修改失败",Toast.LENGTH_SHORT);
         }
 
+
+    }
+
+    @Override
+    public void onGetDataCompleted() {
+
+    }
+
+    @Override
+    public void onGetDataError(Throwable e) {
 
     }
 }

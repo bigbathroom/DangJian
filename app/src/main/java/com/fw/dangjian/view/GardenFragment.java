@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.fw.dangjian.R;
 import com.fw.dangjian.base.BaseFragment;
@@ -16,6 +17,7 @@ public class GardenFragment extends BaseFragment {
 
     @BindView(R.id.wv)
     WebView  wv;
+
     private int managerId;
     @Override
     protected View fillView() {
@@ -32,12 +34,31 @@ public class GardenFragment extends BaseFragment {
     @Override
     protected void initUi() {
         managerId = (int) SPUtils.get(getActivity(), ConstanceValue.LOGIN_TOKEN, -1);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         WebSettings webSettings = wv.getSettings();
         webSettings.setJavaScriptEnabled(true);
-//开启 Application Caches 功能
+        //开启 Application Caches 功能
         webSettings.setAppCacheEnabled(true);
-        wv.loadUrl("http://djbbs.yaoyu-soft.com/bbs/dangjian/m");
+        //设置 缓存模式
+        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        // 开启 DOM storage API 功能
+        webSettings.setDomStorageEnabled(true);
+        String url = "http://djbbs.yaoyu-soft.com/bbs/dangjian/m";
+        wv.loadUrl(url);
 
+        wv.setWebViewClient(new WebViewClient() {
+            //覆盖shouldOverrideUrlLoading 方法
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 
     @Override

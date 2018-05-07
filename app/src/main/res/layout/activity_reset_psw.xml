@@ -8,8 +8,23 @@
     android:background="@mipmap/bg_login"
     tools:context="com.fw.dangjian.view.ResetPswActivity">
 
-    <include
-        layout="@layout/head_title"></include>
+
+    <RelativeLayout
+        android:id="@+id/left"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        >
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/iv_return"
+            />
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/et_old_psw"

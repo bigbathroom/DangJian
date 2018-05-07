@@ -31,8 +31,7 @@
         android:textColor="@color/gray6"
         android:text="委员"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/tv_name"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="200dp"
         android:textSize="14sp"/>
 
     <View

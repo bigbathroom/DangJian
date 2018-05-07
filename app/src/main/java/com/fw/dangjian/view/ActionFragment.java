@@ -123,7 +123,7 @@ public class ActionFragment extends BaseFragment implements ActionMvpView {
                 } else {
                     Intent intent = new Intent(getActivity(), QuizActivity.class);
                     intent.putExtra("squareId", lists.get(position - 2).id);
-                    intent.putExtra("times", lists.get(position - 2).times);
+                    intent.putExtra("title", lists.get(position - 2).square_name);
                     startActivityForResult(intent, 20);
                 }
 
