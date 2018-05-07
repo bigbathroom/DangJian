@@ -27,8 +27,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     private List<ActionBean.ResultBean.ListBean> lists;
     private Context context;
     private onItemClickLitener monItemClickLitener;
-    private int id;
-    private String times;
+
 
     public ActionAdapter(List<ActionBean.ResultBean.ListBean> lists, Context context) {
         this.lists = lists;
@@ -51,10 +50,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        id = lists.get(position).id;
-        times = lists.get(position).times;
         holder.tv_title.setText(lists.get(position).square_name);
         holder.tv_organization.setText(lists.get(position).square_region);
         holder.tv_name.setText(lists.get(position).square_author);
@@ -74,8 +71,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, QuizActivity.class);
-                    intent.putExtra("squareId", id);
-                    intent.putExtra("times", times);
+                    intent.putExtra("squareId", lists.get(position).id);
+                    intent.putExtra("times", lists.get(position).times);
                     context.startActivity(intent);
                 }
             });

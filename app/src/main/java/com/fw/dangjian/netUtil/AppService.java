@@ -275,8 +275,9 @@ public interface AppService {
                                        @Field("id") int id,
                                        @Query("content") String content);
     //获取所有组织架构
-    @GET(Constants.ORGANISITION)
-    Observable<OrganisationBean> getOrgansition(@Header("managerid") int managerid,@Query("pageNum") int pageNum);
+    @FormUrlEncoded
+    @POST(Constants.ORGANISITION)
+    Observable<OrganisationBean> getOrgansition(@Header("managerid") int managerid,@Field("pageNum") int pageNum);
 
 }
 

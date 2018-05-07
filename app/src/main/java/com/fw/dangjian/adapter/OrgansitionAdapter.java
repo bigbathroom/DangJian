@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
-import com.fw.dangjian.bean.AllNoteBean;
+import com.fw.dangjian.bean.OrganisationBean;
 
 import java.util.List;
 
@@ -23,11 +23,11 @@ import butterknife.ButterKnife;
 
 public class OrgansitionAdapter extends RecyclerView.Adapter<OrgansitionAdapter.ViewHolder> {
 
-    private List<AllNoteBean.ResultBean> lists;
+    private List<OrganisationBean.ResultBean.ListBean> lists;
     private Context context;
     private onItemClickLitener monItemClickLitener;
 
-    public OrgansitionAdapter(List<AllNoteBean.ResultBean> lists, Context context) {
+    public OrgansitionAdapter(List<OrganisationBean.ResultBean.ListBean> lists, Context context) {
         this.lists = lists;
         this.context = context;
     }
@@ -49,8 +49,35 @@ public class OrgansitionAdapter extends RecyclerView.Adapter<OrgansitionAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.tv_name.setText(lists.get(position).content);
-        holder.tv_position.setText(lists.get(position).addtime);
+//委员-0     中共党员-1       预备党员-2      发展对象-3       团员-4       群众-5   其它为空
+        if (lists.get(position).rudangzhibu!= null){
+            if (lists.get(position).rudangzhibu.equals("0")){
+                holder.iv.setImageResource(R.mipmap.wei);
+                holder.tv_position.setText("委员");
+            }else if (lists.get(position).rudangzhibu.equals("1")){
+                holder.iv.setImageResource(R.mipmap.dang);
+                holder.tv_position.setText("中共党员");
+            }else if (lists.get(position).rudangzhibu.equals("2")){
+                holder.iv.setImageResource(R.mipmap.dang);
+                holder.tv_position.setText("预备党员");
+            }else if (lists.get(position).rudangzhibu.equals("3")){
+//                holder.iv.setImageResource(R.mipmap.dang);
+                holder.tv_position.setText("发展对象");
+            }else if (lists.get(position).rudangzhibu.equals("4")){
+//                holder.iv.setImageResource(R.mipmap.dang);
+                holder.tv_position.setText("团员");
+            }else if (lists.get(position).rudangzhibu.equals("5")){
+//                holder.iv.setImageResource(R.mipmap.dang);
+                holder.tv_position.setText("群众");
+            }else{
+//                holder.iv.setImageResource(R.mipmap.dang);
+                holder.tv_position.setText("");
+            }
+        }
+
+
+        holder.tv_name.setText(lists.get(position).name);
+
 
         if (monItemClickLitener != null) {
             holder.rlGoods.setOnClickListener(new View.OnClickListener() {

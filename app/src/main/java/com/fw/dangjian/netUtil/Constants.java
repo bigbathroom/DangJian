@@ -95,5 +95,5 @@ public class Constants {
     //修改我的我的笔记
     public static final String changeMyNote ="slender/learn/meetingNote/";
     //获取组织架构
-    public static final String ORGANISITION ="";
+    public static final String ORGANISITION ="slender/learn/manager/";
 }

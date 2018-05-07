@@ -143,8 +143,8 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
                     Intent intent4 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent4);
                 } else {
-                 /*   Intent intent1 = new Intent(getActivity(), OrganisationActivity.class);
-                    startActivity(intent1);*/
+                    Intent intent1 = new Intent(getActivity(), OrganisationActivity.class);
+                    startActivity(intent1);
                 }
                 break;
             case R.id.rv_touxiang:

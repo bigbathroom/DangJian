@@ -62,6 +62,7 @@ public interface onItemClickLitener {
         nt.setMinimumFractionDigits(0);
         float result = (float)count/totleCount*100;
         holder.tv_title.setText(lists.get(position).square_name);
+        holder.tv_time.setText(lists.get(position).test_time);
         holder.pecrcent.setText((int)result+"%");
         holder.total_score.setText("总分："+lists.get(position).score);
         holder.total_question.setText("总题："+lists.get(position).totleCount);
@@ -114,7 +115,8 @@ static class ViewHolder extends RecyclerView.ViewHolder {
     TextView right_question;
     @BindView(R.id.test_again)
     TextView test_again;
-
+    @BindView(R.id.tv_time)
+    TextView tv_time;
     ViewHolder(View view) {
         super(view);
         ButterKnife.bind(this, view);

@@ -11,12 +11,12 @@ import android.widget.TextView;
 import com.fw.dangjian.R;
 import com.fw.dangjian.adapter.OrgansitionAdapter;
 import com.fw.dangjian.base.BaseActivity;
-import com.fw.dangjian.bean.AllNoteBean;
 import com.fw.dangjian.bean.OrganisationBean;
 import com.fw.dangjian.mvpView.OrganisationMvpView;
 import com.fw.dangjian.presenter.UserPresenter;
 import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
+import com.fw.dangjian.util.ToastUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -47,8 +47,8 @@ public class OrganisationActivity extends BaseActivity implements OrganisationMv
     private OrgansitionAdapter mAdapter;
     private int refreshTime = 0;
     private MyHandler handler;
-    private List<AllNoteBean.ResultBean> lists;
     int managerId;
+    private List<OrganisationBean.ResultBean.ListBean> lists;
 
 
     @Override
@@ -133,15 +133,15 @@ public class OrganisationActivity extends BaseActivity implements OrganisationMv
 
     @Override
     public void onGetDataNext(OrganisationBean noteBean) {
-       /* if (noteBean.result_code != null && noteBean.result_code.equals("200")){
-        if(noteBean.result.size()>0){
+        if (noteBean.result_code != null && noteBean.result_code.equals("200")){
+            if(noteBean.result.list.size()>0){
             switch (page) {
                 case 1:
                     lists.clear();
-                    lists.addAll(noteBean.result);
+                    lists.addAll(noteBean.result.list);
                     break;
                 default:
-                    lists.addAll(noteBean.result);
+                    lists.addAll(noteBean.result.list);
                     break;
             }
             handler.sendEmptyMessageDelayed(1, 500);
@@ -160,7 +160,7 @@ public class OrganisationActivity extends BaseActivity implements OrganisationMv
         }
     }else{
         handler.sendEmptyMessageDelayed(3, 500);
-    }*/
+    }
     }
 
     class MyHandler extends Handler {

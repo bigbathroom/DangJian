@@ -34,6 +34,7 @@ public class StudyFragment extends BaseFragment implements StudyMvpView{
     private StudyPresenter studyPresenter;
     private List<StudyBean.ResultBean> result;
 
+
     @Override
     protected View fillView() {
         return layoutinflater.inflate(R.layout.fragment_study, null);
@@ -59,8 +60,14 @@ public class StudyFragment extends BaseFragment implements StudyMvpView{
         if(studyBean.result_code != null && studyBean.result_code.equals("200")){
             result = studyBean.result;
             for (int i = 0;i<result.size();i++){
-                SubStudyFragment subStudyFragment = SubStudyFragment.newInstance(result.get(i).id);
-                fragments1.add(subStudyFragment);
+                if (i == result.size()-1){
+                    GardenFragment gardenFragment = GardenFragment.newInstance(result.get(i).id);
+                    fragments1.add(gardenFragment);
+                }else{
+                    SubStudyFragment subStudyFragment = SubStudyFragment.newInstance(result.get(i).id);
+                    fragments1.add(subStudyFragment);
+                }
+
                 mTabTitles.add(result.get(i).name);
             }
 

@@ -84,7 +84,8 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     ImageView iv_right;
     @BindView(R.id.iv_wrong)
     ImageView iv_wrong;
-
+    @BindView(R.id.tv_right_answer)
+    TextView tv_right_answer;
     private QuizPersenter quizPersenter;
     private int squareId;
 
@@ -92,7 +93,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
     int selectId =-1;
 
     List<Integer> selectIds= new ArrayList<>();
-
+    List<String> rightAnswers= new ArrayList<>();
     private int count;
     int allCount = 0;
     private List<QuizBean.ResultBean.SubjectBean> subject;
@@ -131,6 +132,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
         if (intent != null) {
             squareId = intent.getIntExtra("squareId", -1);
             times = intent.getStringExtra("times");
+//            Toast.makeText(this, "squareId"+squareId, Toast.LENGTH_SHORT).show();
         }
         quizPersenter = new QuizPersenter(this);
 
@@ -256,59 +258,130 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
                         if (subject.get(allCount - 1).optionEntity.get(selectId).isOk == 1) {
                             iv_right.setVisibility(View.VISIBLE);
                             iv_wrong.setVisibility(View.GONE);
+                            tv_right_answer.setVisibility(View.GONE);
                         } else {
                             iv_wrong.setVisibility(View.VISIBLE);
                             iv_right.setVisibility(View.GONE);
+                            if(subject.get(allCount - 1).optionEntity.get(0).isOk == 1){
+                                tv_right_answer.setText("正确答案：A");
+                            }else if (subject.get(allCount - 1).optionEntity.get(1).isOk == 1){
+                                tv_right_answer.setText("正确答案：B");
+                            }else if (subject.get(allCount - 1).optionEntity.get(2).isOk == 1){
+                                tv_right_answer.setText("正确答案：C");
+                            }else if (subject.get(allCount - 1).optionEntity.get(3).isOk == 1){
+                                tv_right_answer.setText("正确答案：D");
+                            }
+                            tv_right_answer.setVisibility(View.VISIBLE);
                         }
                     }
                 } else {
 //                   多选判断对错
-
                     if(selectIds.size()>0){
-                        if(selectIds.size() == 1){
-                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1) {
-                                iv_right.setVisibility(View.VISIBLE);
-                                iv_wrong.setVisibility(View.GONE);
-                            } else {
-                                iv_wrong.setVisibility(View.VISIBLE);
-                                iv_right.setVisibility(View.GONE);
+                        if (subject.get(allCount - 1).optionEntity.size() == 4) {
+                            for(int i = 0;i<4;i++){
+                                if(subject.get(allCount - 1).optionEntity.get(i).isOk == 1){
+                                    rightAnswers.add(subject.get(allCount - 1).optionEntity.get(i).option_opt);
+                                }
                             }
-                        }else if(selectIds.size() == 2){
-                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1) {
-                                iv_right.setVisibility(View.VISIBLE);
-                                iv_wrong.setVisibility(View.GONE);
-                            } else {
-                                iv_wrong.setVisibility(View.VISIBLE);
-                                iv_right.setVisibility(View.GONE);
+                        }else if (subject.get(allCount - 1).optionEntity.size() == 3) {
+                            for(int i = 0;i<3;i++){
+                                if(subject.get(allCount - 1).optionEntity.get(i).isOk == 1){
+                                    rightAnswers.add(subject.get(allCount - 1).optionEntity.get(i).option_opt);
+                                }
                             }
-                        }else if(selectIds.size() == 3){
-
-                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(2).intValue()).isOk == 1) {
-                                iv_right.setVisibility(View.VISIBLE);
-                                iv_wrong.setVisibility(View.GONE);
-                            } else {
-                                iv_wrong.setVisibility(View.VISIBLE);
-                                iv_right.setVisibility(View.GONE);
-                            }
-                        }else if(selectIds.size() == 4){
-
-                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(2).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(3).intValue()).isOk == 1) {
-                                iv_right.setVisibility(View.VISIBLE);
-                                iv_wrong.setVisibility(View.GONE);
-                            } else {
-                                iv_wrong.setVisibility(View.VISIBLE);
-                                iv_right.setVisibility(View.GONE);
-                            }
-                        }else if(selectIds.size() == 5){
-
-                            if (subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(2).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(3).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(4).intValue()).isOk == 1) {
-                                iv_right.setVisibility(View.VISIBLE);
-                                iv_wrong.setVisibility(View.GONE);
-                            } else {
-                                iv_wrong.setVisibility(View.VISIBLE);
-                                iv_right.setVisibility(View.GONE);
+                        }else if (subject.get(allCount - 1).optionEntity.size() == 5) {
+                            for(int i = 0;i<5;i++){
+                                if(subject.get(allCount - 1).optionEntity.get(i).isOk == 1){
+                                    rightAnswers.add(subject.get(allCount - 1).optionEntity.get(i).option_opt);
+                                }
                             }
                         }
+
+
+                        if(rightAnswers.size() == 5){
+                            if(selectIds.size() == 5){
+                                    iv_right.setVisibility(View.VISIBLE);
+                                    iv_wrong.setVisibility(View.GONE);
+                            }else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                                tv_right_answer.setText("正确答案：ABCDE");
+                                tv_right_answer.setVisibility(View.VISIBLE);
+                            }
+                        }else if (rightAnswers.size() == 4){
+
+                            if(selectIds.size() == 4){
+                                if(subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(2).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(3).intValue()).isOk == 1){
+                                    iv_right.setVisibility(View.VISIBLE);
+                                    iv_wrong.setVisibility(View.GONE);
+                                }else{
+                                    iv_wrong.setVisibility(View.VISIBLE);
+                                    iv_right.setVisibility(View.GONE);
+                                    tv_right_answer.setText("正确答案:"+rightAnswers.get(0)+rightAnswers.get(1)+rightAnswers.get(2)+rightAnswers.get(3));
+                                    tv_right_answer.setVisibility(View.VISIBLE);
+                                }
+
+                            }else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                                tv_right_answer.setText("正确答案:"+rightAnswers.get(0)+rightAnswers.get(1)+rightAnswers.get(2)+rightAnswers.get(3));
+                                tv_right_answer.setVisibility(View.VISIBLE);
+                            }
+                        }else if (rightAnswers.size() == 3){
+                            if(selectIds.size() == 3){
+                                if(subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1&& subject.get(allCount - 1).optionEntity.get(selectIds.get(2).intValue()).isOk == 1){
+                                    iv_right.setVisibility(View.VISIBLE);
+                                    iv_wrong.setVisibility(View.GONE);
+                                }else{
+                                    iv_wrong.setVisibility(View.VISIBLE);
+                                    iv_right.setVisibility(View.GONE);
+                                    tv_right_answer.setText("正确答案:"+rightAnswers.get(0)+rightAnswers.get(1)+rightAnswers.get(2));
+                                    tv_right_answer.setVisibility(View.VISIBLE);
+                                }
+                            }else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                                tv_right_answer.setText("正确答案:"+rightAnswers.get(0)+rightAnswers.get(1)+rightAnswers.get(2));
+                                tv_right_answer.setVisibility(View.VISIBLE);
+                            }
+                        }else if (rightAnswers.size() == 2){
+                            if(selectIds.size() == 2){
+                                if(subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1 && subject.get(allCount - 1).optionEntity.get(selectIds.get(1).intValue()).isOk == 1){
+                                    iv_right.setVisibility(View.VISIBLE);
+                                    iv_wrong.setVisibility(View.GONE);
+                                }else{
+                                    iv_wrong.setVisibility(View.VISIBLE);
+                                    iv_right.setVisibility(View.GONE);
+                                    tv_right_answer.setText("正确答案:"+rightAnswers.get(0)+rightAnswers.get(1));
+                                    tv_right_answer.setVisibility(View.VISIBLE);
+                                }
+                            }else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                                tv_right_answer.setText("正确答案:"+rightAnswers.get(0)+rightAnswers.get(1));
+                                tv_right_answer.setVisibility(View.VISIBLE);
+                            }
+                        }else if (rightAnswers.size() ==1){
+                            if(selectIds.size() == 2){
+                                if(subject.get(allCount - 1).optionEntity.get(selectIds.get(0).intValue()).isOk == 1){
+                                    iv_right.setVisibility(View.VISIBLE);
+                                    iv_wrong.setVisibility(View.GONE);
+                                }else{
+                                    iv_wrong.setVisibility(View.VISIBLE);
+                                    iv_right.setVisibility(View.GONE);
+                                    tv_right_answer.setText("正确答案:"+rightAnswers.get(0));
+                                    tv_right_answer.setVisibility(View.VISIBLE);
+                                }
+                            }else {
+                                iv_wrong.setVisibility(View.VISIBLE);
+                                iv_right.setVisibility(View.GONE);
+                                tv_right_answer.setText("正确答案:"+rightAnswers.get(0));
+                                tv_right_answer.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                    }else{
+                        ToastUtils.showShort(act,"请先选择答案");
                     }
                 }
 
@@ -425,10 +498,11 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
         iv_wrong.setVisibility(View.GONE);
         iv_right.setVisibility(View.GONE);
-
+        tv_right_answer.setVisibility(View.GONE);
         choiceId = "";
         selectId = -1;
         selectIds.clear();
+        rightAnswers.clear();
         cbId.clear();
 
         int pageNum = allCount + 1;

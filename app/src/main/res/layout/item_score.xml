@@ -17,6 +17,16 @@
         android:textSize="16sp"
         />
 
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2018"
+        android:textColor="@color/gray9"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
