@@ -124,7 +124,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
 
         timeString = StringUtils.getTimeString();
 
-        url = BASE_URL + "/note/" + id+ "?managerid=" + managerId;
+        url = BASE_URL + "/note/" + id + "?managerid=" + managerId;
 
         Map<String, String> map = new HashMap<String, String>();
         map.put("assetionkey", StringUtils.getBase64(RetrofitHelper.key + timeString));
@@ -165,11 +165,11 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.left:
-                finish();
+                    finish();
                 break;
             case R.id.rl_comment:
                 if (managerId == -1) {
-                    startActivity(new Intent(this,LoginActivity.class));
+                    startActivityForResult(new Intent(this, LoginActivity.class), 1000);
                 } else {
                     commentDialog = new CommentDialog(this);
                     commentDialog.show();
@@ -197,7 +197,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 workInfoPresenter.thumb(id);
                 break;
             case R.id.iv_share:
-                String  shareUrl = BASE_SHARE_URL + "/share/note/" + id + "?managerid=" + managerId+"&&"+"timestamp="+timeString+"&&"+"assetionkey="+StringUtils.getBase64(RetrofitHelper.key + timeString);
+                String shareUrl = BASE_SHARE_URL + "/share/note/" + id + "?managerid=" + managerId + "&&" + "timestamp=" + timeString + "&&" + "assetionkey=" + StringUtils.getBase64(RetrofitHelper.key + timeString);
                 UMWeb web = new UMWeb(shareUrl);
                 web.setTitle("党建");//标题
                 web.setThumb(new UMImage(this, R.mipmap.thumb));  //缩略图
@@ -268,11 +268,6 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -325,4 +320,16 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
         wv.removeAllViews();
         wv.destroy();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000){
+            managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
+
+        }else{
+            UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }

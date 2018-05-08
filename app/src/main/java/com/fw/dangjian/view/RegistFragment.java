@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fw.dangjian.MainActivity;
 import com.fw.dangjian.R;
 import com.fw.dangjian.base.BaseFragment;
 import com.fw.dangjian.bean.IdentifyCode;
@@ -139,13 +138,9 @@ public class RegistFragment extends BaseFragment implements RegistMvpView {
     public void onRegisterNext(RegistBean kongBean) {
         btn_login.setEnabled(false);
         if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
-
             managerid = kongBean.result.managerid;
-
             SPUtils.put(getActivity(), ConstanceValue.LOGIN_TOKEN,managerid);
 
-
-            jumpToActivity(MainActivity.class);
             getActivity().finish();
 
         } else {

@@ -187,8 +187,6 @@ public class LoginFragment extends  BaseFragment implements LoginMvpView{
 
                     SPUtils.put(getActivity(), ConstanceValue.LOGIN_TOKEN,managerid);
 
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
                     getActivity().finish();
                 }
 

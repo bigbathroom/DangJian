@@ -23,4 +23,5 @@
     <color name="blue">#EDEDED</color>
     <color name="greyblue">#81a8c7</color>
     <color name="redf0">#ff0000</color>
+    <color name="red_score">#A71D59</color>
 </resources>

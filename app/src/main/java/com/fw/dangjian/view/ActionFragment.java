@@ -49,20 +49,21 @@ public class ActionFragment extends BaseFragment implements ActionMvpView {
     private int refreshTime = 0;
 
     int managerId;
+
     @Override
     protected View fillView() {
         return layoutinflater.inflate(R.layout.fragment_action, null);
     }
 
+
     @Override
     protected void initUi() {
         tv_title.setText("互动广场");
 
-        managerId = (int) SPUtils.get(getActivity(), ConstanceValue.LOGIN_TOKEN, -1);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         nrecycler.setLayoutManager(layoutManager);
-
 
         View headView = LayoutInflater.from(getActivity()).inflate(R.layout.action_headview, (ViewGroup) getActivity().findViewById(android.R.id.content), false);
         iv = (ImageView) headView.findViewById(R.id.view_pager);
@@ -70,12 +71,22 @@ public class ActionFragment extends BaseFragment implements ActionMvpView {
 
         handler = new MyHandler();
         actionPresenter = new ActionPresenter();
-//        ToastUtils.showShort(getActivity(), ""+managerId, false);
-
     }
 
     @Override
     protected void initData() {
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        managerId = (int) SPUtils.get(getActivity(), ConstanceValue.LOGIN_TOKEN, -1);
+
+        setData();
+    }
+
+    public void setData() {
 
         lists = new ArrayList<>();
 
@@ -110,22 +121,25 @@ public class ActionFragment extends BaseFragment implements ActionMvpView {
         nrecycler.setAdapter(mAdapter);
         initAdapterClike();
     }
-
     private void initAdapterClike() {
         mAdapter.setonItemClickLitener(new ActionAdapter.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-
-                if (lists.get(position - 2).state != null && lists.get(position - 2).state.equals("1")) {
-                    Intent intent = new Intent(getActivity(), ScoreActivity.class);
-                    intent.putExtra("testId", lists.get(position - 2).id);
-                    startActivityForResult(intent, 10);
-                } else {
-                    Intent intent = new Intent(getActivity(), QuizActivity.class);
-                    intent.putExtra("squareId", lists.get(position - 2).id);
-                    intent.putExtra("title", lists.get(position - 2).square_name);
-                    startActivityForResult(intent, 20);
+                if (managerId == -1){
+                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 1000);
+                }else{
+                    if (lists.get(position - 2).state != null && lists.get(position - 2).state.equals("1")) {
+                        Intent intent = new Intent(getActivity(), ScoreActivity.class);
+                        intent.putExtra("testId", lists.get(position - 2).id);
+                        startActivityForResult(intent, 10);
+                    } else {
+                        Intent intent = new Intent(getActivity(), QuizActivity.class);
+                        intent.putExtra("squareId", lists.get(position - 2).id);
+                        intent.putExtra("title", lists.get(position - 2).square_name);
+                        startActivityForResult(intent, 20);
+                    }
                 }
+
 
             }
         });
@@ -133,21 +147,22 @@ public class ActionFragment extends BaseFragment implements ActionMvpView {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 10){
-            if(resultCode == 10){
+        if (requestCode == 10) {
+            if (resultCode == 10) {
                 requestServer(1);
 
             }
-        }else if(requestCode == 20){
-            if(resultCode == 40){
+        } else if (requestCode == 20) {
+            if (resultCode == 40) {
                 requestServer(1);
             }
+        }else if (requestCode == 1000) {
+            managerId = (int) SPUtils.get(getActivity(), ConstanceValue.LOGIN_TOKEN, -1);
         }
-
     }
 
     private void requestServer(int page) {
-        actionPresenter.getActionPage(managerId,page, this);
+        actionPresenter.getActionPage(managerId, page, this);
     }
 
     @Override
@@ -221,6 +236,4 @@ public class ActionFragment extends BaseFragment implements ActionMvpView {
             }
         }
     }
-
-
 }

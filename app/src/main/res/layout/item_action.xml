@@ -34,18 +34,16 @@
                 android:ellipsize="end"/>
 
             <TextView
-                android:id="@+id/tv_again"
+                android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_red1"
-                android:text="再测一次"
-                android:padding="3dp"
+                android:text="学时：5分钟"
+                android:textColor="@color/gray9"
                 android:textSize="12sp"
                 android:gravity="center"
-                android:textColor="@color/redf0"
-                android:layout_alignParentRight="true"
-                android:visibility="gone"
-                />
+                android:layout_alignParentRight="true"/>
+
+
 
         </RelativeLayout>
 
@@ -73,13 +71,18 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/tv_time"
+                android:id="@+id/tv_again"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="学时：5分钟"
-                android:textColor="@color/gray9"
+                android:background="@drawable/shape_red1"
+                android:text="再测一次"
+                android:padding="3dp"
                 android:textSize="12sp"
-                android:layout_alignParentRight="true"/>
+                android:textColor="@color/redf0"
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                />
+
         </RelativeLayout>
     </LinearLayout>
 

@@ -91,17 +91,25 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
     @Override
     protected void initUi() {
         tv_title.setText("用户设置");
-//        iv_msg.setVisibility(View.VISIBLE);
-        managerId = (int) SPUtils.get(getActivity(), ConstanceValue.LOGIN_TOKEN, -1);
         userPresenter = new UserPresenter();
-        userPresenter.getUserProfile(managerId, this);
+        managerId = (int) SPUtils.get(getActivity(), ConstanceValue.LOGIN_TOKEN, -1);
+        if (managerId == -1) {
+            Intent intent4 = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent4);
+        }
     }
 
     @Override
     protected void initData() {
-
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        managerId = (int) SPUtils.get(getActivity(), ConstanceValue.LOGIN_TOKEN, -1);
+        userPresenter.getUserProfile(managerId, this);
+    }
 
     private Rationale mRationale = new Rationale() {
         @Override
@@ -136,7 +144,6 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_msg:
-
                 break;
             case R.id.rl_organ:
                 if (managerId == -1) {
@@ -149,46 +156,52 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
                 break;
             case R.id.rv_touxiang:
 
-                AndPermission.with(getActivity())
-                        .permission(Permission.CAMERA)
-                        .rationale(mRationale)
-                        .onGranted(new Action() {
-                            @Override
-                            public void onAction(List<String> permissions) {
-                                // TODO what to do.
-                                showPop();
-                            }
-                        }).onDenied(new Action() {
-                            @Override
-                            public void onAction(List<String> permissions) {
-                                if (AndPermission.hasAlwaysDeniedPermission(context, permissions)) {
-                                    // 这些权限被用户总是拒绝。
-                                    // 这里使用一个Dialog展示没有这些权限应用程序无法继续运行，询问用户是否去设置中授权。
-                                    final SettingService settingService = AndPermission.permissionSetting(mContext);
-
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                    builder.setTitle("温馨提醒");
-                                    builder.setMessage("建议打开您的相机权限,否则无法继续");
-                                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            // 如果用户不同意去设置：
-                                            settingService.cancel();
-                                        }
-                                    });
-                                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            // 如果用户同意去设置：
-                                            settingService.execute();
-                                        }
-                                    });
-                                    AlertDialog dialog = builder.create();
-                                    dialog.show();
+                if (managerId == -1) {
+                    Intent intent4 = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent4);
+                }else{
+                    AndPermission.with(getActivity())
+                            .permission(Permission.CAMERA)
+                            .rationale(mRationale)
+                            .onGranted(new Action() {
+                                @Override
+                                public void onAction(List<String> permissions) {
+                                    // TODO what to do.
+                                    showPop();
                                 }
+                            }).onDenied(new Action() {
+                        @Override
+                        public void onAction(List<String> permissions) {
+                            if (AndPermission.hasAlwaysDeniedPermission(context, permissions)) {
+                                // 这些权限被用户总是拒绝。
+                                // 这里使用一个Dialog展示没有这些权限应用程序无法继续运行，询问用户是否去设置中授权。
+                                final SettingService settingService = AndPermission.permissionSetting(mContext);
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                builder.setTitle("温馨提醒");
+                                builder.setMessage("建议打开您的相机权限,否则无法继续");
+                                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // 如果用户不同意去设置：
+                                        settingService.cancel();
+                                    }
+                                });
+                                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // 如果用户同意去设置：
+                                        settingService.execute();
+                                    }
+                                });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
                             }
-                        })
-                        .start();
+                        }
+                    })
+                            .start();
+
+                }
 
                 break;
             case R.id.rl_ku:
@@ -260,6 +273,7 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
                 if (managerId == -1) {
                     Intent intent4 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent4);
+                    getActivity().finish();
                 } else {
                     Intent intent3 = new Intent(getActivity(), ResetPswActivity.class);
                     startActivity(intent3);
@@ -271,8 +285,8 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
                     startActivity(intent4);
                 } else {
                     SPUtils.remove(getActivity(), ConstanceValue.LOGIN_TOKEN);
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                    getActivity().finish();
+                    Intent intent4 = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent4);
                 }
 
                 break;

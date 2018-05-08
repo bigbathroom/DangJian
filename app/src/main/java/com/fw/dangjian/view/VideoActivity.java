@@ -185,7 +185,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 
             case R.id.iv_comment:
                 if (managerId == -1) {
-                    startActivity(new Intent(this, LoginActivity.class));
+                    startActivityForResult(new Intent(this, LoginActivity.class), 1000);
                 } else {
                     commentDialog = new CommentDialog(this);
                     commentDialog.show();
@@ -205,7 +205,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 break;
             case R.id.rl_comment:
                 if (managerId == -1) {
-                    startActivity(new Intent(this, LoginActivity.class));
+                    startActivityForResult(new Intent(this, LoginActivity.class), 1000);
                 } else {
                     commentDialog = new CommentDialog(this);
                     commentDialog.show();
@@ -226,7 +226,7 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
 
             case R.id.book:
                 if (managerId == -1) {
-                    startActivity(new Intent(this, LoginActivity.class));
+                    startActivityForResult(new Intent(this, LoginActivity.class), 1000);
                 } else {
                     videoInfoPresenter.getNote(managerId,studyId);
 
@@ -426,7 +426,13 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000){
+            managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
+
+        }else{
+            UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        }
+
     }
 
     @Override

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="竞答"
-        android:textColor="@color/gray6"
+        android:textColor="@color/red_score"
         android:gravity="center"
         android:textSize="16sp"
         />
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="综合"
-            android:textColor="#EE7708"
+            android:textColor="@color/red_score"
             android:textSize="16sp"
             android:layout_marginLeft="15dp"/>
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="0%"
-            android:textColor="#EE7708"
+            android:textColor="@color/red_score"
             android:textSize="16sp"
             android:layout_marginRight="15dp"/>
 
@@ -69,48 +69,85 @@
             android:background="@color/graye" />
 
         <TextView
-            android:id="@+id/total_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="总分： 1"
+            android:text="总分："
             android:textSize="15sp"
             android:textColor="@color/gray3"
             android:layout_below="@+id/pecrcent"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="15dp"/>
-
         <TextView
-            android:id="@+id/total_question"
+            android:id="@+id/total_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="总题： 1"
+            android:text="0"
+            android:textSize="15sp"
+            android:textColor="@color/red_score"
+            android:layout_below="@+id/pecrcent"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="65dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总题："
             android:textSize="15sp"
             android:textColor="@color/gray3"
             android:layout_below="@+id/pecrcent"
             android:layout_marginTop="65dp"
             android:layout_marginLeft="15dp"/>
-
         <TextView
-            android:id="@+id/wrong_question"
+            android:id="@+id/total_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="错题： 1"
+            android:text="0"
+            android:textSize="15sp"
+            android:textColor="@color/red_score"
+            android:layout_below="@+id/pecrcent"
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="65dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="错题："
             android:textSize="15sp"
             android:textColor="@color/gray3"
             android:layout_below="@+id/pecrcent"
             android:layout_marginTop="90dp"
             android:layout_marginLeft="15dp"/>
-
         <TextView
-            android:id="@+id/right_question"
+            android:id="@+id/wrong_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="正题： 1"
+            android:text="0"
+            android:textSize="15sp"
+            android:textColor="@color/red_score"
+            android:layout_below="@+id/pecrcent"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="65dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正题："
             android:textSize="15sp"
             android:textColor="@color/gray3"
             android:layout_below="@+id/pecrcent"
             android:layout_marginTop="115dp"
             android:layout_marginLeft="15dp"/>
+        <TextView
+            android:id="@+id/right_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="15sp"
+            android:textColor="@color/red_score"
+            android:layout_below="@+id/pecrcent"
+            android:layout_marginTop="115dp"
+            android:layout_marginLeft="65dp"/>
+
 
         <TextView
             android:id="@+id/test_again"

@@ -64,10 +64,10 @@ public interface onItemClickLitener {
         holder.tv_title.setText(lists.get(position).square_name);
         holder.tv_time.setText(lists.get(position).test_time);
         holder.pecrcent.setText((int)result+"%");
-        holder.total_score.setText("总分："+lists.get(position).score);
-        holder.total_question.setText("总题："+lists.get(position).totleCount);
-        holder.wrong_question.setText("错题："+wrong);
-        holder.right_question.setText("正题："+lists.get(position).count);
+        holder.total_score.setText(lists.get(position).score+"");
+        holder.total_question.setText(lists.get(position).totleCount+"");
+        holder.wrong_question.setText(wrong+"");
+        holder.right_question.setText(lists.get(position).count+"");
 
         id = lists.get(position).id;
         times = lists.get(position).times;

@@ -1,7 +1,6 @@
 package com.fw.dangjian;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +14,6 @@ import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
 import com.fw.dangjian.view.ActionFragment;
 import com.fw.dangjian.view.HomeFragment;
-import com.fw.dangjian.view.LoginActivity;
 import com.fw.dangjian.view.ManageFragment;
 import com.fw.dangjian.view.MineFragment;
 import com.fw.dangjian.view.StudyFragment;
@@ -126,24 +124,7 @@ public class MainActivity extends AppCompatActivity {
                         showFragment(3);
                         break;
                     case R.id.rd_mine:
-
-                        if (managerId == -1) {
-                            startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                            if (flag == 1){
-                                rd_home.setChecked(true);
-                            }else if (flag == 2){
-                                rd_action.setChecked(true);
-                            }else if (flag == 3){
-                                rd_study.setChecked(true);
-                            }else if (flag == 4){
-                                rd_manage.setChecked(true);
-                            }else{
-                                rd_home.setChecked(true);
-                            }
-                            rd_mine.setChecked(false);
-                        }else{
-                            showFragment(4);
-                        }
+                        showFragment(4);
                         break;
                 }
             }
@@ -240,6 +221,5 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         MobclickAgent.onPause(this);
     }
-
 
 }

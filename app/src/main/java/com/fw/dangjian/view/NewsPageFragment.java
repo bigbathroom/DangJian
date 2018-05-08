@@ -288,5 +288,4 @@ public class NewsPageFragment extends Fragment implements HomeMvpView{
             }
         }
     }
-
 }

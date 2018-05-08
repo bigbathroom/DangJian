@@ -26,6 +26,8 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_question)
+    TextView tv_question;
     @BindView(R.id.total_score)
     TextView total_score;
     @BindView(R.id.pecrcent)
@@ -55,6 +57,7 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
         left.setVisibility(View.VISIBLE);
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
 
+        tv_title.setText("我的成绩");
         testId = getIntent().getIntExtra("testId", -1);
 
         scorePresenter = new ScorePresenter(this);
@@ -77,13 +80,13 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
             //设置百分数精确度2即保留两位小数
             nt.setMinimumFractionDigits(0);
             float result = (float)count/totleCount*100;
-            tv_title.setText(scoreBean.result.square_name);
+            tv_question.setText(scoreBean.result.square_name);
 
             pecrcent.setText((int)result+"%");
-            total_score.setText("总分数："+scoreBean.result.score);
-            total_question.setText("总题："+scoreBean.result.totleCount);
-            right_question.setText("正题："+scoreBean.result.count);
-            wrong_question.setText("错题："+wrong);
+            total_score.setText(scoreBean.result.score+"");
+            total_question.setText(scoreBean.result.totleCount+"");
+            right_question.setText(scoreBean.result.count+"");
+            wrong_question.setText(wrong+"");
         } else {
             Toast.makeText(this, scoreBean.result_msg, Toast.LENGTH_SHORT).show();
         }
