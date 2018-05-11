@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/graye"
     tools:context="com.fw.dangjian.view.ActionFragment">
@@ -9,18 +10,21 @@
     <include
         layout="@layout/head_title"></include>
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/recyclerview"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/graye"
-        />
-    <include  layout="@layout/layout_no_content"
-        android:id="@+id/no_content"
-        android:visibility="gone"/>
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/menu_select"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/menu_select"
+        app:tabTextAppearance="@style/QuestionTextAppearance"/>
 
-    <include  layout="@layout/layout_no_net"
-        android:id="@+id/no_net"
-        android:visibility="gone"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

@@ -25,7 +25,7 @@
 
             <TextView
                 android:id="@+id/tv_title"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="中共中央总书记、国家主席、中央军委主席习近平向全军发布训令"
                 android:textColor="@color/gray3"
@@ -37,7 +37,7 @@
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="学时：5分钟"
+                android:text=""
                 android:textColor="@color/gray9"
                 android:textSize="12sp"
                 android:gravity="center"

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.fw.dangjian.R;
 import com.fw.dangjian.bean.CommentBean;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -50,10 +49,43 @@ public interface onItemClickLitener {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Glide.with(context).load(lists.get(position).comment_author_url).error(R.mipmap.head_portrait).into(holder.rv_touxiang);
+//        Glide.with(context).load(lists.get(position).comment_author_url).error(R.mipmap.head_portrait).into(holder.rv_touxiang);
         holder.tv_name.setText(lists.get(position).comment_author);
         holder.tv_time.setText("发表于"+lists.get(position).comment_date);
         holder.tv_content.setText(lists.get(position).comment_content);
+
+        //委员-0     中共党员-1       预备党员-2      发展对象-3       团员-4       群众-5   其它为空
+        if (lists.get(position).rudangzhibu != null) {
+            if (lists.get(position).rudangzhibu.equals("0")) {
+
+                holder.rv_touxiang.setBackgroundResource(R.mipmap.wei);
+            } else if (lists.get(position).rudangzhibu.equals("1")) {
+                holder.rv_touxiang.setBackgroundResource(R.mipmap.dang);
+            } else if (lists.get(position).rudangzhibu.equals("2")) {
+                holder.rv_touxiang.setBackgroundResource(R.mipmap.dang);
+            } else if (lists.get(position).rudangzhibu.equals("3")) {
+                holder.rv_touxiang.setBackgroundResource(R.mipmap.fazhangduixiang);
+//                holder.tv_position.setText("发展对象");
+            } else if (lists.get(position).rudangzhibu.equals("4")) {
+                holder.rv_touxiang.setBackgroundResource(R.mipmap.tuan);
+//                holder.tv_position.setText("团员");
+            } else if (lists.get(position).rudangzhibu.equals("6")) {
+                holder.rv_touxiang.setBackgroundResource(R.mipmap.shuji);
+//                holder.tv_position.setText("书记");
+            } else {
+                holder.rv_touxiang.setBackgroundResource(R.mipmap.publics);
+//                holder.tv_position.setText("群众");
+            }
+        } else {
+            holder.rv_touxiang.setBackgroundResource(R.mipmap.publics);
+//            holder.tv_position.setText("群众");
+
+        }
+
+
+
+
+
 
         if (monItemClickLitener != null) {
             holder.rlGoods.setOnClickListener(new View.OnClickListener() {

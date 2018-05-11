@@ -6,7 +6,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fw.dangjian.MainActivity;
 import com.fw.dangjian.R;
 import com.fw.dangjian.base.BaseActivity;
 import com.fw.dangjian.bean.ScoreBean;
@@ -45,6 +44,7 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     int managerId;
     private ScorePresenter scorePresenter;
     private int testId;
+    private String square_name;
 
 
     @Override
@@ -75,12 +75,12 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
             int totleCount = scoreBean.result.totleCount;
             int count = scoreBean.result.count;
             int wrong = totleCount - count;
-
+            square_name = scoreBean.result.square_name;
             NumberFormat nt = NumberFormat.getPercentInstance();
             //设置百分数精确度2即保留两位小数
             nt.setMinimumFractionDigits(0);
             float result = (float)count/totleCount*100;
-            tv_question.setText(scoreBean.result.square_name);
+            tv_question.setText(square_name);
 
             pecrcent.setText((int)result+"%");
             total_score.setText(scoreBean.result.score+"");
@@ -96,10 +96,6 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("index", 1);
-        startActivity(intent);
         finish();
     }
 
@@ -107,13 +103,14 @@ public class ScoreActivity extends BaseActivity implements ScoreMvpView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.left:
-                setResult(10);
                 finish();
                 break;
             case R.id.test_again:
-                setResult(10);
+                Intent intent = new Intent(this, QuizActivity.class);
+                intent.putExtra("squareId",testId);
+                intent.putExtra("title", square_name);
+                startActivity(intent);
                 finish();
-                break;
         }
     }
 }

@@ -86,7 +86,7 @@ public class ViewAttributeUtil {
         ta.recycle();
     }
 
-//    public static void applyImageDrawable(ColorUiInterface ci, Resources.Theme theme, int paramInt) {
+//    publics static void applyImageDrawable(ColorUiInterface ci, Resources.Theme theme, int paramInt) {
 //        TypedArray ta = theme.obtainStyledAttributes(new int[]{paramInt});
 //        Drawable drawable = ta.getDrawable(0);
 //        if(null != ci && ci instanceof ImageView) {

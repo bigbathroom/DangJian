@@ -28,8 +28,7 @@ public class TotalScoreAdapter extends RecyclerView.Adapter<TotalScoreAdapter.Vi
 private List<TotalScoreBean.ResultBean> lists;
 private Context context;
 private onItemClickLitener monItemClickLitener;
-    private int id;
-    private String times;
+
 
     public TotalScoreAdapter(List<TotalScoreBean.ResultBean> lists, Context context) {
         this.lists = lists;
@@ -52,7 +51,7 @@ public interface onItemClickLitener {
 }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         int totleCount = lists.get(position).totleCount;
         int count = lists.get(position).count;
         int wrong = totleCount - count;
@@ -69,15 +68,13 @@ public interface onItemClickLitener {
         holder.wrong_question.setText(wrong+"");
         holder.right_question.setText(lists.get(position).count+"");
 
-        id = lists.get(position).id;
-        times = lists.get(position).times;
 
         holder.test_again.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, QuizActivity.class);
-                intent.putExtra("squareId", id);
-                intent.putExtra("times", times);
+                intent.putExtra("squareId", lists.get(position).id);
+                intent.putExtra("title", lists.get(position).square_name);
                 context.startActivity(intent);
             }
         });

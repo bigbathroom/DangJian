@@ -49,5 +49,6 @@ public class CommentBean {
         public Object comment_type;
         public Object comment_parent;
         public Object manager_id;
+        public String rudangzhibu;
     }
 }

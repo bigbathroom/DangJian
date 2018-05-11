@@ -73,8 +73,7 @@ public class Constants {
     public static final String FILE = "square/record/";
     //视频地址
     public static final String VIDEO = "learn/";
-    //记笔记
-    public static final String NOTE = "slender/learn/note/";
+
     //获取学习课程
     public static final String COURSE = "article/list/";
     //获取大事记
@@ -88,12 +87,27 @@ public class Constants {
     public static final String BOARD = "board/";
     //获取总成绩单
     public static final String TOTAL_SCORE = "square/result/mytest/";
-    //获取单个笔记
-    public static final String GET_NOTE ="slender/learn/getNote/";
-    //获取所有笔记
-    public static final String GET_ALL_NOTE ="slender/learn/getMeetingNotes/";
-    //修改我的我的笔记
-    public static final String changeMyNote ="slender/learn/meetingNote/";
+
     //获取组织架构
     public static final String ORGANISITION ="slender/learn/manager/";
+
+    //学习视频获取单个笔记
+    public static final String GET_NOTE ="slender/learn/getNote/";
+    //学习视频记笔记
+    public static final String NOTE = "slender/learn/note/";
+
+
+     //  我的笔记
+    //获取学习所有笔记
+    public static final String GET_LEARN_NOTE ="slender/learn/getNotes/";
+    //修改学习笔记
+    public static final String changeLearnNote ="slender/learn/note/";
+
+    //获取会议所有笔记
+    public static final String GET_MEETING_NOTE ="slender/learn/getMeetingNotes/";
+    //修改会议笔记
+    public static final String changeMeetingNote ="slender/learn/meetingNote/";
+
+
+
 }

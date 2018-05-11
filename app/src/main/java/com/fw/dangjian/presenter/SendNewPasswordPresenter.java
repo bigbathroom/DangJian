@@ -17,20 +17,20 @@ public class SendNewPasswordPresenter extends BasePresenter {
         MvpView = putPasswordMvpView;
     }
 
-    /*public void SendNewPassword(String oldpassword, String newpassword) {
+    /*publics void SendNewPassword(String oldpassword, String newpassword) {
         retrofitHelper.toSubscribe(req.reset(oldpassword, newpassword), new Subscriber<KongBean>() {
             @Override
-            public void onCompleted() {
+            publics void onCompleted() {
                 MvpView.onGetDataCompleted();
             }
 
             @Override
-            public void onError(Throwable e) {
+            publics void onError(Throwable e) {
                 MvpView.onGetDataError(e);
             }
 
             @Override
-            public void onNext(KongBean kongBean) {
+            publics void onNext(KongBean kongBean) {
                 MvpView.onPutPasswordNext(kongBean);
             }
         });

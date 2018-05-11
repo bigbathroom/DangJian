@@ -18,7 +18,7 @@ public class MyListView extends ListView {
 
 
 /*    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
+    publics boolean dispatchTouchEvent(MotionEvent ev) {
         // TODO Auto-generated method stub
         getParent().requestDisallowInterceptTouchEvent(true);//这句话的作用 告诉父view，我的单击事件我自行处理，不要阻碍我。
         return super.dispatchTouchEvent(ev);

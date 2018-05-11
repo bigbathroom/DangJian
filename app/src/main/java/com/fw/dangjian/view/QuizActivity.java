@@ -472,7 +472,7 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
           /*  resultDialog = new ResultDialog(this, R.style.MyDarkDialog, "", "") {
                 @Override
-                public void confirm() {
+                publics void confirm() {
                     dismiss();
                     QuizActivity.this.finish();
                 }
@@ -481,7 +481,8 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
 
             Intent intent = new Intent(this,ScoreActivity.class);
             intent.putExtra("testId",squareId);
-            startActivityForResult(intent,30);
+            startActivity(intent);
+            finish();
 
         } else {
             Toast.makeText(this, submitBean.result_msg, Toast.LENGTH_SHORT).show();
@@ -602,13 +603,4 @@ public class QuizActivity extends BaseActivity implements QuizMvpView {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 30){
-            if(resultCode == 10){
-                setResult(40);
-                finish();
-            }
-        }
-    }
 }

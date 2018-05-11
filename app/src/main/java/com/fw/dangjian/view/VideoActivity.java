@@ -233,12 +233,12 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                     rl_book.setVisibility(View.VISIBLE);
 
                    /* new Handler().postDelayed(new Runnable(){
-                        public void run() {
+                        publics void run() {
                             bookDialog = new BookDialog(VideoActivity.this,content);
                             bookDialog.show();
                             bookDialog.setOnCommitListener(new BookDialog.OnCommitListener() {
                                 @Override
-                                public void onCommit(EditText et, View v) {
+                                publics void onCommit(EditText et, View v) {
                                     String s = et.getText().toString();
 
                                     if (TextUtils.isEmpty(s)) {

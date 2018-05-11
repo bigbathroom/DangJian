@@ -9,11 +9,10 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/rv_touxiang"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:scaleType="fitXY"
         android:layout_marginLeft="10dp"
-        android:src="@mipmap/head_portrait"
         app:riv_border_color="@color/white"
         app:riv_border_width="0dip"
         app:riv_oval="true" />
@@ -57,7 +56,7 @@
         android:text="中共中央总书记、国家主席、中央军委主席习近平向全军发布训令"
         android:textColor="@color/gray6"
         android:textSize="13sp"
-        android:layout_below="@+id/rv_touxiang"
+        android:layout_below="@+id/tv_time"
         android:layout_toRightOf="@+id/rv_touxiang"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"/>

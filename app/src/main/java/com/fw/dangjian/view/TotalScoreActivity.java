@@ -91,8 +91,6 @@ public class TotalScoreActivity extends BaseActivity implements TotalScoreMvpVie
 //                        page++;
 //                        requestServer(page);
                         nrecycler.loadMoreComplete();
-                        nrecycler.refreshComplete();
-
                     }
                 }, 200);
 

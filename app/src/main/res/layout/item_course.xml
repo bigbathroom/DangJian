@@ -9,20 +9,34 @@
     android:paddingRight="15dp">
     <TextView
         android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="中国共产党章程党章党规学习解读"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/gray3"
+        android:textSize="15sp"
+        android:gravity="center" />
+
+
+    <TextView
+        android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="中国共产党章程党章党规学习解读"
         android:maxLines="2"
         android:ellipsize="end"
         android:textColor="@color/gray6"
-        android:textSize="15sp" />
+        android:textSize="13sp"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="5dp"/>
 
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title"
+        android:layout_below="@+id/tv_content"
         android:text="2018-01-04"
         android:layout_marginTop="10dp"
         android:textColor="@color/gray9"

@@ -309,7 +309,7 @@ public class CommonUtil {
      * @param phone
      * @return
      *//*
-    public static boolean checkPhone(String phone, boolean toast) {
+    publics static boolean checkPhone(String phone, boolean toast) {
         if (TextUtils.isEmpty(phone)) {
             if (toast) ToastUtils.showToast("手机号为空");
             return false;
@@ -328,7 +328,7 @@ public class CommonUtil {
      * @param phone
      * @return
      *//*
-    public static boolean checkPhone(String phone) {
+    publics static boolean checkPhone(String phone) {
 
         return checkPhone(phone, false);
     }

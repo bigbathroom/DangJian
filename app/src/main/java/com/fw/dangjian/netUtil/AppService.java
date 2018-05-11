@@ -222,19 +222,7 @@ public interface AppService {
     @GET(Constants.VIDEO + "{id}/")
     Observable<VideoBean> getVideo(@Path("id") int id);
 
-    //记笔记
-    @FormUrlEncoded
-    @POST(Constants.NOTE )
-    Observable<SubmitBean1> submitNote(@Field("managerid") int managerid,
-                                       @Field("postId") int postId,
-                                       @Query("content") String content);
 
-    //记笔记
-    @FormUrlEncoded
-    @POST(Constants.NOTE )
-    Observable<SubmitBean1> changeNote(@Field("managerid") int managerid,
-                                       @Field("id") int id,
-                                       @Query("content") String content);
 
 
 
@@ -260,24 +248,53 @@ public interface AppService {
     @GET(Constants.TOTAL_SCORE)
     Observable<TotalScoreBean> getTotalScore(@Header("managerid") int managerid);
 
-    //获取单个笔记
-    @GET(Constants.GET_NOTE + "{postid}")
-    Observable<NoteBean> getNote(@Header("managerid") int managerid, @Path("postid") int postid);
-
-    //获取所有笔记
-    @GET(Constants.GET_ALL_NOTE)
-    Observable<AllNoteBean> getAllNote(@Header("managerid") int managerid);
-
-    //修改我的我的笔记
-    @FormUrlEncoded
-    @POST(Constants.changeMyNote)
-    Observable<KongBean> changeMyNote(@Header("managerid") int managerid,
-                                       @Field("id") int id,
-                                       @Query("content") String content);
     //获取所有组织架构
     @FormUrlEncoded
     @POST(Constants.ORGANISITION)
     Observable<OrganisationBean> getOrgansition(@Header("managerid") int managerid,@Field("pageNum") int pageNum);
+
+
+    //获取单个笔记
+    @GET(Constants.GET_NOTE + "{postid}")
+    Observable<NoteBean> getNote(@Header("managerid") int managerid, @Path("postid") int postid);
+
+    //记笔记
+    @FormUrlEncoded
+    @POST(Constants.NOTE)
+    Observable<SubmitBean1> submitNote(@Field("managerid") int managerid,
+                                       @Field("postId") int postId,
+                                       @Query("content") String content);
+
+    //修改笔记
+    @FormUrlEncoded
+    @POST(Constants.NOTE)
+    Observable<SubmitBean1> changeNote(@Field("managerid") int managerid,
+                                       @Field("id") int id,
+                                       @Query("content") String content);
+
+    //获取学习所有笔记
+    @GET(Constants.GET_LEARN_NOTE)
+    Observable<AllNoteBean> getLearnNote(@Header("managerid") int managerid);
+
+    //修改学习笔记
+    @FormUrlEncoded
+    @POST(Constants.changeLearnNote)
+    Observable<KongBean> changeLearnNote(@Header("managerid") int managerid,
+                                       @Field("id") int id,
+                                       @Query("content") String content);
+
+    //获取会议所有笔记
+    @GET(Constants.GET_MEETING_NOTE)
+    Observable<AllNoteBean> getMeetingNote(@Header("managerid") int managerid);
+
+    //修改会议笔记
+    @FormUrlEncoded
+    @POST(Constants.changeMeetingNote)
+    Observable<KongBean> changeMeetingNote(@Header("managerid") int managerid,
+                                      @Field("id") int id,
+                                      @Query("content") String content);
+
+
 
 }
 

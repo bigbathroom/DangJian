@@ -30,6 +30,7 @@ public class AllNoteBean {
         public int id;
         public int managerid;
         public int postId;
+        public String post_title;
         public String addtime;
         public String content;
     }

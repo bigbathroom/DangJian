@@ -8,8 +8,9 @@ import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.MineBean;
 import com.fw.dangjian.bean.OrganisationBean;
 import com.fw.dangjian.bean.TotalScoreBean;
-import com.fw.dangjian.mvpView.AllNoteMvpView;
 import com.fw.dangjian.mvpView.ChangeNameMvpView;
+import com.fw.dangjian.mvpView.LearnNoteMvpView;
+import com.fw.dangjian.mvpView.MeetingNoteMvpView;
 import com.fw.dangjian.mvpView.OrganisationMvpView;
 import com.fw.dangjian.mvpView.PutPasswordMvpView;
 import com.fw.dangjian.mvpView.TotalScoreMvpView;
@@ -26,6 +27,7 @@ import rx.Subscriber;
 public class UserPresenter extends BasePresenter {
 
     public UserPresenter() {
+
     }
 
     public void getUserProfile(int managerid,final UserCenterMvpView userCenterMvpView) {
@@ -146,52 +148,6 @@ public class UserPresenter extends BasePresenter {
         });
     }
 
-
-    public void getTotalNote(int managerid,final AllNoteMvpView userCenterMvpView) {
-        retrofitHelper.toSubscribe(req.getAllNote(managerid), new Subscriber<AllNoteBean>() {
-            @Override
-            public void onCompleted() {
-                Log.d("000000", "onCompleted");
-                userCenterMvpView.onGetDataCompleted();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.d("000000", "onError");
-                userCenterMvpView.onGetDataError(e);
-            }
-
-            @Override
-            public void onNext(AllNoteBean userProfile) {
-                Log.d("000000", "onNext " + userProfile);
-                userCenterMvpView.onGetDataNext(userProfile);
-            }
-        });
-    }
-
-    public void changeNote(int managerid,int Id,String content,final AllNoteMvpView mvpView) {
-        retrofitHelper.toSubscribe(req.changeMyNote(managerid,Id,content), new Subscriber<KongBean>() {
-            @Override
-            public void onCompleted() {
-                Log.d("000000","loginonCompleted");
-                mvpView.onGetDataCompleted();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.d("000000", "loginononError");
-                mvpView.onGetDataError(e);
-            }
-
-            @Override
-            public void onNext(KongBean user) {
-                Log.d("000000", "loginononNext");
-                mvpView.onNoteNext(user);
-            }
-        });
-    }
-
-
     public void getOrgansition(int managerid, int page,final OrganisationMvpView userCenterMvpView) {
         retrofitHelper.toSubscribe(req.getOrgansition(managerid,page), new Subscriber<OrganisationBean>() {
             @Override
@@ -214,6 +170,95 @@ public class UserPresenter extends BasePresenter {
         });
     }
 
+    public void getLearnNote(int managerid,final LearnNoteMvpView userCenterMvpView) {
+        retrofitHelper.toSubscribe(req.getLearnNote(managerid), new Subscriber<AllNoteBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000", "onCompleted");
+                userCenterMvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "onError");
+                userCenterMvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(AllNoteBean userProfile) {
+                Log.d("000000", "onNext " + userProfile);
+                userCenterMvpView.onGetDataNext(userProfile);
+            }
+        });
+    }
+
+    public void changeLearnNote(int managerid, int Id, String content, final LearnNoteMvpView mvpView) {
+        retrofitHelper.toSubscribe(req.changeLearnNote(managerid,Id,content), new Subscriber<KongBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000","loginonCompleted");
+                mvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "loginononError");
+                mvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(KongBean user) {
+                Log.d("000000", "loginononNext");
+                mvpView.onNoteNext(user);
+            }
+        });
+    }
+
+
+
+    public void getMeetingNote(int managerid,final MeetingNoteMvpView userCenterMvpView) {
+        retrofitHelper.toSubscribe(req.getMeetingNote(managerid), new Subscriber<AllNoteBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000", "onCompleted");
+                userCenterMvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "onError");
+                userCenterMvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(AllNoteBean userProfile) {
+                Log.d("000000", "onNext " + userProfile);
+                userCenterMvpView.onGetDataNext(userProfile);
+            }
+        });
+    }
+
+    public void changeMeetingNote(int managerid, int Id, String content, final MeetingNoteMvpView mvpView) {
+        retrofitHelper.toSubscribe(req.changeMeetingNote(managerid,Id,content), new Subscriber<KongBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000","loginonCompleted");
+                mvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "loginononError");
+                mvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(KongBean user) {
+                Log.d("000000", "loginononNext");
+                mvpView.onNoteNext(user);
+            }
+        });
+    }
 
 
 

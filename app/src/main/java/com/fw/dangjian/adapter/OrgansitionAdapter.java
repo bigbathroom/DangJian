@@ -49,37 +49,50 @@ public class OrgansitionAdapter extends RecyclerView.Adapter<OrgansitionAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-//委员-0     中共党员-1       预备党员-2      发展对象-3       团员-4       群众-5   其它为空
-        if (lists.get(position).rudangzhibu!= null){
-            if (lists.get(position).rudangzhibu.equals("0")){
-                holder.iv.setImageResource(R.mipmap.wei);
+        //委员-0     中共党员-1       预备党员-2      发展对象-3       团员-4       群众-5   其它为空
+        if (lists.get(position).rudangzhibu != null) {
+            if (lists.get(position).rudangzhibu.equals("0")) {
+//                Glide.with(context).load(R.mipmap.wei).into(holder.iv);
+                holder.iv.setBackgroundResource(R.mipmap.wei);
                 holder.tv_position.setText("委员");
-            }else if (lists.get(position).rudangzhibu.equals("1")){
-                holder.iv.setImageResource(R.mipmap.dang);
+            } else if (lists.get(position).rudangzhibu.equals("1")) {
+//                Glide.with(context).load(R.mipmap.dang).into(holder.iv);
+                holder.iv.setBackgroundResource(R.mipmap.dang);
                 holder.tv_position.setText("中共党员");
-            }else if (lists.get(position).rudangzhibu.equals("2")){
-                holder.iv.setImageResource(R.mipmap.dang);
+            } else if (lists.get(position).rudangzhibu.equals("2")) {
+//                Glide.with(context).load(R.mipmap.dang).into(holder.iv);
+                holder.iv.setBackgroundResource(R.mipmap.dang);
                 holder.tv_position.setText("预备党员");
-            }else if (lists.get(position).rudangzhibu.equals("3")){
-//                holder.iv.setImageResource(R.mipmap.dang);
+            } else if (lists.get(position).rudangzhibu.equals("3")) {
+//                Glide.with(context).load(R.mipmap.fazhangduixiang).into(holder.iv);
+                holder.iv.setBackgroundResource(R.mipmap.fazhangduixiang);
                 holder.tv_position.setText("发展对象");
-            }else if (lists.get(position).rudangzhibu.equals("4")){
-//                holder.iv.setImageResource(R.mipmap.dang);
+            } else if (lists.get(position).rudangzhibu.equals("4")) {
+                holder.iv.setBackgroundResource(R.mipmap.tuan);
                 holder.tv_position.setText("团员");
-            }else if (lists.get(position).rudangzhibu.equals("5")){
-//                holder.iv.setImageResource(R.mipmap.dang);
+            } else if (lists.get(position).rudangzhibu.equals("6")) {
+//                Glide.with(context).load(R.mipmap.shuji).into(holder.iv);
+                holder.iv.setBackgroundResource(R.mipmap.shuji);
+                holder.tv_position.setText("书记");
+            } else {
+//                Glide.with(context).load(R.mipmap.publics).into(holder.iv);
+                holder.iv.setBackgroundResource(R.mipmap.publics);
                 holder.tv_position.setText("群众");
-            }else{
-//                holder.iv.setImageResource(R.mipmap.dang);
-                holder.tv_position.setText("");
             }
+        } else {
+//                Glide.with(context).load(R.mipmap.publics).into(holder.iv);
+            holder.iv.setBackgroundResource(R.mipmap.publics);
+            holder.tv_position.setText("群众");
+
         }
 
 
         holder.tv_name.setText(lists.get(position).name);
 
 
-        if (monItemClickLitener != null) {
+        if (monItemClickLitener != null)
+
+        {
             holder.rlGoods.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

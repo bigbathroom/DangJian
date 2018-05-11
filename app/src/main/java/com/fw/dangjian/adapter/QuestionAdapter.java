@@ -5,11 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fw.dangjian.R;
-import com.fw.dangjian.bean.AllNoteBean;
+import com.fw.dangjian.bean.ActionBean;
 
 import java.util.List;
 
@@ -20,20 +20,21 @@ import butterknife.ButterKnife;
  * Created by @贝贝 on 2017/5/23
  */
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
+public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
-    private List<AllNoteBean.ResultBean> lists;
+    private List<ActionBean.ResultBean.ListBean> lists;
     private Context context;
     private onItemClickLitener monItemClickLitener;
 
-    public CourseAdapter(List<AllNoteBean.ResultBean> lists, Context context) {
+
+    public QuestionAdapter(List<ActionBean.ResultBean.ListBean> lists, Context context) {
         this.lists = lists;
         this.context = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_course, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_action, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -47,12 +48,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.tvTitle.setText(lists.get(position).post_title);
-        holder.tv_content.setText(lists.get(position).content);
-        holder.tv_time.setText(lists.get(position).addtime);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        String s = lists.get(position).square_name;
+        holder.tv_title.setText(s.substring(0,s.indexOf("(")));
+        holder.tv_organization.setText(lists.get(position).square_region);
+        holder.tv_name.setText(lists.get(position).square_author);
+//        holder.tv_time.setText("学时:" + lists.get(position).square_time + "分钟");
+
 
         if (monItemClickLitener != null) {
+
             holder.rlGoods.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -67,14 +72,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         return lists.size();
     }
 
-
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.rl_goods)
-        RelativeLayout rlGoods;
+        LinearLayout rlGoods;
         @BindView(R.id.tv_title)
-        TextView tvTitle;
-        @BindView(R.id.tv_content)
-        TextView tv_content;
+        TextView tv_title;
+        @BindView(R.id.tv_organization)
+        TextView tv_organization;
+
+        @BindView(R.id.tv_name)
+        TextView tv_name;
         @BindView(R.id.tv_time)
         TextView tv_time;
 

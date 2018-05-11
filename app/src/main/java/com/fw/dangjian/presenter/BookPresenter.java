@@ -21,19 +21,19 @@ public class BookPresenter extends BasePresenter {
 
        /* retrofitHelper.toSubscribe(req.getBook(pageNum), new Subscriber<BookBean>() {
             @Override
-            public void onCompleted() {
+            publics void onCompleted() {
                 Log.d("000000", "onCompleted");
                 bookMvpView.onGetDataCompleted();
             }
 
             @Override
-            public void onError(Throwable e) {
+            publics void onError(Throwable e) {
                 Log.d("000000", "onError");
                 bookMvpView.onGetDataError(e);
             }
 
             @Override
-            public void onNext(BookBean homeBean) {
+            publics void onNext(BookBean homeBean) {
                 bookMvpView.onGetDataNext(homeBean);
             }
         });*/

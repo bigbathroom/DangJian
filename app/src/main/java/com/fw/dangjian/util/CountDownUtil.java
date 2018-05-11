@@ -46,10 +46,10 @@ public class CountDownUtil{
     }
 
 
-    /*public static CountDownTimer startCount(int mins, TextView tvTime, ImageView ivTime) {
+    /*publics static CountDownTimer startCount(int mins, TextView tvTime, ImageView ivTime) {
         CountDownTimer timer = new CountDownTimer(mins*60*1000, 1000) {
             @Override
-            public void onTick(long millisUntilFinished) {
+            publics void onTick(long millisUntilFinished) {
                 tvTime.setText(String.format("%02d", millisUntilFinished / 60000) + ":" + String.format("%02d", (millisUntilFinished % 60000) / 1000));
                 if (millisUntilFinished < 60000 && millisUntilFinished > 59888) {
 
@@ -62,7 +62,7 @@ public class CountDownUtil{
                 }
             }
             @Override
-            public void onFinish() {
+            publics void onFinish() {
                 tvTime.setText("00:00");
             }
         };
@@ -70,10 +70,10 @@ public class CountDownUtil{
         return timer;
     }
 
-    public static CountDownTimer startCountAndProcess(long millis, TextView audioTime, ProgressBar progressBar) {
+    publics static CountDownTimer startCountAndProcess(long millis, TextView audioTime, ProgressBar progressBar) {
         CountDownTimer timer = new CountDownTimer(millis, 200) {
             @Override
-            public void onTick(long millisUntilFinished) {
+            publics void onTick(long millisUntilFinished) {
                 String second = (millisUntilFinished % 60000) / 1000 + "";
                 if (second.length() == 1) {
                     second = "0" + second;
@@ -84,7 +84,7 @@ public class CountDownUtil{
             }
 
             @Override
-            public void onFinish() {
+            publics void onFinish() {
                 audioTime.setText("00:00");
                 progressBar.setProgress(100);
                 //强行结束测试
@@ -94,10 +94,10 @@ public class CountDownUtil{
         return timer;
     }
 
-    public static CountDownTimer startCountAndProcess(long millis, ProgressBar progressBar) {
+    publics static CountDownTimer startCountAndProcess(long millis, ProgressBar progressBar) {
         CountDownTimer timer = new CountDownTimer(millis, 100) {
             @Override
-            public void onTick(long millisUntilFinished) {
+            publics void onTick(long millisUntilFinished) {
                 String second = (millisUntilFinished % 60000) / 1000 + "";
                 if (second.length() == 1) {
                     second = "0" + second;
@@ -107,7 +107,7 @@ public class CountDownUtil{
             }
 
             @Override
-            public void onFinish() {
+            publics void onFinish() {
                 progressBar.setProgress(100);
                 //强行结束测试
             }
@@ -116,24 +116,24 @@ public class CountDownUtil{
         return timer;
     }
 
-    public static void cancle(CountDownTimer timer) {
+    publics static void cancle(CountDownTimer timer) {
         timer.cancel();
     }
 
 
 
-    public static CountDownTimer startTimePrompt(int mini, TextView timePrompt) {
+    publics static CountDownTimer startTimePrompt(int mini, TextView timePrompt) {
         timePrompt.setVisibility(View.GONE);
 
         CountDownTimer timer = new CountDownTimer(mini*1000, mini*1000) {
 
             @Override
-            public void onTick(long millisUntilFinished) {
+            publics void onTick(long millisUntilFinished) {
 
             }
 
             @Override
-            public void onFinish() {
+            publics void onFinish() {
                 timePrompt.setText("已用" + mini + "秒，请合理安排时间");
                 timePrompt.setVisibility(View.VISIBLE);
             }
@@ -142,17 +142,17 @@ public class CountDownUtil{
     }
 
 
-    public static CountDownTimer startTimePrompt2(int mini, TextView timePrompt) {
+    publics static CountDownTimer startTimePrompt2(int mini, TextView timePrompt) {
         timePrompt.setVisibility(View.GONE);
         CountDownTimer timer = new CountDownTimer(mini*1000, mini*1000) {
 
             @Override
-            public void onTick(long millisUntilFinished) {
+            publics void onTick(long millisUntilFinished) {
 
             }
 
             @Override
-            public void onFinish() {
+            publics void onFinish() {
                 timePrompt.setText("已用" + mini + "秒，建议您选\"我不知道\"");
                 timePrompt.setVisibility(View.VISIBLE);
             }
@@ -161,7 +161,7 @@ public class CountDownUtil{
     }
 
 
-    public static void cancle(CountDownTimer timer, TextView timePrompt) {
+    publics static void cancle(CountDownTimer timer, TextView timePrompt) {
         timer.cancel();
         timePrompt.setVisibility(View.GONE);
     }

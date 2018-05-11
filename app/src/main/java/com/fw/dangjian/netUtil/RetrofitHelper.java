@@ -50,6 +50,8 @@ public class RetrofitHelper {
             public Response intercept(Chain chain) throws IOException {
 
                 timeString = StringUtils.getTimeString();
+                Log.i("timestamp",timeString);
+                Log.i("assetionkey",StringUtils.getBase64(key+timeString));
                 Request request = chain.request()
                         .newBuilder()
                         .addHeader("timestamp", timeString)
@@ -128,13 +130,13 @@ public class RetrofitHelper {
             Response response = chain.proceed(request);
           /*String cacheControl = request.header("Cache-Control");
             if (TextUtils.isEmpty(cacheControl)) {
-                cacheControl = "public, max-age=60";
+                cacheControl = "publics, max-age=60";
             }*/
             int maxAge = 60;
             return response.newBuilder()
                     .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
                     .removeHeader("Cache-Control")
-                    .header("Cache-Control", "public, max-age=" + maxAge)
+                    .header("Cache-Control", "publics, max-age=" + maxAge)
                     .build();
         }
     };
