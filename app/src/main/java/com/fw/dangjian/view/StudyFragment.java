@@ -64,7 +64,7 @@ public class StudyFragment extends BaseFragment implements StudyMvpView{
                     GardenFragment gardenFragment = GardenFragment.newInstance(result.get(i).id);
                     fragments1.add(gardenFragment);
                 }else{
-                    SubStudyFragment subStudyFragment = SubStudyFragment.newInstance(result.get(i).id);
+                    SubStudyFragment subStudyFragment = SubStudyFragment.newInstance(result.get(i).id,result.get(i).name);
                     fragments1.add(subStudyFragment);
                 }
 

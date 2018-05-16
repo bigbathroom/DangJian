@@ -6,7 +6,6 @@ package com.fw.dangjian.netUtil;
 
 public class Constants {
 
-
     //    总地址
     public static final String BASE_URL = "http://dangjian.yaoyu-soft.com/langur/api/";
     public static final String BASE_SHARE_URL = "http://dangjian.yaoyu-soft.com/langur/";
@@ -107,7 +106,5 @@ public class Constants {
     public static final String GET_MEETING_NOTE ="slender/learn/getMeetingNotes/";
     //修改会议笔记
     public static final String changeMeetingNote ="slender/learn/meetingNote/";
-
-
 
 }

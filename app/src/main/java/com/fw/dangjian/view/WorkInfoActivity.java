@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -97,18 +98,34 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
         workInfoPresenter = new WorkInfoPresenter(this);
 
-        WebSettings webSettings = wv.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+        initWebView();
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        nrecycler.setLayoutManager(layoutManager);
 
         if (Build.VERSION.SDK_INT >= 23) {
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
             ActivityCompat.requestPermissions(this, mPermissionList, 123);
         }
+    }
 
+    private void initWebView() {
+        WebSettings webSettings = wv.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        nrecycler.setLayoutManager(layoutManager);
+        webSettings.setDomStorageEnabled(true);//这句话必须保留。。否则无法播放优酷视频网页。。其他的可以
+        webSettings.setPluginState(WebSettings.PluginState.ON);
+        webSettings.setUseWideViewPort(true); // 关键点
+        webSettings.setAllowFileAccess(true); // 允许访问文件
+        webSettings.setSupportZoom(true); // 支持缩放
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 不加载缓存内容
+        wv.setWebChromeClient(new WebChromeClient());//重写一下。有的时候可能会出现问题
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
     }
 
 

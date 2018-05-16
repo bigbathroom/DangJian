@@ -31,7 +31,23 @@ public class AllNoteBean {
         public int managerid;
         public int postId;
         public String post_title;
+        public String post_excerpt;
         public String addtime;
         public String content;
+        public String post_content;
+        //     时间
+        public String meeting_date_gmt;
+        //    地址
+        public String meeting_address;
+        //    主持人
+        public String meeting_author;
+        //    记录人
+        public String meeting_recorder;
+        //    应到人数
+        public String meeting_memberYD;
+        //    实到人数
+        public String meeting_memberSD;
+        //    评论人
+        public String name;
     }
 }

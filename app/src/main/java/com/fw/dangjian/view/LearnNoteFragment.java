@@ -15,6 +15,7 @@ import com.fw.dangjian.adapter.CourseAdapter;
 import com.fw.dangjian.base.BaseFragment;
 import com.fw.dangjian.bean.AllNoteBean;
 import com.fw.dangjian.bean.KongBean;
+import com.fw.dangjian.bean.PrintBean;
 import com.fw.dangjian.dialog.BookDialog;
 import com.fw.dangjian.mvpView.LearnNoteMvpView;
 import com.fw.dangjian.presenter.UserPresenter;
@@ -48,7 +49,7 @@ public class LearnNoteFragment extends  BaseFragment implements LearnNoteMvpView
     private List<AllNoteBean.ResultBean> lists;
     int managerId;
     BookDialog bookDialog;
-
+    private ArrayList<PrintBean> printBeenList;
 
 
     @Override
@@ -89,8 +90,9 @@ public class LearnNoteFragment extends  BaseFragment implements LearnNoteMvpView
             public void onLoadMore() {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-                        page++;
-                        requestServer(page);
+                    /*    page++;
+                        requestServer(page);*/
+                        nrecycler.loadMoreComplete();
                     }
                 }, 200);
 
@@ -171,6 +173,27 @@ public class LearnNoteFragment extends  BaseFragment implements LearnNoteMvpView
         }
     }
 
+    public List<PrintBean> getLearnNoteBeanList()
+    {
+
+        printBeenList = new ArrayList<>();
+        for(int i = 0;i<lists.size();i++){
+
+            PrintBean  printBean = new PrintBean();
+            printBean.setId(lists.get(i).id);
+            printBean.setContent(lists.get(i).content);
+            printBean.setManagerid(lists.get(i).managerid);
+            printBean.setPost_content(lists.get(i).post_content);
+            printBean.setPost_excerpt(lists.get(i).post_excerpt);
+            printBean.setPost_title(lists.get(i).post_title);
+            printBean.setPostId(lists.get(i).postId);
+            printBean.setAddtime(lists.get(i).addtime);
+            printBean.setName(lists.get(i).name);
+
+            printBeenList.add(printBean);
+        }
+        return printBeenList;
+    }
 
     @Override
     public void onNoteNext(KongBean kongBean) {

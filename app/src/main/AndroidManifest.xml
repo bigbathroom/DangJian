@@ -69,7 +69,8 @@
         <activity android:name=".view.QuizActivity" />
         <activity
             android:name=".view.WorkInfoActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:hardwareAccelerated="true"/>
         <activity
             android:name=".view.PartyMemberActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -175,7 +176,8 @@
         <activity android:name=".view.TotalScoreActivity" />
         <activity android:name=".view.WebActivity" />
         <activity android:name=".view.OrganisationActivity" />
-        <activity android:name=".view.QuestionActivity"></activity>
+        <activity android:name=".view.QuestionActivity" />
+        <activity android:name=".view.PrintNoteActivity"></activity>
     </application>
 
 </manifest>

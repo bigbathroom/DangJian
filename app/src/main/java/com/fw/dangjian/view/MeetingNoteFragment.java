@@ -15,6 +15,7 @@ import com.fw.dangjian.adapter.CourseAdapter;
 import com.fw.dangjian.base.BaseFragment;
 import com.fw.dangjian.bean.AllNoteBean;
 import com.fw.dangjian.bean.KongBean;
+import com.fw.dangjian.bean.PrintBean;
 import com.fw.dangjian.dialog.BookDialog;
 import com.fw.dangjian.mvpView.MeetingNoteMvpView;
 import com.fw.dangjian.presenter.UserPresenter;
@@ -48,7 +49,7 @@ public class MeetingNoteFragment extends BaseFragment implements MeetingNoteMvpV
     private List<AllNoteBean.ResultBean> lists;
     int managerId;
     BookDialog bookDialog;
-
+    private ArrayList<PrintBean> printBeenList;
     @Override
     protected View fillView() {
         return layoutinflater.inflate(R.layout.fragment_meeting_note, null);
@@ -87,8 +88,9 @@ public class MeetingNoteFragment extends BaseFragment implements MeetingNoteMvpV
             public void onLoadMore() {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-                        page++;
-                        requestServer(page);
+                       /* page++;
+                        requestServer(page);*/
+                        nrecycler.loadMoreComplete();
                     }
                 }, 200);
 
@@ -100,6 +102,31 @@ public class MeetingNoteFragment extends BaseFragment implements MeetingNoteMvpV
         initAdapterClike();
     }
 
+    public List<PrintBean> getMeetingNoteBeanList()
+    {
+        printBeenList = new ArrayList<>();
+        for(int i = 0;i<lists.size();i++){
+
+            PrintBean printBean = new PrintBean();
+            printBean.setId(lists.get(i).id);
+            printBean.setContent(lists.get(i).content);
+            printBean.setManagerid(lists.get(i).managerid);
+            printBean.setPost_content(lists.get(i).post_content);
+            printBean.setPost_excerpt(lists.get(i).post_excerpt);
+            printBean.setPost_title(lists.get(i).post_title);
+            printBean.setPostId(lists.get(i).postId);
+            printBean.setAddtime(lists.get(i).addtime);
+            printBean.setMeeting_address(lists.get(i).meeting_address);
+            printBean.setMeeting_date_gmt(lists.get(i).meeting_date_gmt);
+            printBean.setMeeting_author(lists.get(i).meeting_author);
+            printBean.setMeeting_memberSD(lists.get(i).meeting_memberSD);
+            printBean.setMeeting_memberYD(lists.get(i).meeting_memberYD);
+            printBean.setMeeting_recorder(lists.get(i).meeting_recorder);
+            printBean.setName(lists.get(i).name);
+            printBeenList.add(printBean);
+        }
+        return printBeenList;
+    }
     private void initAdapterClike() {
         mAdapter.setonItemClickLitener(new CourseAdapter.onItemClickLitener() {
 

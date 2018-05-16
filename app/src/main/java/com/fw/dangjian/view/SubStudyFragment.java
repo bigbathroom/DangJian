@@ -38,7 +38,7 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
 
     private String mTitleCode = "";
     private StudyPresenter  studyPresenter;
-
+    private String title = "";
     int page = 1;
     private int refreshTime = 0;
     private int columnid;
@@ -50,10 +50,11 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
         return layoutinflater.inflate(R.layout.fragment_sub_study, null);
     }
 
-    public static SubStudyFragment newInstance(String code) {
+    public static SubStudyFragment newInstance(String code,String title) {
         SubStudyFragment fragment = new SubStudyFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstanceValue.DATA, code);
+        bundle.putString("title", title);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -65,6 +66,7 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
 
         mTitleCode = getArguments().getString(ConstanceValue.DATA);
         columnid = Integer.valueOf(mTitleCode).intValue();
+        title = getArguments().getString("title");
 
         studyPresenter = new StudyPresenter();
     }
@@ -108,8 +110,13 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
 
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(),VideoActivity.class);
+              /*  Intent intent = new Intent(getActivity(),VideoActivity.class);
                  intent.putExtra("studyId", lists.get(position - 1).id);
+                startActivity(intent);*/
+
+                Intent intent = new Intent(getActivity(),WorkInfoActivity.class);
+                intent.putExtra("news_id",lists.get(position-1).id);
+                intent.putExtra("title",title);
                 startActivity(intent);
             }
         });

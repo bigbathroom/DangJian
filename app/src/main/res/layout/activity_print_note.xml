@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fw.dangjian.view.PrintNoteActivity">
+    <include
+        layout="@layout/head_title"></include>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="46dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_all"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true"
+        >
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graye"
+            android:layout_alignParentBottom="true"
+            />
+        <CheckBox
+            android:id="@+id/cb_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:drawableLeft="@drawable/select_check"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:button="@null"
+            android:text="全选"
+            android:textColor="@color/toolbar"
+            android:textSize="15sp"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

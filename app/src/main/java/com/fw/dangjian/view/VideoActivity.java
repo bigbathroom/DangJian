@@ -333,7 +333,6 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 String mVideoUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4";
 
                 if (kongBean.result.post_content == null || kongBean.result.post_content.equals("")) {
-//                    mNiceVideoPlayer.setUp(mVideoUrl, null);
                     shareUrl="https://www.baidu.com";
                 } else {
                     shareUrl = kongBean.result.post_content;
@@ -347,7 +346,6 @@ public class VideoActivity extends AppCompatActivity implements VideoMvpView {
                 mNiceVideoPlayer.setController(controller);
 
                 mNiceVideoPlayer.start();
-
 
                 tv_introduce_content1.setText(kongBean.result.post_excerpt);
                 tv_introduce_content2.setText(kongBean.result.post_excerpt);
