@@ -51,6 +51,7 @@ public class LoginFragment extends  BaseFragment implements LoginMvpView{
     private String pwd;
     private LoginPresenter loginPresenter;
     private int managerid;
+    private int phone1;
 
     @Override
     protected View fillView() {
@@ -184,9 +185,9 @@ public class LoginFragment extends  BaseFragment implements LoginMvpView{
                 if (kongBean.result != null){
 
                     managerid = kongBean.result.managerid;
-
+                    phone1 = kongBean.result.phone;
                     SPUtils.put(getActivity(), ConstanceValue.LOGIN_TOKEN,managerid);
-
+                    SPUtils.put(getActivity(), ConstanceValue.ADMIN,phone1);
                     getActivity().finish();
                 }
 

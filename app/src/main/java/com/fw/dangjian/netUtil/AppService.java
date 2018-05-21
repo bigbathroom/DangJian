@@ -16,10 +16,12 @@ import com.fw.dangjian.bean.IdentifyCode;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.LoginBean;
 import com.fw.dangjian.bean.MeetBean;
+import com.fw.dangjian.bean.MeetingPrintBean;
 import com.fw.dangjian.bean.MineBean;
 import com.fw.dangjian.bean.MoneyBean;
 import com.fw.dangjian.bean.NoteBean;
 import com.fw.dangjian.bean.OrganisationBean;
+import com.fw.dangjian.bean.PrintHtmlBean;
 import com.fw.dangjian.bean.QuizBean;
 import com.fw.dangjian.bean.RegistBean;
 import com.fw.dangjian.bean.ScoreBean;
@@ -109,7 +111,7 @@ public interface AppService {
     //点赞
     @FormUrlEncoded
     @POST(Constants.THUMB)
-    Observable<KongBean> thumb(@Field("post_id") int id);
+    Observable<KongBean> thumb(@Header("managerid") int managerid,@Field("post_id") int id);
 
     //视频点赞
     @FormUrlEncoded
@@ -294,8 +296,20 @@ public interface AppService {
                                       @Field("id") int id,
                                       @Query("content") String content);
 
+    // 获取会议打印
+    @GET(Constants.getMeetingWeb)
+    Observable<MeetingPrintBean> getMeetingWeb(@Header("managerid") int managerid,@Header("meetingId") int meetingId);
 
 
+    //提交选择的打印学习笔记
+    @POST(Constants.getAllLearnNoteWeb)
+    Observable<PrintHtmlBean> submitLearnNote(@Header("managerid") int managerid,
+                                              @Body RequestBody answer);
+
+    //提交选择的打印会议笔记
+    @POST(Constants.getAllMeetingWeb)
+    Observable<PrintHtmlBean> submitMeetingNote(@Header("managerid") int managerid,
+                                                @Body RequestBody answer);
 }
 
 

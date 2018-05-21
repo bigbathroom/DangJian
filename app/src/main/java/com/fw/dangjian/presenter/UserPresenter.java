@@ -5,13 +5,17 @@ import android.util.Log;
 import com.fw.dangjian.base.BasePresenter;
 import com.fw.dangjian.bean.AllNoteBean;
 import com.fw.dangjian.bean.KongBean;
+import com.fw.dangjian.bean.MeetingPrintBean;
 import com.fw.dangjian.bean.MineBean;
 import com.fw.dangjian.bean.OrganisationBean;
+import com.fw.dangjian.bean.PrintHtmlBean;
 import com.fw.dangjian.bean.TotalScoreBean;
 import com.fw.dangjian.mvpView.ChangeNameMvpView;
 import com.fw.dangjian.mvpView.LearnNoteMvpView;
 import com.fw.dangjian.mvpView.MeetingNoteMvpView;
+import com.fw.dangjian.mvpView.MeetingWebMvpView;
 import com.fw.dangjian.mvpView.OrganisationMvpView;
+import com.fw.dangjian.mvpView.PrintMvpView;
 import com.fw.dangjian.mvpView.PutPasswordMvpView;
 import com.fw.dangjian.mvpView.TotalScoreMvpView;
 import com.fw.dangjian.mvpView.UserCenterMvpView;
@@ -261,6 +265,71 @@ public class UserPresenter extends BasePresenter {
     }
 
 
+    public void getMeetingWeb(int managerid, int meetingId,final MeetingWebMvpView userCenterMvpView) {
+        retrofitHelper.toSubscribe(req.getMeetingWeb(managerid,meetingId), new Subscriber<MeetingPrintBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000", "onCompleted");
+                userCenterMvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "onError");
+                userCenterMvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(MeetingPrintBean userProfile) {
+                Log.d("000000", "onNext " + userProfile);
+                userCenterMvpView.onGetDataNext(userProfile);
+            }
+        });
+    }
 
 
+    public void getMeetingsNoteWeb(int managerid,RequestBody answer,final PrintMvpView userCenterMvpView) {
+        retrofitHelper.toSubscribe(req.submitMeetingNote(managerid,answer), new Subscriber<PrintHtmlBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("Meeting00000", "onCompleted");
+                userCenterMvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("Meeting00000", "onError");
+                userCenterMvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(PrintHtmlBean userProfile) {
+                Log.d("Meeting00000", "onNext " + userProfile);
+                userCenterMvpView.onGetMeetingNext(userProfile);
+            }
+        });
+    }
+
+
+    public void getLearnNoteWeb(int managerid,RequestBody answer,final PrintMvpView userCenterMvpView) {
+        retrofitHelper.toSubscribe(req.submitLearnNote(managerid,answer), new Subscriber<PrintHtmlBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000", "onCompleted");
+                userCenterMvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "onError");
+                userCenterMvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(PrintHtmlBean userProfile) {
+                Log.d("000000", "onNext " + userProfile);
+                userCenterMvpView.onGetLearnNext(userProfile);
+            }
+        });
+    }
 }

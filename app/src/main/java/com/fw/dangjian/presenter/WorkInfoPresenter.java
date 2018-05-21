@@ -62,8 +62,8 @@ public class WorkInfoPresenter extends BasePresenter {
     }
 
 
-    public void thumb(int post_id) {
-        retrofitHelper.toSubscribe(req.thumb(post_id), new Subscriber<KongBean>() {
+    public void thumb(int post_id,int managerId) {
+        retrofitHelper.toSubscribe(req.thumb(post_id,managerId), new Subscriber<KongBean>() {
             @Override
             public void onCompleted() {
                 Log.d("000000","loginonCompleted");
@@ -83,6 +83,9 @@ public class WorkInfoPresenter extends BasePresenter {
             }
         });
     }
+
+
+
 
     public void getComment(int comment_postid) {
         retrofitHelper.toSubscribe(req.getComment(comment_postid), new Subscriber<CommentBean>() {

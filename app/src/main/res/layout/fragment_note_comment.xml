@@ -1,56 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.fw.dangjian.view.VideoActivity">
-
-    <include layout="@layout/head_title"></include>
-
+    tools:context="com.fw.dangjian.view.NoteCommentFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="45dp">
+        android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:visibility="gone">
-
-                <com.xiao.nicevideoplayer.NiceVideoPlayer
-                    android:id="@+id/video_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
-
-                <RelativeLayout
-                    android:id="@+id/iv_back"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:background="@mipmap/iv_return" />
-                </RelativeLayout>
-            </RelativeLayout>
-
-
-            <com.fw.dangjian.NoScrollWebView
-                android:id="@+id/wv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
 
             <RelativeLayout
                 android:id="@+id/rl_book"
@@ -105,55 +65,10 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rl_jianjie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_book">
-
-                <TextView
-                    android:id="@+id/tv_introduce"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="15dp"
-                    android:text="简介>"
-                    android:textColor="@color/gray9"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/tv_introduce_content1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_introduce"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="3dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="普京：俄准备继续归还乌克兰留俄准备继续归还乌克兰留"
-                    android:textColor="@color/gray6"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_introduce_content2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_introduce"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="3dp"
-                    android:text="普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留普京：俄准备继续归还乌克兰留"
-                    android:textColor="@color/gray6"
-                    android:textSize="16sp"
-                    android:visibility="gone" />
-            </RelativeLayout>
-
-            <RelativeLayout
                 android:id="@+id/rl_note"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@+id/rl_jianjie"
+                android:layout_below="@+id/rl_book"
                 android:layout_marginTop="5dp"
                 android:padding="5dp">
 
@@ -259,30 +174,8 @@
                 </RelativeLayout>
             </RelativeLayout>
 
-            <!--    <RelativeLayout
-                    android:id="@+id/rl_comment"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/white"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="28dp"
-                        android:background="@mipmap/comment_bg"
-                        android:gravity="center_vertical"
-                        android:hint="写评论..."
-                        android:paddingLeft="20dp"
-                        android:textColorHint="@color/gray9" />
-                </RelativeLayout>
-        -->
-
         </RelativeLayout>
     </ScrollView>
-
-
-
 
     <View
         android:layout_width="match_parent"
@@ -316,6 +209,5 @@
             android:textSize="13sp" />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

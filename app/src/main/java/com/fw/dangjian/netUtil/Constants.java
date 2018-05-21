@@ -107,4 +107,12 @@ public class Constants {
     //修改会议笔记
     public static final String changeMeetingNote ="slender/learn/meetingNote/";
 
+    //获取会议打印
+    public static final String getMeetingWeb ="slender/learn/getMeetingNotess/";
+
+    //获取所有会议打印
+    public static final String getAllMeetingWeb ="slender/learn/getMeetingNotes_h5/";
+    //获取所有学习笔记打印
+    public static final String getAllLearnNoteWeb ="slender/learn/getNotes_h5";
+
 }

@@ -29,5 +29,6 @@ public class LoginBean {
         public String account;
         public String lastlogintime;
         public boolean issuper;
+        public int phone;
     }
 }

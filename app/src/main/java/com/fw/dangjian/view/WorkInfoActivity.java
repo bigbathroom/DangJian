@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -114,18 +113,18 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
         WebSettings webSettings = wv.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        webSettings.setDomStorageEnabled(true);//这句话必须保留。。否则无法播放优酷视频网页。。其他的可以
-        webSettings.setPluginState(WebSettings.PluginState.ON);
-        webSettings.setUseWideViewPort(true); // 关键点
-        webSettings.setAllowFileAccess(true); // 允许访问文件
-        webSettings.setSupportZoom(true); // 支持缩放
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 不加载缓存内容
-        wv.setWebChromeClient(new WebChromeClient());//重写一下。有的时候可能会出现问题
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+   /*     webSettings.setDomStorageEnabled(true);//这句话必须保留。。否则无法播放优酷视频网页。。其他的可以
+          webSettings.setPluginState(WebSettings.PluginState.ON);
+          webSettings.setUseWideViewPort(true); // 关键点
+          webSettings.setAllowFileAccess(true); // 允许访问文件
+          webSettings.setSupportZoom(true); // 支持缩放
+          webSettings.setLoadWithOverviewMode(true);
+          webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 不加载缓存内容
+          wv.setWebChromeClient(new WebChromeClient());//重写一下。有的时候可能会出现问题
+          webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
+         }*/
     }
 
 
@@ -133,30 +132,27 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     protected void initData() {
         Intent intent = getIntent();
         if (intent != null) {
-
             id = intent.getIntExtra("news_id", -1);
             title = intent.getStringExtra("title");
             banner_url = intent.getStringExtra("url");
         }
 
-        timeString = StringUtils.getTimeString();
+        if (title != null) {
+            tv_title.setText(title);
+        }
 
+        timeString = StringUtils.getTimeString();
         url = BASE_URL + "/note/" + id + "?managerid=" + managerId;
 
-        Map<String, String> map = new HashMap<String, String>();
+       final Map<String, String> map = new HashMap<String, String>();
         map.put("assetionkey", StringUtils.getBase64(RetrofitHelper.key + timeString));
         map.put("timestamp", timeString);
 
         if (id == -1) {
             wv.loadUrl(banner_url, map);
-            if (title != null) {
-                tv_title.setText(title);
-            }
         } else {
             wv.loadUrl(url, map);
-            if (title != null) {
-                tv_title.setText(title);
-            }
+
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -211,7 +207,12 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                 break;
             case R.id.iv_praise:
 
-                workInfoPresenter.thumb(id);
+                if (managerId == -1) {
+                    startActivityForResult(new Intent(this, LoginActivity.class), 1000);
+                } else {
+                    workInfoPresenter.thumb(id,managerId);
+                }
+
                 break;
             case R.id.iv_share:
                 String shareUrl = BASE_SHARE_URL + "/share/note/" + id + "?managerid=" + managerId + "&&" + "timestamp=" + timeString + "&&" + "assetionkey=" + StringUtils.getBase64(RetrofitHelper.key + timeString);

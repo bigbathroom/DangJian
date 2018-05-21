@@ -20,9 +20,7 @@ public interface ConstanceValue {
     public static final String PROJECT_NAME = "DJ";
     public static final String IS_FIRST_START = "isFirst";//是否第一次启动
     public static final String  LOGIN_TOKEN = "accountId";//是否第一次启动
-
-
-
+    public static final String  ADMIN = "isAdmin";
     /**
      * 修改主题
      */

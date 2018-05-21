@@ -284,7 +284,10 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
                     Intent intent4 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent4);
                 } else {
-                    SPUtils.remove(getActivity(), ConstanceValue.LOGIN_TOKEN);
+//                    SPUtils.remove(getActivity(), ConstanceValue.LOGIN_TOKEN);
+                    SPUtils.clear(getActivity());
+
+
                     Intent intent4 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent4);
                 }
@@ -396,7 +399,6 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
                     .error(R.mipmap.head_portrait)
                     .into(rv_touxiang);
 
-//            tv_name.setText(userProfile.result.name);
         } else {
             ToastUtils.show(getActivity(), userProfile.result_msg, Toast.LENGTH_SHORT);
         }

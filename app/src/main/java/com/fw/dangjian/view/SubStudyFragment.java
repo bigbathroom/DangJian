@@ -112,12 +112,17 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
             public void onItemClick(View view, int position) {
               /*  Intent intent = new Intent(getActivity(),VideoActivity.class);
                  intent.putExtra("studyId", lists.get(position - 1).id);
-                startActivity(intent);*/
+                startActivity(intent);
+*/
 
-                Intent intent = new Intent(getActivity(),WorkInfoActivity.class);
+                Intent intent = new Intent(getActivity(),FileWebActivity.class);
+                intent.putExtra("studyId", lists.get(position - 1).id);
+                startActivity(intent);
+
+               /* Intent intent = new Intent(getActivity(),WorkInfoActivity.class);
                 intent.putExtra("news_id",lists.get(position-1).id);
                 intent.putExtra("title",title);
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
     }

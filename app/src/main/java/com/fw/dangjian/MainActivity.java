@@ -3,12 +3,15 @@ package com.fw.dangjian;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
@@ -60,6 +63,20 @@ public class MainActivity extends AppCompatActivity {
     public Activity act;
     public int alpha = 0;
     int managerId;
+
+    // 定义一个变量，来标识是否退出
+    private static boolean isExit;
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            isExit = false;
+        }
+
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,11 +232,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void onResume() {
         super.onResume();
+        isExit = false;
         MobclickAgent.onResume(this);
     }
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
     }
+
+
+    @Override
+    public void onBackPressed() {
+        exit();
+//        super.onBackPressed();
+    }
+
+
+
+    private void exit() {
+        if (!isExit) {
+            isExit = true;
+            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            mHandler.sendEmptyMessageDelayed(0, 2000);
+        } else {
+            MyApplication.getInstance().exit();
+        }
+    }
+
 
 }

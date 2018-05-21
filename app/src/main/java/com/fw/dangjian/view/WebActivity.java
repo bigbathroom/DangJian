@@ -2,9 +2,14 @@ package com.fw.dangjian.view;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintJob;
+import android.print.PrintManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,19 +18,27 @@ import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fw.dangjian.R;
+import com.fw.dangjian.adapter.MyPrintAdapter;
 import com.fw.dangjian.base.BaseActivity;
+import com.fw.dangjian.bean.MeetingPrintBean;
+import com.fw.dangjian.mvpView.MeetingWebMvpView;
 import com.fw.dangjian.netUtil.RetrofitHelper;
+import com.fw.dangjian.presenter.UserPresenter;
 import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
 import com.fw.dangjian.util.StringUtils;
+import com.fw.dangjian.util.ToastUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -33,12 +46,14 @@ import butterknife.OnClick;
 
 import static com.fw.dangjian.netUtil.Constants.BASE_URL;
 
-public class WebActivity extends BaseActivity {
+public class WebActivity extends BaseActivity implements MeetingWebMvpView {
 
     @BindView(R.id.left)
     RelativeLayout left;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_right)
+    TextView tv_right;
     @BindView(R.id.wv)
     WebView wv;
 
@@ -47,7 +62,10 @@ public class WebActivity extends BaseActivity {
     int id;
     private String timeString;
     private String url2;
-
+    private int isAdmin;
+    private UserPresenter userPresenter;
+    private List<MeetingPrintBean.ResultBean> result;
+    WebView  mWebView;
 
     @Override
     protected int fillView() {
@@ -58,11 +76,21 @@ public class WebActivity extends BaseActivity {
     protected void initUi() {
         left.setVisibility(View.VISIBLE);
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
+        isAdmin = (int) SPUtils.get(this, ConstanceValue.ADMIN, -1);
+
+        userPresenter = new UserPresenter();
+
 
         wv.setWebContentsDebuggingEnabled(true);
         WebSettings webSettings = wv.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
+        if (isAdmin == 1) {
+            tv_right.setVisibility(View.VISIBLE);
+            tv_right.setText("打印");
+        } else {
+            tv_right.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -226,14 +254,76 @@ public class WebActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.left})
+    @OnClick({R.id.left, R.id.tv_right})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.left:
                 finish();
                 break;
+            case R.id.tv_right:
+//              打印
+//                userPresenter.getMeetingWeb(managerId, id, this);
+
+                doWebViewPrint();
+
+                break;
         }
     }
+
+    private  void doWebViewPrint(){
+        String url = BASE_URL+"slender/learn/getMeetingNotess_h5?meetingId="+id;
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("assetionkey", StringUtils.getBase64(RetrofitHelper.key + timeString));
+        map.put("timestamp", timeString);
+        map.put("managerid", managerId + "");
+
+        // Create a WebView object specifically for printing
+
+        WebView webView =new WebView(this);
+
+
+
+        webView.setWebViewClient(new WebViewClient(){
+
+            public boolean shouldOverrideUrlLoading(WebView view,String url){
+
+                return false;
+            }
+
+
+
+            @Override
+
+            public void onPageFinished(WebView view,String url){
+
+                Log.i(TAG,"page finished loading "+ url);
+
+                createWebPrintJob(view);
+
+                mWebView =null;
+
+            }
+
+        });
+
+        webView.loadUrl(url, map);
+
+        mWebView = webView;
+    }
+
+    private void createWebPrintJob(WebView webView){
+
+        PrintManager printManager =(PrintManager)getSystemService(Context.PRINT_SERVICE);
+
+        PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
+
+
+        String jobName = getString(R.string.app_name)+" Document";
+
+        PrintJob printJob = printManager.print(jobName, printAdapter, new PrintAttributes.Builder().build());
+
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -243,4 +333,32 @@ public class WebActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onGetDataNext(MeetingPrintBean actionBean) {
+
+        if (actionBean.result_code != null && actionBean.result_code.equals("200")) {
+
+            result = actionBean.result;
+
+            if (result.size() > 0) {
+                // 打印
+                String jobName = this.getString(R.string.app_name) + " Document";
+
+                PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+                PrintAttributes.Builder builder = new PrintAttributes.Builder();
+
+                MyPrintAdapter myPrintAdapter = new MyPrintAdapter(this, result, 2);
+
+                printManager.print(jobName, myPrintAdapter, builder.build());
+            } else {
+                ToastUtils.show(this, "数据为空", Toast.LENGTH_SHORT);
+            }
+
+
+        } else {
+            ToastUtils.show(this, actionBean.result_msg, Toast.LENGTH_SHORT);
+        }
+
+
+    }
 }
