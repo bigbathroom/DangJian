@@ -115,4 +115,7 @@ public class Constants {
     //获取所有学习笔记打印
     public static final String getAllLearnNoteWeb ="slender/learn/getNotes_h5";
 
+    //获取所有消息
+    public static final String getMessage ="posts/list/";
+
 }

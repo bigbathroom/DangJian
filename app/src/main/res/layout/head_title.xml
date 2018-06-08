@@ -59,12 +59,31 @@
         android:id="@+id/iv_msg"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/message"
+        android:layout_marginRight="22dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@mipmap/message1"
         android:visibility="gone"
         />
+
+
+    <TextView
+        android:id="@+id/tv_message_count"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="9dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_white_radio"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:text="0"
+        android:textColor="@color/menu_select"
+        android:textSize="11sp"
+       android:gravity="center"
+        android:visibility="gone"
+        />
+
+
+
 
     <TextView
         android:id="@+id/tv_right"

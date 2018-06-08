@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fw.dangjian.view.MessageActivity">
+
+    <include
+        layout="@layout/head_title"></include>
+
+ <!--   <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+        android:id="@+id/swipeRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
+-->
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
+    <include  layout="@layout/layout_no_content"
+        android:id="@+id/no_content"
+        android:visibility="gone"/>
+
+    <include  layout="@layout/layout_no_net"
+        android:id="@+id/no_net"
+        android:visibility="gone"/>
+
+</LinearLayout>

@@ -22,9 +22,14 @@ import com.fw.dangjian.adapter.PingLunAdapter;
 import com.fw.dangjian.base.BaseActivity;
 import com.fw.dangjian.bean.CommentBean;
 import com.fw.dangjian.bean.KongBean;
+import com.fw.dangjian.bean.NoteBean;
+import com.fw.dangjian.bean.SubmitBean1;
+import com.fw.dangjian.bean.VideoBean;
 import com.fw.dangjian.dialog.CommentDialog;
+import com.fw.dangjian.mvpView.VideoMvpView;
 import com.fw.dangjian.mvpView.WorkInfoMvpView;
 import com.fw.dangjian.netUtil.RetrofitHelper;
+import com.fw.dangjian.presenter.VideoInfoPresenter;
 import com.fw.dangjian.presenter.WorkInfoPresenter;
 import com.fw.dangjian.util.ConstanceValue;
 import com.fw.dangjian.util.SPUtils;
@@ -47,7 +52,7 @@ import butterknife.OnClick;
 import static com.fw.dangjian.netUtil.Constants.BASE_SHARE_URL;
 import static com.fw.dangjian.netUtil.Constants.BASE_URL;
 
-public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
+public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView,VideoMvpView {
 
     @BindView(R.id.left)
     RelativeLayout left;
@@ -73,6 +78,22 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     ImageView iv_praise;
     @BindView(R.id.iv_share)
     ImageView iv_share;
+
+
+    @BindView(R.id.rl_book)
+    RelativeLayout rl_book;
+    @BindView(R.id.et_biji)
+    EditText et_biji;
+    @BindView(R.id.tv_cancle)
+    TextView tv_cancle;
+    @BindView(R.id.tv_sure)
+    TextView tv_sure;
+    @BindView(R.id.book)
+    TextView book;
+    private String content ="";
+
+    private int noteId = -1;
+    private VideoInfoPresenter videoInfoPresenter;
     private int id;
     private WorkInfoPresenter workInfoPresenter;
     private CommentDialog commentDialog;
@@ -85,6 +106,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     private List<CommentBean.ResultBean> lists;
 
     private String timeString;
+    private String type;
 
     @Override
     protected int fillView() {
@@ -96,7 +118,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
         left.setVisibility(View.VISIBLE);
         managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
         workInfoPresenter = new WorkInfoPresenter(this);
-
+        videoInfoPresenter = new VideoInfoPresenter(this);
         initWebView();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -112,19 +134,6 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     private void initWebView() {
         WebSettings webSettings = wv.getSettings();
         webSettings.setJavaScriptEnabled(true);
-
-   /*     webSettings.setDomStorageEnabled(true);//这句话必须保留。。否则无法播放优酷视频网页。。其他的可以
-          webSettings.setPluginState(WebSettings.PluginState.ON);
-          webSettings.setUseWideViewPort(true); // 关键点
-          webSettings.setAllowFileAccess(true); // 允许访问文件
-          webSettings.setSupportZoom(true); // 支持缩放
-          webSettings.setLoadWithOverviewMode(true);
-          webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 不加载缓存内容
-          wv.setWebChromeClient(new WebChromeClient());//重写一下。有的时候可能会出现问题
-          webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-         }*/
     }
 
 
@@ -134,7 +143,15 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
         if (intent != null) {
             id = intent.getIntExtra("news_id", -1);
             title = intent.getStringExtra("title");
+            type = intent.getStringExtra("type");
+
             banner_url = intent.getStringExtra("url");
+        }
+
+        if (type != null && type.equals("study")){
+            book.setVisibility(View.VISIBLE);
+        }else{
+            book.setVisibility(View.GONE);
         }
 
         if (title != null) {
@@ -174,7 +191,7 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
     }
 
 
-    @OnClick({R.id.left, R.id.rl_comment, R.id.iv_commment, R.id.iv_collect, R.id.iv_praise, R.id.iv_share})
+    @OnClick({R.id.left, R.id.rl_comment, R.id.iv_commment, R.id.iv_collect, R.id.iv_praise, R.id.iv_share, R.id.book, R.id.tv_cancle, R.id.tv_sure})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.left:
@@ -226,6 +243,39 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
                         .setCallback(shareListener).open();
 
                 break;
+            case R.id.book:
+                if (managerId == -1) {
+                    startActivityForResult(new Intent(this, LoginActivity.class), 1000);
+                } else {
+                    videoInfoPresenter.getNote(managerId,id);
+
+                    rl_book.setVisibility(View.VISIBLE);
+
+                }
+                break;
+
+            case R.id.tv_cancle:
+                et_biji.setText("");
+                rl_book.setVisibility(View.GONE);
+
+                break;
+            case R.id.tv_sure:
+
+                String s = et_biji.getText().toString();
+
+                if (TextUtils.isEmpty(s)) {
+                    ToastUtils.show(this, "请先输入笔记", Toast.LENGTH_SHORT);
+                }else{
+
+                    if(noteId == -1||noteId == 0){
+                        videoInfoPresenter.submitNote(managerId,id,s);
+                    }else{
+                        videoInfoPresenter.changeNote(managerId,noteId,s);
+                    }
+
+                }
+
+                break;
         }
     }
 
@@ -259,6 +309,35 @@ public class WorkInfoActivity extends BaseActivity implements WorkInfoMvpView {
             ToastUtils.show(this, kongBean.result_msg, Toast.LENGTH_SHORT);
         }
 
+
+    }
+
+    @Override
+    public void onNoteNext(SubmitBean1 kongBean) {
+        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
+//            bookDialog.dismiss();
+            rl_book.setVisibility(View.GONE);
+            ToastUtils.show(this, "提交成功", Toast.LENGTH_SHORT);
+        } else {
+            ToastUtils.show(this, "提交失败", Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    public void onGetNoteNext(NoteBean kongBean) {
+        if (kongBean.result_code != null && kongBean.result_code.equals("200")) {
+            if(kongBean.result!=null){
+                content = kongBean.result.content;
+                noteId = kongBean.result.id;
+                et_biji.setText(content);
+            }
+        } else {
+//            ToastUtils.show(this, "获取笔记失败", Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    public void onGetDataNext(VideoBean kongBean) {
 
     }
 

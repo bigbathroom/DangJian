@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mcxtzhang.swipemenulib.SwipeMenuLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:paddingTop="10dp"
+    android:background="@color/white"
+    android:id="@+id/swip_layout">
+
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_red"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            >
+            <TextView
+                android:id="@+id/tv_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/greyblue"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="来自党的慰问来自党的慰问来自党的慰问来自党的慰问来自党的慰问"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:layout_below="@+id/tv_from"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="来自党的慰问来自党的慰问来自党的慰问来自党的慰问来自党的慰问来自党的慰问来自党的慰问来自党的慰问"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/gray6"
+                android:textSize="14sp"
+                android:layout_below="@+id/tv_title"
+                android:padding="10dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grayf6"
+                android:layout_below="@+id/tv_message"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"/>
+
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="习近平"
+                android:gravity="center"
+                android:textColor="@color/gray9"
+                android:textSize="14sp"
+                android:layout_below="@+id/tv_message"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="2018-09-08"
+                android:gravity="center"
+                android:textColor="@color/gray9"
+                android:textSize="14sp"
+                android:layout_below="@+id/tv_message"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="@color/blue1"
+        android:text="删除"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"/>
+
+</com.mcxtzhang.swipemenulib.SwipeMenuLayout>

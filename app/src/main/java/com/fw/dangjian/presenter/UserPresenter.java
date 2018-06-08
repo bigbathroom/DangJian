@@ -6,6 +6,7 @@ import com.fw.dangjian.base.BasePresenter;
 import com.fw.dangjian.bean.AllNoteBean;
 import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.MeetingPrintBean;
+import com.fw.dangjian.bean.MessageBean;
 import com.fw.dangjian.bean.MineBean;
 import com.fw.dangjian.bean.OrganisationBean;
 import com.fw.dangjian.bean.PrintHtmlBean;
@@ -14,6 +15,7 @@ import com.fw.dangjian.mvpView.ChangeNameMvpView;
 import com.fw.dangjian.mvpView.LearnNoteMvpView;
 import com.fw.dangjian.mvpView.MeetingNoteMvpView;
 import com.fw.dangjian.mvpView.MeetingWebMvpView;
+import com.fw.dangjian.mvpView.MessageMvpView;
 import com.fw.dangjian.mvpView.OrganisationMvpView;
 import com.fw.dangjian.mvpView.PrintMvpView;
 import com.fw.dangjian.mvpView.PutPasswordMvpView;
@@ -329,6 +331,28 @@ public class UserPresenter extends BasePresenter {
             public void onNext(PrintHtmlBean userProfile) {
                 Log.d("000000", "onNext " + userProfile);
                 userCenterMvpView.onGetLearnNext(userProfile);
+            }
+        });
+    }
+
+    public void getMessage(int managerid, final MessageMvpView messageMvpView) {
+        retrofitHelper.toSubscribe(req.getMessage(managerid), new Subscriber<MessageBean>() {
+            @Override
+            public void onCompleted() {
+                Log.d("000000", "onCompleted");
+                messageMvpView.onGetDataCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("000000", "onError");
+                messageMvpView.onGetDataError(e);
+            }
+
+            @Override
+            public void onNext(MessageBean userProfile) {
+                Log.d("000000", "onNext " + userProfile);
+                messageMvpView.onGetDataNext(userProfile);
             }
         });
     }

@@ -1,8 +1,9 @@
 package com.fw.dangjian;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by Administrator on 2018/1/4.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 
     private static Context context;
     private List<Activity> activityList = new LinkedList<Activity>();
@@ -78,4 +79,9 @@ public class MyApplication extends Application {
         System.exit(0);
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 }

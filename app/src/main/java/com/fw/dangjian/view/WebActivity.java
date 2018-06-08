@@ -116,10 +116,10 @@ public class WebActivity extends BaseActivity implements MeetingWebMvpView {
         map.put("timestamp", timeString);
         map.put("managerid", managerId + "");
 
-//        Toast.makeText(this, managerId + "", Toast.LENGTH_SHORT).show();
         if (flag == 100) {
             wv.loadUrl(url1, map);
             tv_title.setText("学习计划");
+            tv_right.setVisibility(View.GONE);
         } else if (flag == 200) {
             wv.loadUrl(url2, map);
             tv_title.setText("会议详情");

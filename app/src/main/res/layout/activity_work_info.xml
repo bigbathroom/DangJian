@@ -25,20 +25,89 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <RelativeLayout
-                android:id="@+id/rl_pinglun"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="40dp"
+                android:background="@color/graye" />
+
+            <RelativeLayout
+                android:id="@+id/rl_book"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/wv"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/et_biji"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/shape_gray"
+                    android:gravity="top|left"
+                    android:hint="请输入笔记内容"
+                    android:maxLines="5"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_cancle"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/et_biji"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/graye"
+                    android:gravity="center"
+                    android:text="取消"
+                    android:textColor="@color/gray3"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_sure"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/et_biji"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/graye"
+                    android:gravity="center"
+                    android:text="提交"
+                    android:textColor="@color/gray3"
+                    android:textSize="15sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@color/graye" />
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/gray9" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_book"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="我的笔记"
+                android:textColor="#0978AA"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_pinglun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="40dp"
+                android:visibility="gone">
+
+
+
                 <TextView
                     android:id="@+id/tv_comment_count"
                     android:layout_width="match_parent"

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.fw.dangjian.view.FaBuActivity">
+
+    <include layout="@layout/head_title"></include>
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:id="@+id/root">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="板块："
+                    android:textSize="18sp"
+                    android:textColor="@color/gray6"/>
+
+                <TextView
+                    android:id="@+id/tv_bankuai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="首页"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray3"
+                    android:layout_marginLeft="80dp"/>
+
+                <TextView
+                    android:id="@+id/tv_arrow"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/arrow_down2"
+                    android:layout_alignParentRight="true"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/gray"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="栏目："
+                    android:textSize="18sp"
+                    android:textColor="@color/gray6"/>
+
+                <TextView
+                    android:id="@+id/tv_lanmu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="首页"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray3"
+                    android:layout_marginLeft="80dp"/>
+
+                <TextView
+                    android:id="@+id/tv_arrow1"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/arrow_down2"
+                    android:layout_alignParentRight="true"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/gray"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="标题："
+                    android:textSize="18sp"
+                    android:textColor="@color/gray6"/>
+
+                <EditText
+                    android:id="@+id/tv_biaoti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入标题"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray3"
+                    android:textColorHint="@color/gray9"
+                    android:layout_marginLeft="80dp"
+                    android:background="@null"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/gray"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正文："
+                android:textSize="18sp"
+                android:textColor="@color/gray6"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"/>
+
+
+
+            <EditText
+                android:id="@+id/et_question"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/shape_gray"
+                android:gravity="top"
+                android:hint="请输入发布内容..."
+                android:lineSpacingExtra="4sp"
+                android:maxEms="400"
+                android:padding="15dp"
+                android:singleLine="false"
+                android:textColor="#000000"
+                android:textColorHint="#8a94a6"
+                android:textSize="14sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

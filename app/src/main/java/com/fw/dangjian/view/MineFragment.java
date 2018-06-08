@@ -56,14 +56,12 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
     RoundedImageView rv_touxiang;
     @BindView(R.id.tv_name)
     TextView tv_name;
+    @BindView(R.id.rl_message)
+    RelativeLayout rl_message;
     @BindView(R.id.rl_ku)
     RelativeLayout rl_ku;
     @BindView(R.id.rl_photo)
     RelativeLayout rl_photo;
-    @BindView(R.id.rl_manager)
-    RelativeLayout rl_manager;
-    @BindView(R.id.rl_user)
-    RelativeLayout rl_user;
     @BindView(R.id.rl_course)
     RelativeLayout rl_course;
     @BindView(R.id.rl_score)
@@ -140,10 +138,19 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
     };
 
 
-    @OnClick({R.id.iv_msg, R.id.rv_touxiang, R.id.rl_ku, R.id.rl_photo, R.id.rl_manager, R.id.rl_spec, R.id.rl_user, R.id.rl_course,R.id.rl_score, R.id.rl_psw, R.id.rl_organ})
+    @OnClick({R.id.iv_msg, R.id.rv_touxiang,R.id.rl_message, R.id.rl_ku, R.id.rl_photo, R.id.rl_spec, R.id.rl_course,R.id.rl_score, R.id.rl_psw, R.id.rl_organ, R.id.rl_fabu})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_msg:
+                break;
+            case R.id.rl_message:
+                if (managerId == -1) {
+                    Intent intent4 = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent4);
+                } else {
+                    Intent intent1 = new Intent(getActivity(), MessageActivity.class);
+                    startActivity(intent1);
+                }
                 break;
             case R.id.rl_organ:
                 if (managerId == -1) {
@@ -238,27 +245,6 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
                 }
 
                 break;
-            case R.id.rl_manager:
-                if (managerId == -1) {
-                    Intent intent4 = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent4);
-                } else {
-                    Intent intent1 = new Intent(getActivity(), ManagerActivity.class);
-                    startActivity(intent1);
-                }
-
-                break;
-            case R.id.rl_user:
-                if (managerId == -1) {
-                    Intent intent4 = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent4);
-                } else {
-                    Intent intent2 = new Intent(getActivity(), ChangeNameActivity.class);
-                    startActivityForResult(intent2, 400);
-
-                }
-
-                break;
             case R.id.rl_course:
                 if (managerId == -1) {
                     Intent intent4 = new Intent(getActivity(), LoginActivity.class);
@@ -287,11 +273,20 @@ public class MineFragment extends BaseFragment implements UserCenterMvpView {
 //                    SPUtils.remove(getActivity(), ConstanceValue.LOGIN_TOKEN);
                     SPUtils.clear(getActivity());
 
-
                     Intent intent4 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent4);
                 }
 
+                break;
+
+            case R.id.rl_fabu:
+                if (managerId == -1) {
+                    Intent intent4 = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent4);
+                } else {
+                    Intent intent1 = new Intent(getActivity(), FaBuActivity.class);
+                    startActivity(intent1);
+                }
                 break;
         }
     }

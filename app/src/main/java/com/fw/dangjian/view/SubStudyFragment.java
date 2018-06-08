@@ -102,7 +102,7 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
         });
 
 
-        mAdapter = new StudyAdapter(lists, getActivity());
+        mAdapter = new StudyAdapter(lists, getActivity(),columnid);
         nrecycler.setAdapter(mAdapter);
 
         mAdapter.setonItemClickLitener(new StudyAdapter.onItemClickLitener() {
@@ -114,15 +114,18 @@ public class SubStudyFragment extends  BaseFragment implements StudyMvpView{
                  intent.putExtra("studyId", lists.get(position - 1).id);
                 startActivity(intent);
 */
+              if(columnid == 12){
+                  Intent intent = new Intent(getActivity(),FileWebActivity.class);
+                  intent.putExtra("studyId", lists.get(position - 1).id);
+                  startActivity(intent);
 
-                Intent intent = new Intent(getActivity(),FileWebActivity.class);
-                intent.putExtra("studyId", lists.get(position - 1).id);
-                startActivity(intent);
-
-               /* Intent intent = new Intent(getActivity(),WorkInfoActivity.class);
-                intent.putExtra("news_id",lists.get(position-1).id);
-                intent.putExtra("title",title);
-                startActivity(intent);*/
+              }else{
+                  Intent intent = new Intent(getActivity(),WorkInfoActivity.class);
+                  intent.putExtra("news_id",lists.get(position-1).id);
+                  intent.putExtra("title",title);
+                  intent.putExtra("type","study");
+                  startActivity(intent);
+              }
             }
         });
     }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/iv_feed_pic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@mipmap/feed_add"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/delete"
+           />
+    </RelativeLayout>
+
+</RelativeLayout>

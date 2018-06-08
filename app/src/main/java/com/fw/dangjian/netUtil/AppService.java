@@ -17,6 +17,7 @@ import com.fw.dangjian.bean.KongBean;
 import com.fw.dangjian.bean.LoginBean;
 import com.fw.dangjian.bean.MeetBean;
 import com.fw.dangjian.bean.MeetingPrintBean;
+import com.fw.dangjian.bean.MessageBean;
 import com.fw.dangjian.bean.MineBean;
 import com.fw.dangjian.bean.MoneyBean;
 import com.fw.dangjian.bean.NoteBean;
@@ -310,6 +311,10 @@ public interface AppService {
     @POST(Constants.getAllMeetingWeb)
     Observable<PrintHtmlBean> submitMeetingNote(@Header("managerid") int managerid,
                                                 @Body RequestBody answer);
+
+    // 获取会议打印
+    @GET(Constants.getMessage)
+    Observable<MessageBean> getMessage(@Header("managerid") int managerid);
 }
 
 

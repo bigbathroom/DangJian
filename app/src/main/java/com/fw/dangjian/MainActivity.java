@@ -25,6 +25,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         initlistener();
+
+        JPushInterface.setDebugMode(true);//如果时正式版就改成false
+        JPushInterface.init(this);
 
     }
     private void initlistener() {
