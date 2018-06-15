@@ -68,7 +68,7 @@ public class ChangeColumnDialog extends Dialog implements View.OnClickListener,O
 		provinceAdapter = new AddressTextAdapter(context, arrProvinces, getProvinceItem(strProvince), maxsize, minsize);
 		wvProvince.setVisibleItems(3);
 		wvProvince.setViewAdapter(provinceAdapter);
-		wvProvince.setCyclic(true);//设置内容循环
+		wvProvince.setCyclic(false);//设置内容循环
 		wvProvince.setCurrentItem(getProvinceItem(strProvince));
 
 
@@ -81,6 +81,7 @@ public class ChangeColumnDialog extends Dialog implements View.OnClickListener,O
 			public void onScrollingFinished(WheelView wheel) {
 				String currentText = (String) provinceAdapter.getItemText(wheel.getCurrentItem());
 				setTextviewSize(currentText, provinceAdapter);
+				strProvince = currentText;
 			}
 		});
 
@@ -96,6 +97,12 @@ public class ChangeColumnDialog extends Dialog implements View.OnClickListener,O
 			this.strProvince = province;
 		}
 	}
+
+	@Override
+	public void onChanged(WheelView wheel, int oldValue, int newValue) {
+
+	}
+
 	/**
 	 * 返回省会索引
 	 */
@@ -112,15 +119,10 @@ public class ChangeColumnDialog extends Dialog implements View.OnClickListener,O
 			}
 		}
 		if (noprovince) {
-			strProvince = "首页";
-			return 10;
+			strProvince = province;
+			return 0;
 		}
 		return provinceIndex;
-	}
-
-	@Override
-	public void onChanged(WheelView wheel, int oldValue, int newValue) {
-
 	}
 
 
@@ -171,6 +173,7 @@ public class ChangeColumnDialog extends Dialog implements View.OnClickListener,O
 	public void setAddresskListener(OnAddressCListener onAddressCListener) {
 		this.onAddressCListener = onAddressCListener;
 	}
+
 
 	@Override
 	public void onClick(View v) {

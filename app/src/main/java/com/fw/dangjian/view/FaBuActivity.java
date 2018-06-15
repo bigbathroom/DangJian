@@ -25,10 +25,15 @@ import android.widget.Toast;
 import com.fw.dangjian.R;
 import com.fw.dangjian.adapter.FeedPicAdapter;
 import com.fw.dangjian.base.BaseActivity;
+import com.fw.dangjian.bean.ColumnBean;
+import com.fw.dangjian.bean.StudyBean;
 import com.fw.dangjian.dialog.ChangeColumnDialog;
+import com.fw.dangjian.mvpView.FaBuMvpView;
 import com.fw.dangjian.popwin.CameraPopu;
-import com.fw.dangjian.presenter.UserPresenter;
+import com.fw.dangjian.presenter.FabuPresenter;
 import com.fw.dangjian.util.Bimp;
+import com.fw.dangjian.util.ConstanceValue;
+import com.fw.dangjian.util.SPUtils;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
@@ -50,7 +55,7 @@ import static com.fw.dangjian.util.ImageUtils.file_photo;
 import static com.umeng.commonsdk.stateless.UMSLEnvelopeBuild.mContext;
 import static com.umeng.socialize.utils.DeviceConfig.context;
 
-public class FaBuActivity extends BaseActivity {
+public class FaBuActivity extends BaseActivity implements FaBuMvpView {
     @BindView(R.id.left)
     RelativeLayout left;
     @BindView(R.id.tv_title)
@@ -89,7 +94,6 @@ public class FaBuActivity extends BaseActivity {
     private CameraPopu cameraPopu;
     private Bitmap bmp;
 
-    UserPresenter  userPresenter;
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
@@ -104,6 +108,11 @@ public class FaBuActivity extends BaseActivity {
     };
     private ArrayList<String> arrayList;
     private ArrayList<String> arrayList1;
+    private int managerId;
+    private ArrayList<String> homeTitles;
+    private ArrayList<String> studyTitles;
+    private FabuPresenter fabuPresenter;
+
     @Override
     protected int fillView() {
         return R.layout.activity_fa_bu;
@@ -123,16 +132,23 @@ public class FaBuActivity extends BaseActivity {
         bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.feed_add);
         bmps.clear();
         bmps.add(bmp);
-        initData();
+
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         rv.setLayoutManager(layoutManager);
-        userPresenter = new UserPresenter();
+
+        fabuPresenter = new FabuPresenter();
+
+        managerId = (int) SPUtils.get(this, ConstanceValue.LOGIN_TOKEN, -1);
+        homeTitles = new ArrayList<>();
+        studyTitles = new ArrayList<>();
+
+        fabuPresenter.getHomeColunm(this);
+        fabuPresenter.getStudyColunm(this);
     }
 
     @Override
     protected void initData() {
         setData();
-
     }
 
     public void  setData(){
@@ -365,18 +381,34 @@ public class FaBuActivity extends BaseActivity {
                 break;
             case R.id.tv_arrow1:
 
-                arrayList1 = new ArrayList<>();
-                arrayList1.add("两学一做");
-                arrayList1.add("文件");
-                ChangeColumnDialog mChangeAddressDialog1 = new ChangeColumnDialog(FaBuActivity.this,arrayList1);
-                mChangeAddressDialog1.setAddress("两学一做");
-                mChangeAddressDialog1.show();
-                mChangeAddressDialog1.setAddresskListener(new ChangeColumnDialog.OnAddressCListener() {
-                    @Override
-                    public void onClick(String province) {
-                        tv_lanmu.setText(province);
+               String  bankuai = tv_bankuai.getText().toString().trim();
+                if(bankuai.isEmpty()){
+                    Toast.makeText(this, "请先选择板块", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(bankuai.equals("首页")){
+                        ChangeColumnDialog mChangeAddressDialog1 = new ChangeColumnDialog(FaBuActivity.this,homeTitles);
+                        mChangeAddressDialog1.setAddress(homeTitles.get(0));
+                        mChangeAddressDialog1.show();
+                        mChangeAddressDialog1.setAddresskListener(new ChangeColumnDialog.OnAddressCListener() {
+                            @Override
+                            public void onClick(String province) {
+                                tv_lanmu.setText(province);
+                            }
+                        });
+                    }else if(bankuai.equals("学习")){
+                        ChangeColumnDialog mChangeAddressDialog1 = new ChangeColumnDialog(FaBuActivity.this,studyTitles);
+                        mChangeAddressDialog1.setAddress(studyTitles.get(0));
+                        mChangeAddressDialog1.show();
+                        mChangeAddressDialog1.setAddresskListener(new ChangeColumnDialog.OnAddressCListener() {
+                            @Override
+                            public void onClick(String province) {
+                                tv_lanmu.setText(province);
+                            }
+                        });
                     }
-                });
+
+                }
+
 
                 break;
         }
@@ -436,4 +468,35 @@ public class FaBuActivity extends BaseActivity {
             dialog.show();
         }
     };
+
+
+    @Override
+    public void onGetHomeColunmDataNext(ColumnBean columnBean) {
+        if(columnBean.result_code != null && columnBean.result_code.equals("200")){
+            List<ColumnBean.ResultBean> result = columnBean.result;
+            for (int i = 0;i<result.size();i++){
+
+                homeTitles.add(result.get(i).name);
+            }
+
+        }else {
+
+            Toast.makeText(this, columnBean.reason, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onGetStudyColunmDataNext(StudyBean studyBean) {
+        if(studyBean.result_code != null && studyBean.result_code.equals("200")){
+            List<StudyBean.ResultBean> result = studyBean.result;
+            for (int i = 0;i<result.size();i++){
+
+                studyTitles.add(result.get(i).name);
+            }
+
+        }else {
+
+            Toast.makeText(this, studyBean.result_msg, Toast.LENGTH_SHORT).show();
+        }
+    }
 }
