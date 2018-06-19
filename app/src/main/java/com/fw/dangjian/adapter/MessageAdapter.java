@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.fw.dangjian.R;
 import com.fw.dangjian.bean.MessageBean;
-import com.fw.dangjian.util.ToastUtils;
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 
 import java.util.List;
@@ -70,15 +69,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.tv_source.setText("学习——上级文件");
         }else if(lists.get(position).post_column == 13){
             holder.tv_source.setText("首页——要闻");
+        }else{
+            holder.tv_source.setText("");
         }
 
 
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUtils.showShort(context, "id"+position);
+//                ToastUtils.showShort(context, "id"+position);
             }
         });
+
+
+
 
 
         if (monItemClickLitener != null) {

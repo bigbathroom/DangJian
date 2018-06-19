@@ -50,7 +50,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         String s = lists.get(position).square_name;
-        holder.tv_title.setText(s.substring(0,s.indexOf("(")));
+        if (s.contains("(")){
+            holder.tv_title.setText(s.substring(0,s.indexOf("(")));
+        }else{
+            holder.tv_title.setText(s);
+        }
+
         holder.tv_organization.setText(lists.get(position).square_region);
         holder.tv_name.setText(lists.get(position).square_author);
 //        holder.tv_time.setText("学时:" + lists.get(position).square_time + "分钟");

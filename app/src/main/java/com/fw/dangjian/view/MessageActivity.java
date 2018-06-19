@@ -42,7 +42,6 @@ public class MessageActivity extends BaseActivity implements MessageMvpView {
     private MessageAdapter mAdapter;
     private UserPresenter userPresenter;
     int page = 1;
-    private int refreshTime = 0;
     private int managerId;
     private List<MessageBean.ResultBean.PageInfoBean.ListBean> lists;
 
@@ -62,33 +61,37 @@ public class MessageActivity extends BaseActivity implements MessageMvpView {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         nrecycler.setLayoutManager(layoutManager);
 
+
+
     }
+
+    private void requestServer() {
+        userPresenter.getMessage(managerId, this);
+    }
+
 
     @Override
     protected void initData() {
+
         lists = new ArrayList<>();
-        requestServer(page);
+        requestServer();
 
         nrecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                refreshTime++;
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         page = 1;
-                        requestServer(page);
+                        requestServer();
                     }
 
-                }, 200);            //refresh data here
+                }, 200);
             }
 
             @Override
             public void onLoadMore() {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-                     /*   page++;
-                        requestServer(page);*/
-
                         nrecycler.loadMoreComplete();
                     }
                 }, 200);
@@ -96,16 +99,14 @@ public class MessageActivity extends BaseActivity implements MessageMvpView {
             }
         });
 
+
         mAdapter = new MessageAdapter(lists, this);
         nrecycler.setAdapter(mAdapter);
-
         initAdapterClike();
+
     }
 
-    private void requestServer(int page) {
 
-        userPresenter.getMessage(managerId, this);
-    }
 
     private void initAdapterClike() {
         mAdapter.setonItemClickLitener(new MessageAdapter.onItemClickLitener() {
@@ -155,14 +156,7 @@ public class MessageActivity extends BaseActivity implements MessageMvpView {
 
     }
 
-    @OnClick({R.id.left})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.left:
-                finish();
-                break;
-        }
-    }
+
 
 
     @Override
@@ -228,7 +222,11 @@ public class MessageActivity extends BaseActivity implements MessageMvpView {
                     break;
             }
         }
+
+
     }
+
+
 
     @Override
     public void onGetDataError(Throwable e) {
@@ -237,5 +235,14 @@ public class MessageActivity extends BaseActivity implements MessageMvpView {
         nrecycler.refreshComplete();
     }
 
+
+    @OnClick({R.id.left})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.left:
+                finish();
+                break;
+        }
+    }
 
 }
