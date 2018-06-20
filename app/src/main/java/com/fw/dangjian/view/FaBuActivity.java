@@ -33,6 +33,7 @@ import com.fw.dangjian.popwin.CameraPopu;
 import com.fw.dangjian.presenter.FabuPresenter;
 import com.fw.dangjian.util.Bimp;
 import com.fw.dangjian.util.ConstanceValue;
+import com.fw.dangjian.util.RealPathFromUriUtils;
 import com.fw.dangjian.util.SPUtils;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
@@ -112,6 +113,8 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
     private ArrayList<String> homeTitles;
     private ArrayList<String> studyTitles;
     private FabuPresenter fabuPresenter;
+    private File file_photo1;
+
 
     @Override
     protected int fillView() {
@@ -151,15 +154,15 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
         setData();
     }
 
-    public void  setData(){
-        mAdapter = new FeedPicAdapter(bmps,drr, this,handler);
+    public void setData() {
+        mAdapter = new FeedPicAdapter(bmps, drr, this, handler);
         rv.setAdapter(mAdapter);
 
         mAdapter.setonItemClickLitener(new FeedPicAdapter.onItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
 
-                if (bmps.size()<7) {
+                if (bmps.size() < 7) {
                     if (position == bmps.size() - 1) { //点击图片位置为+ 0对应0张图片
                         //选择图片
                         //通过onResume()刷新数据
@@ -175,7 +178,7 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
                         intent.putExtra("image", bitmapByte);
                         startActivity(intent);
                     }
-                }else{
+                } else {
                     if (position == bmps.size() - 1) {
 
                     } else {
@@ -194,8 +197,9 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
 
         });
     }
+
     private void choicePic() {
-        if (drr.size() < 6){
+        if (drr.size() < 6) {
             AndPermission.with(this)
                     .permission(Permission.CAMERA)
                     .rationale(mRationale)
@@ -237,12 +241,11 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
             })
                     .start();
 
-        }else{
-            Toast.makeText(this,"最多上传五张", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "最多上传五张", Toast.LENGTH_SHORT).show();
         }
 
     }
-
 
 
     private void showPop() {
@@ -288,12 +291,29 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
         switch (requestCode) {
             //相机
             case REQUEST_CODE_CAMERA:
-                if(resultCode == RESULT_OK){
-  /*
-                * 默认情况下，即不需要指定intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);照相机有自己默认的存储路径，拍摄的照片将返回一个缩略图。如果想访问原始图片，可以通过dat extra能够得到原始图片位置。即，如果指定了目标uri，data就没有数据，如果没有指定uri，则data就返回有数据！*/
+                if (resultCode == RESULT_OK) {
                     Uri uri = Uri.fromFile(file_photo);
                     startActivityForResult(cropImageUri(uri, 480, 480), 103);
                 }
+
+              /*  if (resultCode == RESULT_OK) {
+                    drr.add(file_photo);
+                    Bitmap bitmap = Bimp.getLoacalBitmap(drr.get(drr.size() - 1));
+
+                    if (bmps.size() == 1) {
+                        bmps.clear();
+                        bmps.add(bitmap);
+                        bmps.add(bmp);
+                    } else if (bmps.size() > 1) {
+                        if (bmps.size() < 7) {
+                            bmps.remove(bmps.size() - 1);
+                            bmps.add(bitmap);
+                            bmps.add(bmp);
+                        }
+                    }
+                    setData();
+                }*/
+
 
                 break;
 
@@ -303,6 +323,10 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
                     Uri uri1 = data.getData();
                     startActivityForResult(cropImageUri(uri1, 480, 480), 103);
                 }
+
+          /*      if (resultCode == RESULT_OK) {
+                    handleImage(data);
+                }*/
                 break;
 
             //裁剪
@@ -335,9 +359,50 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
         }
     }
 
+    /**
+     * 4.4以下系统处理图片的方法
+     */
+    private void handleImage(Intent data) {
+        if (data != null) {
+            Uri uri = data.getData();
+            String realPathFromUri = RealPathFromUriUtils.getRealPathFromUri(this, uri);
 
 
+            try {
+                file_photo1 = new File(realPathFromUri);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                if (!file_photo1.exists()) {
+                    file_photo1.mkdir();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
+
+            drr.add(file_photo1);
+
+            Bitmap bitmap = Bimp.getLoacalBitmap(drr.get(drr.size() - 1));
+
+            if (bmps.size() == 1) {
+                bmps.clear();
+                bmps.add(bitmap);
+                bmps.add(bmp);
+            } else if (bmps.size() > 1) {
+                if (bmps.size() < 7) {
+                    bmps.remove(bmps.size() - 1);
+                    bmps.add(bitmap);
+                    bmps.add(bmp);
+                }
+            }
+
+
+            setData();
+
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -353,7 +418,7 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
     }
 
 
-    @OnClick({R.id.left,R.id.tv_right,R.id.tv_arrow,R.id.tv_arrow1})
+    @OnClick({R.id.left, R.id.tv_right, R.id.tv_arrow, R.id.tv_arrow1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.left:
@@ -367,7 +432,7 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
                 arrayList = new ArrayList<>();
                 arrayList.add("首页");
                 arrayList.add("学习");
-                ChangeColumnDialog mChangeAddressDialog = new ChangeColumnDialog(FaBuActivity.this,arrayList);
+                ChangeColumnDialog mChangeAddressDialog = new ChangeColumnDialog(FaBuActivity.this, arrayList);
                 mChangeAddressDialog.setAddress("首页");
                 mChangeAddressDialog.show();
                 mChangeAddressDialog.setAddresskListener(new ChangeColumnDialog.OnAddressCListener() {
@@ -381,12 +446,12 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
                 break;
             case R.id.tv_arrow1:
 
-               String  bankuai = tv_bankuai.getText().toString().trim();
-                if(bankuai.isEmpty()){
+                String bankuai = tv_bankuai.getText().toString().trim();
+                if (bankuai.isEmpty()) {
                     Toast.makeText(this, "请先选择板块", Toast.LENGTH_SHORT).show();
-                }else{
-                    if(bankuai.equals("首页")){
-                        ChangeColumnDialog mChangeAddressDialog1 = new ChangeColumnDialog(FaBuActivity.this,homeTitles);
+                } else {
+                    if (bankuai.equals("首页")) {
+                        ChangeColumnDialog mChangeAddressDialog1 = new ChangeColumnDialog(FaBuActivity.this, homeTitles);
                         mChangeAddressDialog1.setAddress(homeTitles.get(0));
                         mChangeAddressDialog1.show();
                         mChangeAddressDialog1.setAddresskListener(new ChangeColumnDialog.OnAddressCListener() {
@@ -395,8 +460,8 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
                                 tv_lanmu.setText(province);
                             }
                         });
-                    }else if(bankuai.equals("学习")){
-                        ChangeColumnDialog mChangeAddressDialog1 = new ChangeColumnDialog(FaBuActivity.this,studyTitles);
+                    } else if (bankuai.equals("学习")) {
+                        ChangeColumnDialog mChangeAddressDialog1 = new ChangeColumnDialog(FaBuActivity.this, studyTitles);
                         mChangeAddressDialog1.setAddress(studyTitles.get(0));
                         mChangeAddressDialog1.show();
                         mChangeAddressDialog1.setAddresskListener(new ChangeColumnDialog.OnAddressCListener() {
@@ -472,14 +537,14 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
 
     @Override
     public void onGetHomeColunmDataNext(ColumnBean columnBean) {
-        if(columnBean.result_code != null && columnBean.result_code.equals("200")){
+        if (columnBean.result_code != null && columnBean.result_code.equals("200")) {
             List<ColumnBean.ResultBean> result = columnBean.result;
-            for (int i = 0;i<result.size();i++){
+            for (int i = 0; i < result.size(); i++) {
 
                 homeTitles.add(result.get(i).name);
             }
 
-        }else {
+        } else {
 
             Toast.makeText(this, columnBean.reason, Toast.LENGTH_SHORT).show();
         }
@@ -487,14 +552,14 @@ public class FaBuActivity extends BaseActivity implements FaBuMvpView {
 
     @Override
     public void onGetStudyColunmDataNext(StudyBean studyBean) {
-        if(studyBean.result_code != null && studyBean.result_code.equals("200")){
+        if (studyBean.result_code != null && studyBean.result_code.equals("200")) {
             List<StudyBean.ResultBean> result = studyBean.result;
-            for (int i = 0;i<result.size();i++){
+            for (int i = 0; i < result.size(); i++) {
 
                 studyTitles.add(result.get(i).name);
             }
 
-        }else {
+        } else {
 
             Toast.makeText(this, studyBean.result_msg, Toast.LENGTH_SHORT).show();
         }

@@ -9,7 +9,8 @@
         android:id="@+id/iv_feed_pic"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@mipmap/feed_add"/>
+        android:background="@mipmap/feed_add"
+        android:scaleType="fitXY"/>
 
     <RelativeLayout
         android:id="@+id/rl_delete"
